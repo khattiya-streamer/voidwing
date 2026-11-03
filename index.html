@@ -120,6 +120,10 @@ section{position:relative}
 .v3d .state{position:absolute;left:12px;right:12px;bottom:14px;z-index:2;text-align:center;color:var(--muted);font-size:14px;pointer-events:none}
 .v3d.live .cta{display:none}
 
+.watch{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.watch .lbl{font-size:13px;color:#8EA0C2}
+.watch a.btn{min-height:44px;padding:0 18px;font-size:15px}
+
 /* sections */
 .sec{padding:84px 0 24px}
 .sec-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:34px}
@@ -392,7 +396,7 @@ const T = {
     ctaMods:"ดูมอดทั้งหมด", ctaInstall:"วิธีติดตั้ง 4 ขั้น", heroSlot:"[คลิปรวมมอดทั้งหมด 15-30 วินาที วางตรงนี้]",
     gameTag:"HEROES OF NEWERTH", modsTitle:"มอดทั้งหมด", modsSub:"ทุกตัวแจกฟรี โหลดไฟล์เดียว ติดตั้งผ่าน Forge", search:"ค้นหา", searchPh:"ชื่อตัวละคร / ฮีโร่",
     host:"ฮีโร่ฐาน", download:"โหลดมอด", soon:"เร็วๆ นี้", count:"มอด", none:"ไม่พบมอดที่ค้นหา", ver:"เวอร์ชัน",
-    tab3d:"3D", tabClip:"คลิป", view3d:"ดูโมเดล 3D", loading3d:"กำลังโหลดโมเดล...", err3d:"โหลดโมเดลไม่สำเร็จ ลองใหม่อีกครั้ง", hint3d:"ลากเพื่อหมุน · ท่ายืนในเกม", modelAlt:"โมเดล 3D ของ {name} (ท่ายืนในเกม)",
+    watchYt:"ดูคลิปเต็มบน YouTube", watchTt:"ดูบน TikTok", tab3d:"3D", tabClip:"คลิป", view3d:"ดูโมเดล 3D", loading3d:"กำลังโหลดโมเดล...", err3d:"โหลดโมเดลไม่สำเร็จ ลองใหม่อีกครั้ง", hint3d:"ลากเพื่อหมุน · ท่ายืนในเกม", modelAlt:"โมเดล 3D ของ {name} (ท่ายืนในเกม)",
     descPh:"[คำอธิบายมอด: จุดเด่นและสกิล 1-2 บรรทัด]", trailerPh:"[คลิปตัวอย่างมอด {name}]", skillsTitle:"สกิล", skillPh:"[คลิปสกิล {k}]", galleryTitle:"ภาพในเกม", galleryPh:"[ภาพ {n}]",
     instTag:"ติดตั้ง", instTitle:"ติดตั้งใน 4 ขั้น", shotPh:"[ภาพหน้าจอ Forge ขั้นที่ {n}]",
     s1:"โหลดไฟล์มอด", s1t:"ไฟล์ .honmod ไม่ต้องแตกไฟล์",
@@ -418,7 +422,7 @@ const T = {
     ctaMods:"Browse mods", ctaInstall:"Install in 4 steps", heroSlot:"[Showreel clip of all mods, 15-30 s, goes here]",
     gameTag:"HEROES OF NEWERTH", modsTitle:"All mods", modsSub:"All free. One file each, installed through Forge.", search:"Search", searchPh:"Character / hero",
     host:"Base hero", download:"Download", soon:"Coming soon", count:"mods", none:"No mod matches your search", ver:"Version",
-    tab3d:"3D", tabClip:"Clip", view3d:"View 3D model", loading3d:"Loading model...", err3d:"Could not load the model, try again", hint3d:"Drag to rotate · in-game idle", modelAlt:"3D model of {name} (in-game idle pose)",
+    watchYt:"Watch the full video on YouTube", watchTt:"Watch on TikTok", tab3d:"3D", tabClip:"Clip", view3d:"View 3D model", loading3d:"Loading model...", err3d:"Could not load the model, try again", hint3d:"Drag to rotate · in-game idle", modelAlt:"3D model of {name} (in-game idle pose)",
     descPh:"[Mod description: highlights and skills, 1-2 lines]", trailerPh:"[{name} trailer clip]", skillsTitle:"Skills", skillPh:"[Skill {k} clip]", galleryTitle:"In-game shots", galleryPh:"[Shot {n}]",
     instTag:"INSTALL", instTitle:"Install in 4 steps", shotPh:"[Forge screenshot, step {n}]",
     s1:"Download the mod", s1t:"The .honmod file. Do not unzip it.",
@@ -470,7 +474,7 @@ function slot(m, ph, ratio, small) {
     const im = el("img"); im.src = "https://i.ytimg.com/vi/" + m.youtube + "/hqdefault.jpg"; im.alt = ""; im.loading = "lazy";
     b.append(im, el("i"));
     b.addEventListener("click", () => {
-      const f = el("iframe"); f.src = "https://www.youtube-nocookie.com/embed/" + m.youtube + "?autoplay=1&rel=0";
+      const f = el("iframe"); f.src = "https://www.youtube.com/embed/" + m.youtube + "?autoplay=1&rel=0";
       f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen"; f.allowFullscreen = true; f.title = ph || "video";
       b.replaceWith(f);
     });
@@ -557,6 +561,15 @@ function feature(m, i) {
   } else {
     med.appendChild(clip);
   }
+  const watch = el("div", "watch");
+  const links = m.watch || {};
+  for (const [key, label] of [["youtube", t("watchYt")], ["tiktok", t("watchTt")]]) {
+    const a = el("a", "btn ghost", label);
+    if (links[key]) { a.href = links[key]; a.target = "_blank"; a.rel = "noopener"; a.dataset.watch = key; }
+    else { a.setAttribute("aria-disabled", "true"); a.dataset.watch = key; a.title = t("soon"); }
+    watch.appendChild(a);
+  }
+  med.appendChild(watch);
   const gal = el("div", "gallery");
   for (let n = 0; n < 3; n++) gal.appendChild(slot(m.gallery && m.gallery[n], t("galleryPh", { n: n + 1 }), "r169", true));
   med.append(el("div", "h4", t("galleryTitle")), gal);
