@@ -180,6 +180,7 @@ section{position:relative}
 .mods{display:flex;flex-direction:column;gap:56px}
 .feature{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:40px;align-items:start}
 .feature:nth-child(even) .f-media{order:2}
+.feature.nomedia{grid-template-columns:minmax(0,760px);justify-content:center}
 .f-media{display:flex;flex-direction:column;gap:14px}
 .f-body{display:flex;flex-direction:column;gap:16px}
 .no{font-family:var(--display);font-weight:800;font-size:64px;line-height:.9;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;opacity:.9}
@@ -462,10 +463,10 @@ const CONFIG = {
   hero: {"media": null},
   upcoming: [{"id": "up1", "status": "in_dev", "name": null, "host": null, "hint": null, "progress": null, "eta": null, "silhouette": null}, {"id": "up2", "status": "teaser", "name": null, "host": null, "hint": null, "progress": null, "eta": null, "silhouette": null}],
   mods: [
-    {"name": "Aizen Sosuke", "host": "Kinesis", "version": "1.2.105", "img": "img/aizen.png", "download": "https://github.com/khattiya-streamer/voidwing/releases/download/aizen-v1.2.105/Aizen_Kinesis_v1.2.105.honmod", "status": "released"},
-    {"name": "Jin Mori", "host": "Monkey King", "version": "0.6.75", "img": "img/jin-mori.png", "download": "https://github.com/khattiya-streamer/voidwing/releases/download/jin-mori-v0.6.75/Jin_Mori__Monkey_King_v0.6.75.honmod", "status": "released"},
-    {"name": "Yoruichi Shihouin", "host": "Silhouette", "version": "0.13.96", "img": "img/yoruichi.png", "download": "https://github.com/khattiya-streamer/voidwing/releases/download/yoruichi-v0.13.96/Yoruichi_Shihouin_v0.13.96.honmod", "status": "released"},
-    {"name": "Shanks", "host": "Nomad", "version": "0.8.5", "img": "img/shanks.png", "download": "https://github.com/khattiya-streamer/voidwing/releases/download/shanks-v0.8.5/Shanks_v0.8.5.honmod", "status": "released"}
+    {"name": "Aizen Sosuke", "host": "Kinesis", "version": "1.2.105", "img": "img/aizen.png", "download": "https://github.com/khattiya-streamer/voidwing/releases/download/aizen-v1.2.105/Aizen_Kinesis_v1.2.105.honmod", "skills": {"q": {"media": "img/skills/aizen-q.png"}, "w": {"media": "img/skills/aizen-w.png"}, "e": {"media": "img/skills/aizen-e.png"}, "r": {"media": "img/skills/aizen-r.png"}}, "status": "released"},
+    {"name": "Jin Mori", "host": "Monkey King", "version": "0.6.75", "img": "img/jin-mori.png", "download": "https://github.com/khattiya-streamer/voidwing/releases/download/jin-mori-v0.6.75/Jin_Mori__Monkey_King_v0.6.75.honmod", "skills": {"q": {"media": "img/skills/jin-mori-q.png"}, "w": {"media": "img/skills/jin-mori-w.png"}, "e": {"media": "img/skills/jin-mori-e.png"}, "r": {"media": "img/skills/jin-mori-r.png"}}, "status": "released"},
+    {"name": "Yoruichi Shihouin", "host": "Silhouette", "version": "0.13.96", "img": "img/yoruichi.png", "download": "https://github.com/khattiya-streamer/voidwing/releases/download/yoruichi-v0.13.96/Yoruichi_Shihouin_v0.13.96.honmod", "skills": {"q": {"media": "img/skills/yoruichi-q.png"}, "w": {"media": "img/skills/yoruichi-w.png"}, "e": {"media": "img/skills/yoruichi-e.png"}, "r": {"media": "img/skills/yoruichi-r.png"}}, "status": "soon"},
+    {"name": "Shanks", "host": "Nomad", "version": "0.8.5", "img": "img/shanks.png", "download": "https://github.com/khattiya-streamer/voidwing/releases/download/shanks-v0.8.5/Shanks_v0.8.5.honmod", "skills": {"q": {"media": "img/skills/shanks-q.png"}, "w": {"media": "img/skills/shanks-w.png"}, "e": {"media": "img/skills/shanks-e.png"}, "r": {"media": "img/skills/shanks-r.png"}}, "status": "in_dev"}
   ]
 };
 /*CONFIG:END*/
@@ -630,6 +631,10 @@ let revealOnRender = true;   // fade-in only on the first render; search / langu
 function feature(m, i) {
   const art = el("article", "feature"); if (revealOnRender) art.setAttribute("data-reveal", ""); else art.classList.add("in"); art.dataset.name = (m.name + " " + m.host).toLowerCase();
   const med = el("div", "f-media");
+  const hasTrailer = !!norm(m.trailer);
+  const shots = ((m.gallery || []).filter(g => norm(g)));
+  const links = m.watch || {};
+  const watchKeys = [["youtube", t("watchYt")], ["tiktok", t("watchTt")]].filter(([key]) => links[key]);
   const clip = slot(m.trailer, t("trailerPh", { name: m.name }), "r1610");
   if (m.model) {
     const tabs = el("div", "tabs"), b3 = el("button", null, t("tab3d")), bc = el("button", null, t("tabClip"));
@@ -643,21 +648,25 @@ function feature(m, i) {
     tabs.append(b3, bc);
     med.append(tabs, v, clip);
     show(m.trailer ? "clip" : "3d");
-  } else {
+  } else if (hasTrailer) {
     med.appendChild(clip);
   }
-  const watch = el("div", "watch");
-  const links = m.watch || {};
-  for (const [key, label] of [["youtube", t("watchYt")], ["tiktok", t("watchTt")]]) {
-    const a = el("a", "btn ghost", label);
-    if (links[key]) { a.href = links[key]; a.target = "_blank"; a.rel = "noopener"; a.dataset.watch = key; }
-    else { a.setAttribute("aria-disabled", "true"); a.dataset.watch = key; a.title = t("soon"); }
-    watch.appendChild(a);
+  // empty media (no clip, no in-game shots, no watch links) is hidden instead of showing a mock-up
+  if (watchKeys.length) {
+    const watch = el("div", "watch");
+    for (const [key, label] of watchKeys) {
+      const a = el("a", "btn ghost", label);
+      a.href = links[key]; a.target = "_blank"; a.rel = "noopener"; a.dataset.watch = key;
+      watch.appendChild(a);
+    }
+    med.appendChild(watch);
   }
-  med.appendChild(watch);
-  const gal = el("div", "gallery");
-  for (let n = 0; n < 3; n++) gal.appendChild(slot(m.gallery && m.gallery[n], t("galleryPh", { n: n + 1 }), "r169", true));
-  med.append(el("div", "h4", t("galleryTitle")), gal);
+  if (shots.length) {
+    const gal = el("div", "gallery");
+    shots.slice(0, 3).forEach((g, n) => gal.appendChild(slot(g, t("galleryPh", { n: n + 1 }), "r169", true)));
+    med.append(el("div", "h4", t("galleryTitle")), gal);
+  }
+  if (!med.children.length) art.classList.add("nomedia");
 
   const body = el("div", "f-body");
   body.appendChild(el("div", "no", String(i + 1).padStart(2, "0")));
@@ -685,7 +694,7 @@ function feature(m, i) {
   else { a.setAttribute("aria-disabled", "true"); a.textContent = ready ? t("soon") : t("notReady"); }
   dl.append(a, el("small", null, ".honmod"));
   body.append(head, chips, desc); if (sn) body.appendChild(el("p", "snote", sn)); body.append(el("div", "h4", t("skillsTitle")), sk, dl);
-  art.append(med, body);
+  if (med.children.length) art.append(med, body); else art.append(body);
   return art;
 }
 
