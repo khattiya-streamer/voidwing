@@ -164,21 +164,26 @@ a[aria-disabled=true]{color:#6C7F95;text-decoration:none;cursor:not-allowed}
 </div>
 
 <script>
-/* ===== ตั้งค่า: แก้ตรงนี้ที่เดียว =====
-   href ว่าง = ปุ่มจะเป็น "เร็วๆ นี้" กดไม่ได้ (ไม่มีลิงก์ตาย)
-   ใส่ลิงก์ GitHub Releases ของแต่ละมอดใน download */
+/* ===== CONFIG ถูกสร้างจาก _channel/registry.json ด้วย _toolkit/publish_mod.py (sync/publish) อย่าแก้มือ =====
+   href ว่าง = ปุ่มเป็น "เร็วๆ นี้" กดไม่ได้ (ไม่มีลิงก์ตาย) */
+/*CONFIG:START*/
 const CONFIG = {
   links: {
-    tiktok: "", youtube: "", stream: "",
-    forge: "", request: "", support: ""
+    tiktok: "",
+    youtube: "",
+    stream: "",
+    forge: "",
+    request: "",
+    support: ""
   },
   mods: [
-    { name: "Aizen Sosuke",      host: "Kinesis",     version: "1.2.104",  img: "img/aizen.png",    download: "https://github.com/khattiya-streamer/voidwing/releases/download/aizen-v1.2.104/Aizen_Kinesis_v1.2.104.honmod" },
-    { name: "Jin Mori",          host: "Monkey King", version: "0.6.74",   img: "img/jin-mori.png", download: "https://github.com/khattiya-streamer/voidwing/releases/download/jin-mori-v0.6.74/Jin_Mori__Monkey_King_v0.6.74.honmod" },
-    { name: "Yoruichi Shihouin", host: "Silhouette",  version: "0.13.95",  img: "img/yoruichi.png", download: "https://github.com/khattiya-streamer/voidwing/releases/download/yoruichi-v0.13.95/Yoruichi_Shihouin_v0.13.95.honmod" },
-    { name: "Shanks",            host: "Nomad",       version: "0.8.4",    img: "img/shanks.png",   download: "https://github.com/khattiya-streamer/voidwing/releases/download/shanks-v0.8.4/Shanks_v0.8.4.honmod" }
+    { name: "Aizen Sosuke", host: "Kinesis", version: "1.2.105", img: "img/aizen.png", download: "https://github.com/khattiya-streamer/voidwing/releases/download/aizen-v1.2.105/Aizen_Kinesis_v1.2.105.honmod" },
+    { name: "Jin Mori", host: "Monkey King", version: "0.6.74", img: "img/jin-mori.png", download: "https://github.com/khattiya-streamer/voidwing/releases/download/jin-mori-v0.6.74/Jin_Mori__Monkey_King_v0.6.74.honmod" },
+    { name: "Yoruichi Shihouin", host: "Silhouette", version: "0.13.95", img: "img/yoruichi.png", download: "https://github.com/khattiya-streamer/voidwing/releases/download/yoruichi-v0.13.95/Yoruichi_Shihouin_v0.13.95.honmod" },
+    { name: "Shanks", host: "Nomad", version: "0.8.4", img: "img/shanks.png", download: "https://github.com/khattiya-streamer/voidwing/releases/download/shanks-v0.8.4/Shanks_v0.8.4.honmod" }
   ]
 };
+/*CONFIG:END*/
 
 const T = {
   th: {
