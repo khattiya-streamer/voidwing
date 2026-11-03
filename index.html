@@ -24,6 +24,7 @@
   --display:'Kanit','IBM Plex Sans Thai',system-ui,sans-serif;
 }
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html{scroll-behavior:smooth;scroll-padding-top:16px}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans Thai',system-ui,sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden}
 a{color:#7FEFE4}
@@ -102,6 +103,22 @@ section{position:relative}
 .yt:hover img{opacity:1;transform:scale(1.03)}
 .yt i{position:absolute;left:50%;top:50%;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;background:rgba(6,9,18,.75);border:2px solid var(--cyan)}
 .yt i::after{content:"";position:absolute;left:25px;top:19px;border-left:18px solid var(--cyan);border-top:11px solid transparent;border-bottom:11px solid transparent}
+
+
+/* 3D model viewer (click to load; model-viewer from Google's CDN, only when someone asks for it) */
+.tabs{display:inline-flex;gap:4px;padding:4px;border-radius:12px;background:var(--panel);border:1px solid var(--line);align-self:flex-start}
+.tabs button{min-height:44px;padding:0 18px;border:0;border-radius:9px;background:transparent;color:var(--muted);font:inherit;font-weight:600;cursor:pointer;transition:background .2s,color .2s}
+.tabs button:hover{color:#fff}
+.tabs button[aria-pressed=true]{background:var(--grad);color:#04121A}
+.v3d{position:relative;border-radius:14px;overflow:hidden;background:radial-gradient(70% 90% at 50% 40%,#18233F,#0A1020);border:1px solid var(--line);aspect-ratio:16/10}
+.v3d .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transition:opacity .5s,transform .6s}
+.v3d:hover .poster{transform:scale(1.03)}
+.v3d.live .poster{opacity:0;pointer-events:none}
+.v3d model-viewer{position:absolute;inset:0;width:100%;height:100%;background:transparent;--poster-color:transparent;--progress-bar-color:#35E0D0}
+.v3d .badge3d{position:absolute;left:12px;top:12px;z-index:2;padding:3px 12px;border-radius:999px;border:1px solid var(--cyan);background:rgba(6,9,18,.7);color:var(--cyan);font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.06em}
+.v3d .cta{position:absolute;left:50%;bottom:16px;z-index:2;transform:translateX(-50%)}
+.v3d .state{position:absolute;left:12px;right:12px;bottom:14px;z-index:2;text-align:center;color:var(--muted);font-size:14px;pointer-events:none}
+.v3d.live .cta{display:none}
 
 /* sections */
 .sec{padding:84px 0 24px}
@@ -360,10 +377,10 @@ const CONFIG = {
   },
   hero: {"media": null},
   mods: [
-    {"name": "Aizen Sosuke", "host": "Kinesis", "version": "1.2.105", "img": "img/aizen.png", "download": "https://github.com/khattiya-streamer/voidwing/releases/download/aizen-v1.2.105/Aizen_Kinesis_v1.2.105.honmod"},
-    {"name": "Jin Mori", "host": "Monkey King", "version": "0.6.75", "img": "img/jin-mori.png", "download": "https://github.com/khattiya-streamer/voidwing/releases/download/jin-mori-v0.6.75/Jin_Mori__Monkey_King_v0.6.75.honmod"},
-    {"name": "Yoruichi Shihouin", "host": "Silhouette", "version": "0.13.96", "img": "img/yoruichi.png", "download": "https://github.com/khattiya-streamer/voidwing/releases/download/yoruichi-v0.13.96/Yoruichi_Shihouin_v0.13.96.honmod"},
-    {"name": "Shanks", "host": "Nomad", "version": "0.8.5", "img": "img/shanks.png", "download": "https://github.com/khattiya-streamer/voidwing/releases/download/shanks-v0.8.5/Shanks_v0.8.5.honmod"}
+    {"name": "Aizen Sosuke", "host": "Kinesis", "version": "1.2.105", "img": "img/aizen.png", "download": "https://github.com/khattiya-streamer/voidwing/releases/download/aizen-v1.2.105/Aizen_Kinesis_v1.2.105.honmod", "model": {"glb": "models/aizen.glb", "poster": "models/aizen.webp", "target": [0.2, 62.5, 2.3], "radius": 234.4, "height": 99.7, "fov": 30}},
+    {"name": "Jin Mori", "host": "Monkey King", "version": "0.6.75", "img": "img/jin-mori.png", "download": "https://github.com/khattiya-streamer/voidwing/releases/download/jin-mori-v0.6.75/Jin_Mori__Monkey_King_v0.6.75.honmod", "model": {"glb": "models/jin-mori.glb", "poster": "models/jin-mori.webp", "target": [-3.5, 33.6, -15.5], "radius": 156.6, "height": 66.6, "fov": 30}},
+    {"name": "Yoruichi Shihouin", "host": "Silhouette", "version": "0.13.96", "img": "img/yoruichi.png", "download": "https://github.com/khattiya-streamer/voidwing/releases/download/yoruichi-v0.13.96/Yoruichi_Shihouin_v0.13.96.honmod", "model": {"glb": "models/yoruichi.glb", "poster": "models/yoruichi.webp", "target": [-0.1, 35.5, 3.3], "radius": 166.8, "height": 71.0, "fov": 30}},
+    {"name": "Shanks", "host": "Nomad", "version": "0.8.5", "img": "img/shanks.png", "download": "https://github.com/khattiya-streamer/voidwing/releases/download/shanks-v0.8.5/Shanks_v0.8.5.honmod", "model": {"glb": "models/shanks.glb", "poster": "models/shanks.webp", "target": [-1.4, 35.6, -2.4], "radius": 168.3, "height": 71.6, "fov": 30}}
   ]
 };
 /*CONFIG:END*/
@@ -375,6 +392,7 @@ const T = {
     ctaMods:"ดูมอดทั้งหมด", ctaInstall:"วิธีติดตั้ง 4 ขั้น", heroSlot:"[คลิปรวมมอดทั้งหมด 15-30 วินาที วางตรงนี้]",
     gameTag:"HEROES OF NEWERTH", modsTitle:"มอดทั้งหมด", modsSub:"ทุกตัวแจกฟรี โหลดไฟล์เดียว ติดตั้งผ่าน Forge", search:"ค้นหา", searchPh:"ชื่อตัวละคร / ฮีโร่",
     host:"ฮีโร่ฐาน", download:"โหลดมอด", soon:"เร็วๆ นี้", count:"มอด", none:"ไม่พบมอดที่ค้นหา", ver:"เวอร์ชัน",
+    tab3d:"3D", tabClip:"คลิป", view3d:"ดูโมเดล 3D", loading3d:"กำลังโหลดโมเดล...", err3d:"โหลดโมเดลไม่สำเร็จ ลองใหม่อีกครั้ง", hint3d:"ลากเพื่อหมุน · ท่ายืนในเกม", modelAlt:"โมเดล 3D ของ {name} (ท่ายืนในเกม)",
     descPh:"[คำอธิบายมอด: จุดเด่นและสกิล 1-2 บรรทัด]", trailerPh:"[คลิปตัวอย่างมอด {name}]", skillsTitle:"สกิล", skillPh:"[คลิปสกิล {k}]", galleryTitle:"ภาพในเกม", galleryPh:"[ภาพ {n}]",
     instTag:"ติดตั้ง", instTitle:"ติดตั้งใน 4 ขั้น", shotPh:"[ภาพหน้าจอ Forge ขั้นที่ {n}]",
     s1:"โหลดไฟล์มอด", s1t:"ไฟล์ .honmod ไม่ต้องแตกไฟล์",
@@ -400,6 +418,7 @@ const T = {
     ctaMods:"Browse mods", ctaInstall:"Install in 4 steps", heroSlot:"[Showreel clip of all mods, 15-30 s, goes here]",
     gameTag:"HEROES OF NEWERTH", modsTitle:"All mods", modsSub:"All free. One file each, installed through Forge.", search:"Search", searchPh:"Character / hero",
     host:"Base hero", download:"Download", soon:"Coming soon", count:"mods", none:"No mod matches your search", ver:"Version",
+    tab3d:"3D", tabClip:"Clip", view3d:"View 3D model", loading3d:"Loading model...", err3d:"Could not load the model, try again", hint3d:"Drag to rotate · in-game idle", modelAlt:"3D model of {name} (in-game idle pose)",
     descPh:"[Mod description: highlights and skills, 1-2 lines]", trailerPh:"[{name} trailer clip]", skillsTitle:"Skills", skillPh:"[Skill {k} clip]", galleryTitle:"In-game shots", galleryPh:"[Shot {n}]",
     instTag:"INSTALL", instTitle:"Install in 4 steps", shotPh:"[Forge screenshot, step {n}]",
     s1:"Download the mod", s1t:"The .honmod file. Do not unzip it.",
@@ -477,10 +496,67 @@ function renderHero() {
   h.appendChild(slot(CONFIG.hero && CONFIG.hero.media, t("heroSlot"), "r169"));
 }
 
+/* ---- 3D viewer: model-viewer loads only after a click ---- */
+const MV_URL = "https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js";
+let mvLib = null, active3d = null;
+function loadViewerLib() {
+  if (!mvLib) mvLib = new Promise((res, rej) => {
+    if (customElements.get("model-viewer")) return res();
+    const sc = document.createElement("script"); sc.type = "module"; sc.src = MV_URL;
+    sc.onload = () => customElements.whenDefined("model-viewer").then(res);
+    sc.onerror = () => { mvLib = null; rej(new Error("model-viewer library")); };
+    document.head.appendChild(sc);
+  });
+  return mvLib;
+}
+function viewer3d(m) {
+  const box = el("div", "v3d");
+  const poster = el("img", "poster"); poster.src = m.model.poster; poster.alt = t("modelAlt", { name: m.name }); poster.width = 960; poster.height = 600; poster.loading = "lazy";
+  const badge = el("span", "badge3d", "3D");
+  const cta = el("button", "btn cta", t("view3d")); cta.type = "button";
+  const state = el("div", "state");
+  box.append(poster, badge, cta, state);
+  const reset = () => { const v = box.querySelector("model-viewer"); if (v) v.remove(); box.classList.remove("live"); state.textContent = ""; };
+  box.addEventListener("pointerenter", () => { loadViewerLib().catch(() => {}); }, { once: true });
+  cta.addEventListener("click", async () => {
+    if (active3d && active3d !== reset) active3d();
+    active3d = reset;
+    cta.disabled = true; state.textContent = t("loading3d");
+    try { await loadViewerLib(); } catch (e) { state.textContent = t("err3d"); cta.disabled = false; return; }
+    const mv = document.createElement("model-viewer"), M = m.model, g = M.target || [0, 35, 0];
+    mv.setAttribute("src", M.glb); mv.setAttribute("alt", t("modelAlt", { name: m.name }));
+    mv.setAttribute("camera-controls", ""); mv.setAttribute("disable-zoom", ""); mv.setAttribute("touch-action", "pan-y");
+    mv.setAttribute("camera-target", g[0] + "m " + g[1] + "m " + g[2] + "m");
+    mv.setAttribute("camera-orbit", "25deg 80deg " + (M.radius || 160) + "m"); mv.setAttribute("field-of-view", (M.fov || 30) + "deg");
+    mv.setAttribute("shadow-intensity", "0.7"); mv.setAttribute("exposure", "1.1"); mv.setAttribute("environment-image", "neutral"); mv.setAttribute("interaction-prompt", "none");
+    if (!reduced) { mv.setAttribute("autoplay", ""); mv.setAttribute("auto-rotate", ""); mv.setAttribute("auto-rotate-delay", "800"); mv.setAttribute("rotation-per-second", "18deg"); }
+    mv.addEventListener("load", () => { box.classList.add("live"); state.textContent = t("hint3d"); cta.disabled = false; });
+    mv.addEventListener("error", () => { mv.remove(); state.textContent = t("err3d"); cta.disabled = false; });
+    box.appendChild(mv);
+  });
+  return box;
+}
+
+let revealOnRender = true;   // fade-in only on the first render; search / language switch show cards at once
 function feature(m, i) {
-  const art = el("article", "feature"); art.setAttribute("data-reveal", ""); art.dataset.name = (m.name + " " + m.host).toLowerCase();
+  const art = el("article", "feature"); if (revealOnRender) art.setAttribute("data-reveal", ""); else art.classList.add("in"); art.dataset.name = (m.name + " " + m.host).toLowerCase();
   const med = el("div", "f-media");
-  med.appendChild(slot(m.trailer, t("trailerPh", { name: m.name }), "r169"));
+  const clip = slot(m.trailer, t("trailerPh", { name: m.name }), "r1610");
+  if (m.model) {
+    const tabs = el("div", "tabs"), b3 = el("button", null, t("tab3d")), bc = el("button", null, t("tabClip"));
+    b3.type = bc.type = "button";
+    const v = viewer3d(m);
+    const show = (which) => {
+      b3.setAttribute("aria-pressed", which === "3d"); bc.setAttribute("aria-pressed", which !== "3d");
+      v.hidden = which !== "3d"; clip.hidden = which === "3d";
+    };
+    b3.addEventListener("click", () => show("3d")); bc.addEventListener("click", () => show("clip"));
+    tabs.append(b3, bc);
+    med.append(tabs, v, clip);
+    show(m.trailer ? "clip" : "3d");
+  } else {
+    med.appendChild(clip);
+  }
   const gal = el("div", "gallery");
   for (let n = 0; n < 3; n++) gal.appendChild(slot(m.gallery && m.gallery[n], t("galleryPh", { n: n + 1 }), "r169", true));
   med.append(el("div", "h4", t("galleryTitle")), gal);
@@ -608,6 +684,7 @@ document.getElementById("lang").addEventListener("click", () => { lang = lang ==
 document.getElementById("q").addEventListener("input", renderMods);
 apply();
 hookEffects(document);
+revealOnRender = false;
 spy();
 pauseHeroWhenHidden();
 if (!reduced) {
