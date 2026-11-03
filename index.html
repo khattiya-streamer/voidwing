@@ -124,6 +124,40 @@ section{position:relative}
 .watch .lbl{font-size:13px;color:#8EA0C2}
 .watch a.btn{min-height:44px;padding:0 18px;font-size:15px}
 
+
+/* status badges + "coming soon" teasers */
+.chip.st{display:inline-flex;align-items:center;gap:7px;font-weight:700}
+.chip.st i{width:8px;height:8px;border-radius:50%;background:currentColor;display:inline-block}
+.st-released{background:rgba(53,224,208,.14);border-color:rgba(53,224,208,.5);color:#8FF2E8}
+.st-beta{background:rgba(255,181,71,.12);border-color:rgba(255,181,71,.55);color:#FFC97A}
+.st-in_dev{background:rgba(143,123,255,.16);border-color:rgba(143,123,255,.6);color:#CBC2FF}
+.st-in_dev i{animation:blink 1.4s ease-in-out infinite}
+.st-soon{background:rgba(53,224,208,.08);border-color:var(--cyan);color:#8FF2E8}
+.st-soon i{animation:blink 1s ease-in-out infinite}
+.st-teaser{background:rgba(163,177,204,.1);border-color:#5C6C8C;color:#B7C3DB}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+.snote{margin:0;color:#FFC97A;font-size:14px}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.up-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:20px}
+.up{position:relative;display:flex;flex-direction:column;gap:12px;padding:16px;border-radius:18px;background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);transition:border-color .25s,transform .25s}
+.up:hover{border-color:var(--line2);transform:translateY(-3px)}
+.mystery{position:relative;overflow:hidden;border-radius:12px;aspect-ratio:4/3;background:radial-gradient(70% 80% at 50% 40%,#1A2547,#0A1020);display:flex;align-items:center;justify-content:center;border:1px solid var(--line)}
+.mystery::before{content:"";position:absolute;inset:-40% 0 auto 0;height:60%;background:linear-gradient(180deg,transparent,rgba(53,224,208,.12),transparent);animation:scan 4.5s linear infinite}
+@keyframes scan{to{transform:translateY(300%)}}
+.mystery .q{position:relative;font-family:var(--display);font-weight:800;font-size:clamp(84px,12vw,120px);line-height:1;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;opacity:.85;animation:floaty 3.2s ease-in-out infinite}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.mystery img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;filter:brightness(0) drop-shadow(0 0 14px rgba(53,224,208,.7))}
+.mystery .st-wrap{position:absolute;left:10px;top:10px;z-index:2}
+.up h3{font-size:24px;font-weight:700}
+.up .hint{margin:0;padding:10px 12px;border-radius:10px;background:rgba(143,123,255,.08);border:1px dashed var(--line2);color:#D5DCEC;text-wrap:pretty}
+.up .hint.ph{color:#8394B5;font-style:italic}
+.up .hint b{display:block;font-size:12px;letter-spacing:.14em;color:var(--cyan);margin-bottom:2px}
+.bar{height:8px;border-radius:99px;background:#18223D;overflow:hidden}
+.bar>span{display:block;height:100%;border-radius:99px;background:var(--grad);width:0;transition:width 1.2s cubic-bezier(.2,.7,.2,1)}
+.meta{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:#8EA0C2}
+.follow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:26px}
+.follow span{color:var(--muted)}
+
 /* sections */
 .sec{padding:84px 0 24px}
 .sec-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:34px}
@@ -242,6 +276,7 @@ footer p{margin:0;max-width:660px}
   <nav class="nav" aria-label="menu">
     <div class="label" data-i="menu">เมนู</div>
     <a href="#mods" data-sec="mods" data-i="navMods">มอดทั้งหมด</a>
+    <a href="#upcoming" data-sec="upcoming" id="navUpcoming" data-i="navUpcoming" hidden>เร็วๆ นี้</a>
     <a href="#install" data-sec="install" data-i="navInstall">วิธีติดตั้ง</a>
     <a href="#faq" data-sec="faq" data-i="navFaq">ปัญหาที่พบบ่อย</a>
     <a href="#community" data-sec="community" data-i="navCommunity">ขอมอด / สนับสนุน</a>
@@ -284,6 +319,21 @@ footer p{margin:0;max-width:660px}
         <label class="search"><span data-i="search">ค้นหา</span><input id="q" type="search" data-iph="searchPh" placeholder="ชื่อตัวละคร / ฮีโร่"></label>
       </div>
       <div class="mods" id="modList"></div>
+    </div>
+  </section>
+
+  <section id="upcoming" class="sec" aria-labelledby="upTitle" hidden>
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <div>
+          <div class="eyebrow" data-i="upTag">COMING SOON</div>
+          <h2 id="upTitle" data-i="upTitle">กำลังจะมา</h2>
+          <p data-i="upSub">ตัวละครที่กำลังทำอยู่ ใบ้ให้ดูก่อน เดาออกไหม?</p>
+          <div class="legend" id="legend"></div>
+        </div>
+      </div>
+      <div class="up-grid" id="upList"></div>
+      <div class="follow"><span data-i="followFirst">อยากรู้ก่อนใคร:</span><a class="btn ghost" data-link="tiktok">TikTok</a><a class="btn ghost" data-link="youtube">YouTube</a></div>
     </div>
   </section>
 
@@ -374,17 +424,18 @@ const CONFIG = {
   links: {
     tiktok: "https://www.tiktok.com/@voidwing_g",
     youtube: "https://www.youtube.com/@voidwing-sm",
-    stream: "",
+    stream: "https://www.tiktok.com/@voidwing_g/live",
     forge: "https://kim22tv.blogspot.com/",
     request: "",
     support: ""
   },
   hero: {"media": null},
+  upcoming: [{"id": "up1", "status": "in_dev", "name": null, "host": null, "hint": null, "progress": null, "eta": null, "silhouette": null}, {"id": "up2", "status": "teaser", "name": null, "host": null, "hint": null, "progress": null, "eta": null, "silhouette": null}],
   mods: [
-    {"name": "Aizen Sosuke", "host": "Kinesis", "version": "1.2.105", "img": "img/aizen.png", "download": "https://github.com/khattiya-streamer/voidwing/releases/download/aizen-v1.2.105/Aizen_Kinesis_v1.2.105.honmod"},
-    {"name": "Jin Mori", "host": "Monkey King", "version": "0.6.75", "img": "img/jin-mori.png", "download": "https://github.com/khattiya-streamer/voidwing/releases/download/jin-mori-v0.6.75/Jin_Mori__Monkey_King_v0.6.75.honmod"},
-    {"name": "Yoruichi Shihouin", "host": "Silhouette", "version": "0.13.96", "img": "img/yoruichi.png", "download": "https://github.com/khattiya-streamer/voidwing/releases/download/yoruichi-v0.13.96/Yoruichi_Shihouin_v0.13.96.honmod"},
-    {"name": "Shanks", "host": "Nomad", "version": "0.8.5", "img": "img/shanks.png", "download": "https://github.com/khattiya-streamer/voidwing/releases/download/shanks-v0.8.5/Shanks_v0.8.5.honmod"}
+    {"name": "Aizen Sosuke", "host": "Kinesis", "version": "1.2.105", "img": "img/aizen.png", "download": "https://github.com/khattiya-streamer/voidwing/releases/download/aizen-v1.2.105/Aizen_Kinesis_v1.2.105.honmod", "status": "released"},
+    {"name": "Jin Mori", "host": "Monkey King", "version": "0.6.75", "img": "img/jin-mori.png", "download": "https://github.com/khattiya-streamer/voidwing/releases/download/jin-mori-v0.6.75/Jin_Mori__Monkey_King_v0.6.75.honmod", "status": "released"},
+    {"name": "Yoruichi Shihouin", "host": "Silhouette", "version": "0.13.96", "img": "img/yoruichi.png", "download": "https://github.com/khattiya-streamer/voidwing/releases/download/yoruichi-v0.13.96/Yoruichi_Shihouin_v0.13.96.honmod", "status": "released"},
+    {"name": "Shanks", "host": "Nomad", "version": "0.8.5", "img": "img/shanks.png", "download": "https://github.com/khattiya-streamer/voidwing/releases/download/shanks-v0.8.5/Shanks_v0.8.5.honmod", "status": "released"}
   ]
 };
 /*CONFIG:END*/
@@ -396,6 +447,7 @@ const T = {
     ctaMods:"ดูมอดทั้งหมด", ctaInstall:"วิธีติดตั้ง 4 ขั้น", heroSlot:"[คลิปรวมมอดทั้งหมด 15-30 วินาที วางตรงนี้]",
     gameTag:"HEROES OF NEWERTH", modsTitle:"มอดทั้งหมด", modsSub:"ทุกตัวแจกฟรี โหลดไฟล์เดียว ติดตั้งผ่าน Forge", search:"ค้นหา", searchPh:"ชื่อตัวละคร / ฮีโร่",
     host:"ฮีโร่ฐาน", download:"โหลดมอด", soon:"เร็วๆ นี้", count:"มอด", none:"ไม่พบมอดที่ค้นหา", ver:"เวอร์ชัน",
+    stReleased:"พร้อมโหลด", stBeta:"ทดสอบ (Beta)", stDev:"กำลังพัฒนา", stSoon:"ใกล้เสร็จ", stTeaser:"แอบใบ้", notReady:"ยังไม่พร้อมโหลด", navUpcoming:"เร็วๆ นี้", upTag:"COMING SOON", upTitle:"กำลังจะมา", upSub:"ตัวละครที่กำลังทำอยู่ ใบ้ให้ดูก่อน เดาออกไหม?", hintLabel:"คำใบ้", hintPh:"[คำใบ้: บอกใบ้ตัวละครแบบไม่เฉลย 1-2 บรรทัด]", unknownName:"???", hostUnknown:"ฮีโร่ฐาน: ???", progressLabel:"ความคืบหน้า", etaLabel:"คาดว่า", followFirst:"อยากรู้ก่อนใคร:",
     watchYt:"ดูคลิปเต็มบน YouTube", watchTt:"ดูบน TikTok", tab3d:"3D", tabClip:"คลิป", view3d:"ดูโมเดล 3D", loading3d:"กำลังโหลดโมเดล...", err3d:"โหลดโมเดลไม่สำเร็จ ลองใหม่อีกครั้ง", hint3d:"ลากเพื่อหมุน · ท่ายืนในเกม", modelAlt:"โมเดล 3D ของ {name} (ท่ายืนในเกม)",
     descPh:"[คำอธิบายมอด: จุดเด่นและสกิล 1-2 บรรทัด]", trailerPh:"[คลิปตัวอย่างมอด {name}]", skillsTitle:"สกิล", skillPh:"[คลิปสกิล {k}]", galleryTitle:"ภาพในเกม", galleryPh:"[ภาพ {n}]",
     instTag:"ติดตั้ง", instTitle:"ติดตั้งใน 4 ขั้น", shotPh:"[ภาพหน้าจอ Forge ขั้นที่ {n}]",
@@ -422,6 +474,7 @@ const T = {
     ctaMods:"Browse mods", ctaInstall:"Install in 4 steps", heroSlot:"[Showreel clip of all mods, 15-30 s, goes here]",
     gameTag:"HEROES OF NEWERTH", modsTitle:"All mods", modsSub:"All free. One file each, installed through Forge.", search:"Search", searchPh:"Character / hero",
     host:"Base hero", download:"Download", soon:"Coming soon", count:"mods", none:"No mod matches your search", ver:"Version",
+    stReleased:"Available", stBeta:"Beta", stDev:"In development", stSoon:"Almost ready", stTeaser:"Teaser", notReady:"Not ready yet", navUpcoming:"Coming soon", upTag:"COMING SOON", upTitle:"Coming soon", upSub:"Characters in the works. A hint first: can you guess who?", hintLabel:"HINT", hintPh:"[Hint: a clue about the character without naming them, 1-2 lines]", unknownName:"???", hostUnknown:"Base hero: ???", progressLabel:"Progress", etaLabel:"Expected", followFirst:"Be the first to know:",
     watchYt:"Watch the full video on YouTube", watchTt:"Watch on TikTok", tab3d:"3D", tabClip:"Clip", view3d:"View 3D model", loading3d:"Loading model...", err3d:"Could not load the model, try again", hint3d:"Drag to rotate · in-game idle", modelAlt:"3D model of {name} (in-game idle pose)",
     descPh:"[Mod description: highlights and skills, 1-2 lines]", trailerPh:"[{name} trailer clip]", skillsTitle:"Skills", skillPh:"[Skill {k} clip]", galleryTitle:"In-game shots", galleryPh:"[Shot {n}]",
     instTag:"INSTALL", instTitle:"Install in 4 steps", shotPh:"[Forge screenshot, step {n}]",
@@ -580,8 +633,11 @@ function feature(m, i) {
   const ic = el("img"); ic.src = m.img; ic.alt = ""; ic.width = 64; ic.height = 64;
   const hd = el("div"); hd.append(el("h3", null, m.name), el("div", "host", t("host") + " " + m.host));
   head.append(ic, hd);
-  const chips = el("div", "chips"); chips.append(el("span", "chip v", "v" + m.version), el("span", "chip", "Heroes of Newerth"));
+  const st = m.status || "released";
+  const chips = el("div", "chips"); chips.append(statusChip(st), el("span", "chip v", "v" + m.version), el("span", "chip", "Heroes of Newerth"));
+  const sn = pick(m.status_note);
   const d = pick(m.desc); const desc = el("p", "desc" + (d ? "" : " ph"), d || t("descPh"));
+  const ready = st === "released" || st === "beta";
   const sk = el("div", "skills");
   for (const k of SKILLS) {
     const s = (m.skills && m.skills[k]) || {};
@@ -593,14 +649,49 @@ function feature(m, i) {
   }
   const dl = el("div", "dl");
   const a = el("a", "btn");
-  if (m.download) { a.href = m.download; a.textContent = t("download"); a.setAttribute("download", ""); }
-  else { a.setAttribute("aria-disabled", "true"); a.textContent = t("soon"); }
+  if (m.download && ready) { a.href = m.download; a.textContent = t("download"); a.setAttribute("download", ""); }
+  else { a.setAttribute("aria-disabled", "true"); a.textContent = ready ? t("soon") : t("notReady"); }
   dl.append(a, el("small", null, ".honmod"));
-  body.append(head, chips, desc, el("div", "h4", t("skillsTitle")), sk, dl);
+  body.append(head, chips, desc); if (sn) body.appendChild(el("p", "snote", sn)); body.append(el("div", "h4", t("skillsTitle")), sk, dl);
   art.append(med, body);
   return art;
 }
 
+const ST_KEY = { released: "stReleased", beta: "stBeta", in_dev: "stDev", soon: "stSoon", teaser: "stTeaser" };
+function statusChip(st) {
+  const c = el("span", "chip st st-" + st); c.append(el("i"), document.createTextNode(t(ST_KEY[st] || "stDev"))); c.dataset.status = st; return c;
+}
+function renderUpcoming() {
+  const list = CONFIG.upcoming || [], sec = document.getElementById("upcoming"), nav = document.getElementById("navUpcoming");
+  sec.hidden = nav.hidden = !list.length;
+  const box = document.getElementById("upList"); box.textContent = "";
+  const lg = document.getElementById("legend"); lg.textContent = "";
+  if (!list.length) return;
+  for (const k of ["in_dev", "soon", "teaser"]) lg.appendChild(statusChip(k));
+  list.forEach((u, i) => {
+    const card = el("article", "up"); card.dataset.status = u.status || "teaser";
+    if (revealOnRender) { card.setAttribute("data-reveal", ""); card.style.setProperty("--d", (i * 0.08) + "s"); } else card.classList.add("in");
+    const my = el("div", "mystery");
+    if (u.silhouette) { const im = el("img"); im.src = u.silhouette; im.alt = ""; im.loading = "lazy"; my.appendChild(im); } else my.appendChild(el("span", "q", "?"));
+    const w = el("div", "st-wrap"); w.appendChild(statusChip(u.status || "teaser")); my.appendChild(w);
+    card.appendChild(my);
+    card.appendChild(el("h3", null, u.name || t("unknownName")));
+    card.appendChild(el("div", "host", u.host ? t("host") + " " + u.host : t("hostUnknown")));
+    const h = pick(u.hint), hint = el("p", "hint" + (h ? "" : " ph"));
+    if (h) { hint.appendChild(el("b", null, t("hintLabel"))); hint.appendChild(document.createTextNode(h)); } else hint.textContent = t("hintPh");
+    card.appendChild(hint);
+    const eta = pick(u.eta);
+    if (typeof u.progress === "number") {
+      const pct = Math.max(0, Math.min(100, Math.round(u.progress)));
+      const bar = el("div", "bar"); bar.setAttribute("role", "progressbar"); bar.setAttribute("aria-label", t("progressLabel")); bar.setAttribute("aria-valuemin", "0"); bar.setAttribute("aria-valuemax", "100"); bar.setAttribute("aria-valuenow", String(pct));
+      const f = el("span"); bar.appendChild(f); card.appendChild(bar);
+      requestAnimationFrame(() => requestAnimationFrame(() => { f.style.width = pct + "%"; }));
+      const meta = el("div", "meta"); meta.append(el("span", null, t("progressLabel") + " " + pct + "%")); if (eta) meta.append(el("span", null, t("etaLabel") + " " + eta)); card.appendChild(meta);
+    } else if (eta) { const meta = el("div", "meta"); meta.append(el("span", null, t("etaLabel") + " " + eta)); card.appendChild(meta); }
+    box.appendChild(card);
+  });
+  hookEffects(box);
+}
 function renderMods() {
   const q = document.getElementById("q").value.trim().toLowerCase();
   const list = document.getElementById("modList"); list.textContent = "";
@@ -624,7 +715,8 @@ function apply() {
   document.querySelectorAll("[data-iph]").forEach(e => { e.placeholder = t(e.dataset.iph); });
   document.querySelectorAll("[data-link]").forEach(setLink);
   document.getElementById("modCount").textContent = CONFIG.mods.length + " " + t("count");
-  renderHero(); renderMods(); renderShots();
+  renderHero(); renderMods(); renderUpcoming(); renderShots();
+  document.querySelectorAll("#upcoming [data-link]").forEach(setLink);
 }
 
 /* ---- effects: reveal, tilt, cursor glow, particles, scroll-spy ---- */
@@ -685,8 +777,9 @@ function spy() {
     queued = false;
     const line = innerHeight * 0.35, atEnd = innerHeight + scrollY >= document.documentElement.scrollHeight - 4;
     let cur = null;
-    for (const [a, s] of secs) if (s.getBoundingClientRect().top <= line) cur = a;
-    if (atEnd && secs.length) cur = secs[secs.length - 1][0];
+    for (const [a, s] of secs) if (!s.hidden && s.getBoundingClientRect().top <= line) cur = a;
+    const shown = secs.filter(x => !x[1].hidden);
+    if (atEnd && shown.length) cur = shown[shown.length - 1][0];
     secs.forEach(([a]) => { if (a === cur) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current"); });
   };
   addEventListener("scroll", () => { if (!queued) { queued = true; setTimeout(update, 50); } }, { passive: true });
