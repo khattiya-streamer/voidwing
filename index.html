@@ -3,86 +3,205 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#060912">
 <title>VoidWing — มอด Heroes of Newerth</title>
 <meta name="description" content="มอดฮีโร่ Heroes of Newerth ที่ทำเอง แจกฟรี ติดตั้งผ่าน Heroes Forge / Free hand-made Heroes of Newerth hero mods">
-<link rel="icon" href="img/jin-mori.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="VoidWing — Heroes of Newerth mods">
+<meta property="og:description" content="Free hand-made hero mods for Heroes of Newerth. มอดฮีโร่ที่ทำเอง แจกฟรี">
+<meta property="og:url" content="https://khattiya-streamer.github.io/voidwing/">
+<meta property="og:image" content="https://khattiya-streamer.github.io/voidwing/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@600;700;800&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap">
 <style>
+@property --a{syntax:'<angle>';initial-value:0deg;inherits:false}
 :root{
-  --navy:#12263F; --navy2:#1E3A5C; --ink:#12263F; --muted:#3C5169;
-  --bg:#EEF2F6; --card:#FFFFFF; --line:#D3DCE6; --soft:#DCE5EE;
-  --accent:#0B7A72; --accent-dark:#0B5F59; --accent-tint:#DDF1EF; --accent-light:#6FE0D5;
+  --bg:#060912; --bg2:#0A0F1D; --panel:#0F1628; --panel2:#151F38; --line:#243052; --line2:#33436F;
+  --ink:#E9EEF9; --muted:#A3B1CC; --cyan:#35E0D0; --violet:#8F7BFF; --focus:#FFB547;
+  --grad:linear-gradient(135deg,#35E0D0,#8F7BFF);
+  --display:'Kanit','IBM Plex Sans Thai',system-ui,sans-serif;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans Thai',system-ui,sans-serif;font-size:16px;line-height:1.6}
-a{color:#0B6F68}
-a:hover{color:var(--navy)}
-:focus-visible{outline:3px solid #F2A900;outline-offset:2px}
+html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans Thai',system-ui,sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden}
+a{color:#7FEFE4}
+a:hover{color:#fff}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:6px}
+h1,h2,h3{font-family:var(--display);margin:0;line-height:1.1}
 .layout{display:flex;flex-wrap:wrap;min-height:100vh}
-aside{flex:0 0 272px;background:var(--navy);color:#E6EDF5;padding:28px 20px;display:flex;flex-direction:column;gap:32px;position:sticky;top:0;height:100vh;align-self:flex-start;overflow:auto}
-aside a{color:#E6EDF5}
-.brand{display:flex;align-items:center;gap:12px;padding:0 8px;font-weight:700;font-size:22px}
-.label{padding:0 8px 8px;font-size:13px;font-weight:600;letter-spacing:.12em;color:#9FB2C8}
-.game{display:flex;align-items:center;justify-content:space-between;min-height:48px;padding:0 14px;border-radius:10px;background:var(--navy2);color:#fff;font-weight:600;text-decoration:none}
-.game small{font-size:14px;color:var(--accent-light);font-weight:600}
-.soon{display:flex;align-items:center;min-height:48px;padding:0 14px;border-radius:10px;border:1px dashed #3A5575;color:#9FB2C8;margin-top:8px}
-.nav{display:flex;flex-direction:column;gap:4px}
-.nav a{display:flex;align-items:center;min-height:44px;padding:0 14px;border-radius:8px;text-decoration:none}
-.nav a:hover{background:#1E3A5C;color:#fff}
+
+/* sidebar */
+aside{flex:0 0 264px;background:linear-gradient(180deg,#0A1020,#070B16);border-right:1px solid var(--line);padding:26px 18px;display:flex;flex-direction:column;gap:28px;position:sticky;top:0;height:100vh;align-self:flex-start;overflow:auto}
+.brand{display:flex;align-items:center;gap:12px;padding:0 8px;font-family:var(--display);font-weight:700;font-size:24px;letter-spacing:.02em;color:#fff;text-decoration:none}
+.brand svg{filter:drop-shadow(0 0 8px rgba(53,224,208,.6))}
+.label{padding:0 8px 8px;font-size:12px;font-weight:600;letter-spacing:.16em;color:#7C8DAE;text-transform:uppercase}
+.game{display:flex;align-items:center;justify-content:space-between;min-height:48px;padding:0 14px;border-radius:12px;background:linear-gradient(135deg,rgba(53,224,208,.16),rgba(143,123,255,.16));border:1px solid var(--line2);color:#fff;font-weight:600;text-decoration:none}
+.game small{font-size:13px;color:var(--cyan);font-weight:600}
+.soon{display:flex;align-items:center;min-height:48px;padding:0 14px;border-radius:12px;border:1px dashed var(--line2);color:#8394B5;margin-top:8px}
+.nav{display:flex;flex-direction:column;gap:2px}
+.nav a{display:flex;align-items:center;min-height:44px;padding:0 14px;border-radius:10px;text-decoration:none;color:#C7D3E8;border-left:2px solid transparent;transition:background .2s,color .2s,border-color .2s}
+.nav a:hover{background:#121B33;color:#fff}
+.nav a[aria-current=true]{background:#121B33;color:#fff;border-left-color:var(--cyan)}
 .side-foot{margin-top:auto;display:flex;flex-direction:column;gap:12px;padding:0 8px}
-.socials{display:flex;gap:18px;font-weight:600;flex-wrap:wrap}
-.socials a{text-decoration:none}
-.socials a:hover{text-decoration:underline}
-button.lang{align-self:flex-start;min-height:44px;padding:0 16px;border-radius:10px;border:1px solid #3A5575;background:transparent;color:#E6EDF5;font:inherit;font-weight:600;cursor:pointer}
-button.lang:hover{background:#1E3A5C}
-main{flex:1 1 640px;min-width:0;padding:40px 48px 56px;display:flex;flex-direction:column;gap:40px;max-width:1100px}
-.eyebrow{font-size:14px;font-weight:600;letter-spacing:.12em;color:#0B6F68}
-h1{margin:4px 0 8px;font-size:44px;line-height:1.15;font-weight:700;text-wrap:balance}
-h2{margin:0;font-size:26px;font-weight:700}
-h3{margin:0}
-.lead{margin:0;font-size:18px;color:var(--muted);max-width:640px;text-wrap:pretty}
-.head-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
-.search{display:flex;align-items:center;gap:10px;min-height:44px;padding:0 14px;border-radius:10px;background:#fff;border:1px solid #C2CEDB}
-.search span{color:var(--muted);font-size:15px}
-.search input{border:0;outline:0;background:transparent;font:inherit;width:200px;color:var(--ink)}
-.search:focus-within{outline:3px solid #F2A900;outline-offset:2px}
-.mods{display:flex;flex-direction:column;gap:12px;margin-top:12px}
-.mod{display:flex;flex-wrap:wrap;align-items:center;gap:20px;padding:16px 20px;border-radius:14px;background:var(--card);border:1px solid var(--line)}
-.mod img{width:72px;height:72px;border-radius:10px;object-fit:cover;background:var(--soft);flex:0 0 72px}
-.mod .info{flex:1 1 220px;display:flex;flex-direction:column}
-.mod h3{font-size:20px;font-weight:600}
-.mod .host{color:var(--muted);font-size:15px}
-.ver{padding:4px 12px;border-radius:999px;background:var(--accent-tint);color:var(--accent-dark);font-size:14px;font-weight:600}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 22px;border-radius:10px;background:var(--accent);color:#fff;font-weight:600;text-decoration:none;border:0;font-family:inherit;font-size:16px;cursor:pointer}
-.btn:hover{background:var(--accent-dark);color:#fff}
-.btn[aria-disabled=true]{background:#C9D3DE;color:#3C5169;cursor:not-allowed}
-.empty{padding:20px;color:var(--muted)}
-.panel{display:flex;flex-direction:column;gap:16px;padding:28px;border-radius:16px;background:var(--card);border:1px solid var(--line)}
-.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:16px;margin:0;padding:0;list-style:none}
-.steps li{display:flex;gap:14px;align-items:flex-start}
-.steps .n{flex:0 0 36px;height:36px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
-.steps strong{display:block}
-.steps span.t{color:var(--muted);font-size:15px}
-details{border-top:1px solid var(--line);padding:10px 0}
-summary{cursor:pointer;font-weight:600;min-height:32px;display:flex;align-items:center}
-details p{margin:6px 0 0;color:var(--muted);font-size:15px}
-.two{display:flex;flex-wrap:wrap;gap:20px}
-.two .panel{flex:1 1 320px;padding:24px;gap:10px}
-.two p{margin:0;color:var(--muted)}
-.two a.more{align-self:flex-start;font-weight:600}
-a[aria-disabled=true]{color:#6C7F95;text-decoration:none;cursor:not-allowed}
-.socials a[aria-disabled=true]{color:#9FB2C8}
-.disc{margin:0;color:var(--muted);font-size:14px;max-width:680px}
+.socials{display:flex;gap:16px;font-weight:600;flex-wrap:wrap}
+.socials a{text-decoration:none;color:#C7D3E8}
+.socials a:hover{color:#fff;text-decoration:underline}
+a[aria-disabled=true]{color:#6F7F9E;text-decoration:none;cursor:not-allowed}
+button.lang{align-self:flex-start;min-height:44px;padding:0 16px;border-radius:10px;border:1px solid var(--line2);background:transparent;color:#E9EEF9;font:inherit;font-weight:600;cursor:pointer;transition:background .2s}
+button.lang:hover{background:#121B33}
+
+/* main */
+main{flex:1 1 640px;min-width:0}
+.wrap{max-width:1120px;margin:0 auto;padding:0 44px}
+section{position:relative}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.2em;color:var(--cyan)}
+.lead{margin:0;font-size:19px;color:var(--muted);max-width:620px;text-wrap:pretty}
+
+/* hero */
+#top{overflow:hidden;border-bottom:1px solid var(--line);background:radial-gradient(900px 500px at 15% 0%,rgba(143,123,255,.28),transparent 60%),radial-gradient(800px 500px at 90% 30%,rgba(53,224,208,.18),transparent 60%),var(--bg)}
+#fx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.bigwing{position:absolute;right:-60px;top:20px;width:520px;opacity:.07;pointer-events:none;transition:transform .2s ease-out}
+.hero{position:relative;display:flex;flex-wrap:wrap;align-items:center;gap:48px;padding-top:72px;padding-bottom:84px}
+.hero-text{flex:1 1 420px;display:flex;flex-direction:column;gap:22px}
+.hero h1{font-weight:800;font-size:clamp(52px,8.4vw,112px);letter-spacing:-.01em;line-height:.95;background:linear-gradient(100deg,#fff 0%,#9BF3EA 35%,#B3A6FF 60%,#fff 100%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 7s ease-in-out infinite}
+@keyframes shine{0%,100%{background-position:0% 0}50%{background-position:100% 0}}
+.ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:6px}
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:0 26px;border-radius:12px;background:var(--grad);color:#04121A;font-weight:700;font-size:16px;text-decoration:none;border:0;font-family:inherit;cursor:pointer;transition:transform .18s,box-shadow .18s;box-shadow:0 6px 24px rgba(53,224,208,.22)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(143,123,255,.38);color:#04121A}
+.btn.ghost{background:transparent;color:#E9EEF9;border:1px solid var(--line2);box-shadow:none}
+.btn.ghost:hover{background:#121B33;color:#fff;box-shadow:none}
+.btn[aria-disabled=true]{background:#1A2440;color:#8394B5;box-shadow:none;cursor:not-allowed;transform:none}
+.btn[aria-disabled=true]:hover{background:#1A2440;color:#8394B5;box-shadow:none;transform:none}
+.hero-media{flex:1 1 440px}
+.frame{position:relative;padding:2px;border-radius:20px;background:conic-gradient(from var(--a),#35E0D0,#8F7BFF,#35E0D0 50%,#8F7BFF,#35E0D0);animation:spin 7s linear infinite;box-shadow:0 20px 80px rgba(143,123,255,.25)}
+@keyframes spin{to{--a:360deg}}
+.frame .slot{border-radius:18px;border:0;background-color:#0B1224}
+.scroll-hint{position:absolute;left:50%;bottom:18px;width:22px;height:34px;border:2px solid var(--line2);border-radius:12px;transform:translateX(-50%);opacity:.8}
+.scroll-hint::after{content:"";position:absolute;left:50%;top:6px;width:3px;height:7px;margin-left:-1.5px;border-radius:2px;background:var(--cyan);animation:wheel 1.8s ease-in-out infinite}
+@keyframes wheel{0%{opacity:0;transform:translateY(0)}30%{opacity:1}100%{opacity:0;transform:translateY(12px)}}
+
+/* media slots (mock-ups until real clips/images are supplied) */
+.slot{position:relative;margin:0;overflow:hidden;border-radius:14px;background:#0B1224;border:1px solid var(--line);isolation:isolate}
+.r169{aspect-ratio:16/9}.r11{aspect-ratio:1/1}.r1610{aspect-ratio:16/10}
+.slot img,.slot video,.slot iframe{position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:cover;display:block}
+.slot.empty{border:1.5px dashed var(--line2);background-color:#0B1224;background-image:repeating-linear-gradient(135deg,rgba(143,123,255,.09) 0 14px,rgba(53,224,208,.06) 14px 28px);background-size:80px 80px;display:flex;align-items:center;justify-content:center;text-align:center;padding:12px;color:#9AA9C6;font-size:14px}
+@keyframes stripes{to{background-position:80px 0}}
+.frame .slot.empty,.slot.empty:hover{animation:stripes 6s linear infinite}
+.slot.empty::before{content:"";position:absolute;left:50%;top:50%;width:54px;height:54px;margin:-27px 0 0 -27px;border-radius:50%;border:2px solid rgba(53,224,208,.5);background:rgba(6,9,18,.6)}
+.slot.empty::after{content:"";position:absolute;left:50%;top:50%;margin:-9px 0 0 -6px;border-left:15px solid rgba(53,224,208,.85);border-top:9px solid transparent;border-bottom:9px solid transparent;transform:translateX(3px)}
+.slot.empty span{position:absolute;left:10px;right:10px;bottom:10px;z-index:1}
+.slot.empty.small::before,.slot.empty.small::after{display:none}
+.slot.empty.small span{position:static}
+.skill .slot.empty span{display:none}
+.skill .slot.empty.small::before{display:block;width:34px;height:34px;margin:-17px 0 0 -17px}
+.skill .slot.empty.small::after{display:block;margin:-6px 0 0 -4px;border-left:10px solid rgba(53,224,208,.85);border-top:6px solid transparent;border-bottom:6px solid transparent;transform:none}
+.yt{position:absolute;inset:0;border:0;padding:0;background:#000;cursor:pointer}
+.yt img{opacity:.85;transition:opacity .2s,transform .4s}
+.yt:hover img{opacity:1;transform:scale(1.03)}
+.yt i{position:absolute;left:50%;top:50%;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;background:rgba(6,9,18,.75);border:2px solid var(--cyan)}
+.yt i::after{content:"";position:absolute;left:25px;top:19px;border-left:18px solid var(--cyan);border-top:11px solid transparent;border-bottom:11px solid transparent}
+
+/* sections */
+.sec{padding:84px 0 24px}
+.sec-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:34px}
+.sec-head h2{font-size:clamp(32px,4.4vw,48px);font-weight:700}
+.sec-head p{margin:8px 0 0;color:var(--muted);max-width:560px}
+.search{display:flex;align-items:center;gap:10px;min-height:46px;padding:0 14px;border-radius:12px;background:var(--panel);border:1px solid var(--line2)}
+.search span{color:var(--muted);font-size:14px}
+.search input{border:0;outline:0;background:transparent;font:inherit;width:190px;color:var(--ink)}
+.search:focus-within{outline:3px solid var(--focus);outline-offset:2px}
+
+/* mod feature cards */
+.mods{display:flex;flex-direction:column;gap:56px}
+.feature{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:40px;align-items:start}
+.feature:nth-child(even) .f-media{order:2}
+.f-media{display:flex;flex-direction:column;gap:14px}
+.f-body{display:flex;flex-direction:column;gap:16px}
+.no{font-family:var(--display);font-weight:800;font-size:64px;line-height:.9;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;opacity:.9}
+.f-head{display:flex;align-items:center;gap:16px}
+.f-head img{width:64px;height:64px;border-radius:14px;object-fit:cover;border:1px solid var(--line2);background:var(--panel)}
+.f-head h3{font-size:clamp(26px,3.2vw,36px);font-weight:700}
+.host{color:var(--muted);font-size:15px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{padding:3px 12px;border-radius:999px;border:1px solid var(--line2);background:rgba(143,123,255,.12);color:#C8BFFF;font-size:13px;font-weight:600}
+.chip.v{background:rgba(53,224,208,.12);color:#8FF2E8}
+.desc{margin:0;color:#C7D3E8;text-wrap:pretty}
+.desc.ph{color:#8394B5;font-style:italic;border:1px dashed var(--line2);border-radius:10px;padding:10px 12px}
+.h4{font-size:12px;font-weight:600;letter-spacing:.16em;color:#7C8DAE;text-transform:uppercase;margin:6px 0 -4px}
+.skills{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.skill{position:relative;transition:transform .25s ease-out;will-change:transform}
+.skill .k{position:absolute;left:8px;top:8px;z-index:3;min-width:26px;height:26px;padding:0 6px;border-radius:8px;background:rgba(6,9,18,.85);border:1px solid var(--cyan);color:var(--cyan);font-family:var(--display);font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center}
+.skill .nm{margin:6px 2px 0;font-size:13px;color:var(--muted)}
+.gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.dl{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:6px}
+.dl small{color:#8394B5}
+
+/* glow panel + reveal */
+.glow{position:relative}
+.glow::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(360px circle at var(--mx,50%) var(--my,50%),rgba(53,224,208,.16),transparent 60%)}
+.glow:hover::before{opacity:1}
+[data-reveal]{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+[data-reveal].in{opacity:1;transform:none}
+
+/* install */
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;position:relative;margin:0;padding:0;list-style:none;counter-reset:s}
+.steps::before{content:"";position:absolute;left:6%;right:6%;top:26px;height:2px;background:var(--grad);transform:scaleX(0);transform-origin:left;transition:transform 1.4s ease .2s;opacity:.55}
+.steps.in::before{transform:scaleX(1)}
+.step{position:relative;display:flex;flex-direction:column;gap:10px;padding:0;background:none}
+.step .n{position:relative;z-index:1;width:52px;height:52px;border-radius:50%;background:var(--bg2);border:2px solid var(--cyan);color:#fff;font-family:var(--display);font-weight:700;font-size:22px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 0 rgba(53,224,208,.5)}
+.steps.in .step .n{animation:pulse 2.4s ease-out 1.2s 2}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(53,224,208,.5)}100%{box-shadow:0 0 0 18px rgba(53,224,208,0)}}
+.step strong{font-size:18px}
+.step .t{color:var(--muted);font-size:15px}
+.note{margin-top:26px;color:var(--muted);font-size:15px}
+
+/* faq + cards */
+.panel{position:relative;display:flex;flex-direction:column;gap:12px;padding:26px;border-radius:18px;background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);transition:border-color .25s,transform .25s}
+.panel:hover{border-color:var(--line2);transform:translateY(-3px)}
+.panel h3{font-size:24px;font-weight:700}
+.panel p{margin:0;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.row-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+details{border-top:1px solid var(--line);padding:6px 0}
+details:last-child{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-weight:600;min-height:46px;display:flex;align-items:center;justify-content:space-between;gap:12px;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:24px;color:var(--cyan);transition:transform .25s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{margin:0 0 12px;color:var(--muted);font-size:15px;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.empty-msg{padding:28px;text-align:center;color:var(--muted);border:1px dashed var(--line2);border-radius:14px}
+footer{margin-top:90px;border-top:1px solid var(--line);padding:30px 0 60px;color:#8EA0C2;font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px}
+footer p{margin:0;max-width:660px}
+
+@media (max-width:1100px){
+  .feature{grid-template-columns:1fr;gap:22px}
+  .feature:nth-child(even) .f-media{order:0}
+  .cards{grid-template-columns:1fr}
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:28px}
+  .steps::before{display:none}
+}
 @media (max-width:860px){
-  aside{flex:1 1 100%;position:static;height:auto;flex-direction:row;flex-wrap:wrap;align-items:center;gap:16px 24px;padding:16px 20px}
-  aside .games{display:none}
-  .nav .label{display:none}
-  .nav{flex-direction:row;flex-wrap:wrap;gap:0}
+  aside{flex:1 1 100%;position:static;height:auto;flex-direction:row;flex-wrap:wrap;align-items:center;gap:14px 22px;padding:14px 18px;border-right:0;border-bottom:1px solid var(--line)}
+  aside .games,.nav .label{display:none}
+  .nav{flex-direction:row;flex-wrap:wrap}
+  .nav a{border-left:0;padding:0 10px}
   .side-foot{margin-top:0;flex-direction:row;align-items:center;flex-wrap:wrap}
-  main{padding:28px 20px 48px}
-  h1{font-size:34px}
+  .wrap{padding:0 20px}
+  .hero{padding-top:44px;padding-bottom:64px;gap:32px}
+  .skills{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .steps{grid-template-columns:1fr}
+  .sec{padding-top:64px}
+  .bigwing{width:320px;right:-80px}
+}
+#top.off *,#top.off *::before,#top.off *::after{animation-play-state:paused!important}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  [data-reveal]{opacity:1;transform:none}
+  .steps::before{transform:none}
 }
 </style>
 </head>
@@ -90,20 +209,21 @@ a[aria-disabled=true]{color:#6C7F95;text-decoration:none;cursor:not-allowed}
 <div class="layout">
 
 <aside>
-  <div class="brand">
-    <svg width="34" height="34" viewBox="0 0 36 36" fill="none" stroke="#6FE0D5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9c8 1 13 5 15 12 2-7 7-11 15-12-2 8-6 13-15 18C9 22 5 17 3 9Z"/></svg>
+  <a class="brand" href="#top" aria-label="VoidWing">
+    <svg width="34" height="34" viewBox="0 0 36 36" fill="none" stroke="#35E0D0" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9c8 1 13 5 15 12 2-7 7-11 15-12-2 8-6 13-15 18C9 22 5 17 3 9Z"/></svg>
     VoidWing
-  </div>
+  </a>
   <div class="games">
     <div class="label" data-i="games">เกม</div>
     <a class="game" href="#mods"><span>Heroes of Newerth</span><small id="modCount"></small></a>
     <span class="soon" data-i="nextGame">เกมถัดไป · เร็วๆ นี้</span>
   </div>
   <nav class="nav" aria-label="menu">
-    <div class="label" data-i="help">ช่วยเหลือ</div>
-    <a href="#install" data-i="navInstall">วิธีติดตั้ง</a>
-    <a href="#request" data-i="navRequest">ขอมอดตัวละคร</a>
-    <a href="#support" data-i="navSupport">สนับสนุนช่อง</a>
+    <div class="label" data-i="menu">เมนู</div>
+    <a href="#mods" data-sec="mods" data-i="navMods">มอดทั้งหมด</a>
+    <a href="#install" data-sec="install" data-i="navInstall">วิธีติดตั้ง</a>
+    <a href="#faq" data-sec="faq" data-i="navFaq">ปัญหาที่พบบ่อย</a>
+    <a href="#community" data-sec="community" data-i="navCommunity">ขอมอด / สนับสนุน</a>
   </nav>
   <div class="side-foot">
     <div class="socials">
@@ -114,58 +234,120 @@ a[aria-disabled=true]{color:#6C7F95;text-decoration:none;cursor:not-allowed}
 </aside>
 
 <main>
-  <header>
-    <div class="eyebrow" data-i="eyebrow">มอดทั้งหมด</div>
-    <h1>Heroes of Newerth</h1>
-    <p class="lead" data-i="lead">มอดฮีโร่ที่ทำเอง แจกฟรี โมเดล สกิล เอฟเฟกต์ และเสียง ติดตั้งผ่าน Heroes Forge</p>
-  </header>
-
-  <section id="mods" aria-labelledby="modsTitle">
-    <div class="head-row">
-      <h2 id="modsTitle" data-i="modsTitle">รายการมอด</h2>
-      <label class="search"><span data-i="search">ค้นหา</span><input id="q" type="search" data-iph="searchPh" placeholder="ชื่อตัวละคร / ฮีโร่"></label>
+  <section id="top" aria-labelledby="heroTitle">
+    <canvas id="fx" aria-hidden="true"></canvas>
+    <svg class="bigwing" id="bigwing" viewBox="0 0 36 36" fill="none" stroke="#35E0D0" stroke-width=".6" aria-hidden="true"><path d="M3 9c8 1 13 5 15 12 2-7 7-11 15-12-2 8-6 13-15 18C9 22 5 17 3 9Z"/></svg>
+    <div class="wrap hero">
+      <div class="hero-text">
+        <span class="eyebrow" data-i="eyebrow">MOD CHANNEL · แจกฟรีทุกตัว</span>
+        <h1 id="heroTitle">VOIDWING</h1>
+        <p class="lead" data-i="lead">มอดฮีโร่ Heroes of Newerth ที่ทำเอง โมเดล สกิล เอฟเฟกต์ และเสียง ติดตั้งผ่าน Heroes Forge ไม่ถึง 2 นาที</p>
+        <div class="ctas">
+          <a class="btn" href="#mods" data-i="ctaMods">ดูมอดทั้งหมด</a>
+          <a class="btn ghost" href="#install" data-i="ctaInstall">วิธีติดตั้ง 4 ขั้น</a>
+        </div>
+      </div>
+      <div class="hero-media"><div class="frame tilt" id="heroSlot"></div></div>
     </div>
-    <div class="mods" id="modList"></div>
+    <div class="scroll-hint" aria-hidden="true"></div>
   </section>
 
-  <section id="install" class="panel" aria-labelledby="instTitle">
-    <h2 id="instTitle" data-i="instTitle">ติดตั้งใน 4 ขั้น</h2>
-    <ol class="steps">
-      <li><span class="n">1</span><div><strong data-i="s1">โหลดไฟล์มอด</strong><span class="t" data-i="s1t">ไฟล์ .honmod ไม่ต้องแตกไฟล์</span></div></li>
-      <li><span class="n">2</span><div><strong data-i="s2">เพิ่มใน Forge</strong><span class="t" data-i="s2t">แท็บ Custom Mod (.honmod) แล้วกด เพิ่ม .honmod</span></div></li>
-      <li><span class="n">3</span><div><strong data-i="s3">เปิดสวิตช์</strong><span class="t" data-i="s3t">เปิดสวิตช์ที่การ์ดมอดให้เป็นสีน้ำเงิน</span></div></li>
-      <li><span class="n">4</span><div><strong data-i="s4">ใช้งานม็อด</strong><span class="t" data-i="s4t">กด ใช้งานม็อด แล้วเปิดเกมจาก Forge</span></div></li>
-    </ol>
-    <span style="color:var(--muted);font-size:15px"><span data-i="noForge">ยังไม่มี Heroes Forge? ติดตั้งจากเว็บทางการของผู้ทำ Forge เท่านั้น</span> <a data-link="forge" style="font-weight:600" data-i="forgeLink">เว็บ Forge</a></span>
-    <div>
-      <details><summary data-i="t1">มอดไม่ขึ้นในเกม</summary><p data-i="t1a">ตรวจว่าสวิตช์เปิดอยู่ และกด "ใช้งานม็อด" แล้วเปิดเกมใหม่ทั้งหมด</p></details>
-      <details><summary data-i="t2">โมเดลไม่ใช่ตัวที่ควรเป็น / ชนกัน</summary><p data-i="t2a">อย่าเปิดสองมอดที่ใช้ฮีโร่ฐานตัวเดียวกันพร้อมกัน และปิด avatar/skin ของฮีโร่ตัวนั้น</p></details>
-      <details><summary data-i="t3">เกมอัปเดตแล้วมอดพัง</summary><p data-i="t3a">รอเวอร์ชันใหม่จากหน้านี้ เกมแพตช์อาจทำให้ไฟล์ที่มอดอ้างหายไป</p></details>
-      <details><summary data-i="t4">อัปเดตมอด</summary><p data-i="t4a">โหลดเวอร์ชันใหม่ ลบการ์ดเดิมใน Forge เพิ่มไฟล์ใหม่ เปิดสวิตช์ แล้วกด "ใช้งานม็อด" อีกครั้ง</p></details>
-    </div>
-    <p class="disc" data-i="local">มอดเปลี่ยนสิ่งที่เห็นและได้ยินบนเครื่องคุณ คนอื่นในแมตช์ไม่เห็นมอดของคุณ</p>
-  </section>
-
-  <section class="two">
-    <div id="request" class="panel">
-      <h3 data-i="reqT">อยากให้ทำตัวละครไหน</h3>
-      <p data-i="reqP">บอกตัวละคร สกิลที่อยากเห็น และรูปอ้างอิง ไม่รับประกันว่าจะทำทุกคำขอ</p>
-      <a class="more" data-link="request" data-i="reqA">ส่งคำขอ →</a>
-    </div>
-    <div id="support" class="panel">
-      <h3 data-i="supT">สนับสนุนช่อง</h3>
-      <p data-i="supP">มอดแจกฟรีเสมอ การสนับสนุนเป็นทิปให้กำลังใจเท่านั้น</p>
-      <a class="more" data-link="support" data-i="supA">สนับสนุน →</a>
+  <section id="mods" class="sec" aria-labelledby="modsTitle">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <div>
+          <div class="eyebrow" data-i="gameTag">HEROES OF NEWERTH</div>
+          <h2 id="modsTitle" data-i="modsTitle">มอดทั้งหมด</h2>
+          <p data-i="modsSub">ทุกตัวแจกฟรี โหลดไฟล์เดียว ติดตั้งผ่าน Forge</p>
+        </div>
+        <label class="search"><span data-i="search">ค้นหา</span><input id="q" type="search" data-iph="searchPh" placeholder="ชื่อตัวละคร / ฮีโร่"></label>
+      </div>
+      <div class="mods" id="modList"></div>
     </div>
   </section>
 
-  <p class="disc" data-i="disc">VoidWing mods เป็นงาน fan-made ไม่เกี่ยวข้องกับ Juvio หรือ Heroes of Newerth ตัวละครและชื่อเป็นของเจ้าของลิขสิทธิ์เดิม</p>
+  <section id="install" class="sec" aria-labelledby="instTitle">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <div>
+          <div class="eyebrow" data-i="instTag">INSTALL</div>
+          <h2 id="instTitle" data-i="instTitle">ติดตั้งใน 4 ขั้น</h2>
+        </div>
+      </div>
+      <ol class="steps" id="steps" data-reveal>
+        <li class="step"><span class="n">1</span><strong data-i="s1">โหลดไฟล์มอด</strong><span class="t" data-i="s1t">ไฟล์ .honmod ไม่ต้องแตกไฟล์</span><div class="shot"></div></li>
+        <li class="step"><span class="n">2</span><strong data-i="s2">เพิ่มใน Forge</strong><span class="t" data-i="s2t">แท็บ Custom Mod (.honmod) แล้วกด เพิ่ม .honmod</span><div class="shot"></div></li>
+        <li class="step"><span class="n">3</span><strong data-i="s3">เปิดสวิตช์</strong><span class="t" data-i="s3t">เปิดสวิตช์ที่การ์ดมอดให้เป็นสีน้ำเงิน</span><div class="shot"></div></li>
+        <li class="step"><span class="n">4</span><strong data-i="s4">ใช้งานม็อด</strong><span class="t" data-i="s4t">กด ใช้งานม็อด แล้วเปิดเกมจาก Forge</span><div class="shot"></div></li>
+      </ol>
+      <p class="note"><span data-i="noForge">ยังไม่มี Heroes Forge? ติดตั้งจากเว็บทางการของผู้ทำ Forge เท่านั้น</span> <a data-link="forge" style="font-weight:600" data-i="forgeLink">เว็บ Forge</a></p>
+    </div>
+  </section>
+
+  <section id="faq" class="sec" aria-labelledby="faqTitle">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <div>
+          <div class="eyebrow" data-i="faqTag">FAQ</div>
+          <h2 id="faqTitle" data-i="faqTitle">ปัญหาที่พบบ่อย</h2>
+        </div>
+      </div>
+      <div data-reveal>
+        <details><summary data-i="t1">มอดไม่ขึ้นในเกม</summary><p data-i="t1a"></p></details>
+        <details><summary data-i="t2">โมเดลไม่ใช่ตัวที่ควรเป็น / ชนกัน</summary><p data-i="t2a"></p></details>
+        <details><summary data-i="t3">เกมอัปเดตแล้วมอดพัง</summary><p data-i="t3a"></p></details>
+        <details><summary data-i="t4">อัปเดตมอด</summary><p data-i="t4a"></p></details>
+        <details><summary data-i="t5">ใครเห็นมอดบ้าง</summary><p data-i="t5a"></p></details>
+      </div>
+    </div>
+  </section>
+
+  <section id="community" class="sec" aria-labelledby="comTitle">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <div>
+          <div class="eyebrow" data-i="comTag">COMMUNITY</div>
+          <h2 id="comTitle" data-i="comTitle">ขอมอด / สนับสนุน / ติดตาม</h2>
+        </div>
+      </div>
+      <div class="cards">
+        <div id="request" class="panel glow" data-reveal style="--d:.05s">
+          <h3 data-i="reqT">อยากให้ทำตัวละครไหน</h3>
+          <p data-i="reqP"></p>
+          <div class="row-links"><a class="btn ghost" data-link="request" data-i="reqA">ส่งคำขอ</a></div>
+        </div>
+        <div id="support" class="panel glow" data-reveal style="--d:.15s">
+          <h3 data-i="supT">สนับสนุนช่อง</h3>
+          <p data-i="supP"></p>
+          <div class="row-links"><a class="btn ghost" data-link="support" data-i="supA">สนับสนุน</a></div>
+        </div>
+        <div id="follow" class="panel glow" data-reveal style="--d:.25s">
+          <h3 data-i="folT">ติดตามช่อง</h3>
+          <p data-i="folP"></p>
+          <div class="row-links">
+            <a class="btn ghost" data-link="tiktok">TikTok</a>
+            <a class="btn ghost" data-link="youtube">YouTube</a>
+            <a class="btn ghost" data-link="stream">Stream</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <p data-i="disc"></p>
+      <span>© VoidWing</span>
+    </div>
+  </footer>
 </main>
 </div>
+<noscript><p style="padding:20px;color:#fff">This page needs JavaScript. Downloads: <a href="https://github.com/khattiya-streamer/voidwing/releases">GitHub Releases</a></p></noscript>
 
 <script>
 /* ===== CONFIG ถูกสร้างจาก _channel/registry.json ด้วย _toolkit/publish_mod.py (sync/publish) อย่าแก้มือ =====
-   href ว่าง = ปุ่มเป็น "เร็วๆ นี้" กดไม่ได้ (ไม่มีลิงก์ตาย) */
+   href ว่าง = ปุ่มเป็น "เร็วๆ นี้" กดไม่ได้ (ไม่มีลิงก์ตาย)
+   media ว่าง (null) = ช่องมอกอัพ (กรอบเว้นไว้) ใส่ได้: ชื่อไฟล์ภาพ/วิดีโอ, {youtube:"ID"}, {video:"x.mp4",loop:true} */
 /*CONFIG:START*/
 const CONFIG = {
   links: {
@@ -176,104 +358,263 @@ const CONFIG = {
     request: "",
     support: ""
   },
+  hero: {"media": null},
   mods: [
-    { name: "Aizen Sosuke", host: "Kinesis", version: "1.2.105", img: "img/aizen.png", download: "https://github.com/khattiya-streamer/voidwing/releases/download/aizen-v1.2.105/Aizen_Kinesis_v1.2.105.honmod" },
-    { name: "Jin Mori", host: "Monkey King", version: "0.6.75", img: "img/jin-mori.png", download: "https://github.com/khattiya-streamer/voidwing/releases/download/jin-mori-v0.6.75/Jin_Mori__Monkey_King_v0.6.75.honmod" },
-    { name: "Yoruichi Shihouin", host: "Silhouette", version: "0.13.96", img: "img/yoruichi.png", download: "https://github.com/khattiya-streamer/voidwing/releases/download/yoruichi-v0.13.96/Yoruichi_Shihouin_v0.13.96.honmod" },
-    { name: "Shanks", host: "Nomad", version: "0.8.5", img: "img/shanks.png", download: "https://github.com/khattiya-streamer/voidwing/releases/download/shanks-v0.8.5/Shanks_v0.8.5.honmod" }
+    {"name": "Aizen Sosuke", "host": "Kinesis", "version": "1.2.105", "img": "img/aizen.png", "download": "https://github.com/khattiya-streamer/voidwing/releases/download/aizen-v1.2.105/Aizen_Kinesis_v1.2.105.honmod"},
+    {"name": "Jin Mori", "host": "Monkey King", "version": "0.6.75", "img": "img/jin-mori.png", "download": "https://github.com/khattiya-streamer/voidwing/releases/download/jin-mori-v0.6.75/Jin_Mori__Monkey_King_v0.6.75.honmod"},
+    {"name": "Yoruichi Shihouin", "host": "Silhouette", "version": "0.13.96", "img": "img/yoruichi.png", "download": "https://github.com/khattiya-streamer/voidwing/releases/download/yoruichi-v0.13.96/Yoruichi_Shihouin_v0.13.96.honmod"},
+    {"name": "Shanks", "host": "Nomad", "version": "0.8.5", "img": "img/shanks.png", "download": "https://github.com/khattiya-streamer/voidwing/releases/download/shanks-v0.8.5/Shanks_v0.8.5.honmod"}
   ]
 };
 /*CONFIG:END*/
 
 const T = {
   th: {
-    games:"เกม", nextGame:"เกมถัดไป · เร็วๆ นี้", help:"ช่วยเหลือ", navInstall:"วิธีติดตั้ง", navRequest:"ขอมอดตัวละคร", navSupport:"สนับสนุนช่อง",
-    eyebrow:"มอดทั้งหมด", lead:"มอดฮีโร่ที่ทำเอง แจกฟรี โมเดล สกิล เอฟเฟกต์ และเสียง ติดตั้งผ่าน Heroes Forge",
-    modsTitle:"รายการมอด", search:"ค้นหา", searchPh:"ชื่อตัวละคร / ฮีโร่",
-    host:"ฮีโร่ฐาน", download:"โหลด", soon:"เร็วๆ นี้", count:"มอด", none:"ไม่พบมอดที่ค้นหา",
-    instTitle:"ติดตั้งใน 4 ขั้น",
+    games:"เกม", nextGame:"เกมถัดไป · เร็วๆ นี้", menu:"เมนู", navMods:"มอดทั้งหมด", navInstall:"วิธีติดตั้ง", navFaq:"ปัญหาที่พบบ่อย", navCommunity:"ขอมอด / สนับสนุน",
+    eyebrow:"MOD CHANNEL · แจกฟรีทุกตัว", lead:"มอดฮีโร่ Heroes of Newerth ที่ทำเอง โมเดล สกิล เอฟเฟกต์ และเสียง ติดตั้งผ่าน Heroes Forge ไม่ถึง 2 นาที",
+    ctaMods:"ดูมอดทั้งหมด", ctaInstall:"วิธีติดตั้ง 4 ขั้น", heroSlot:"[คลิปรวมมอดทั้งหมด 15-30 วินาที วางตรงนี้]",
+    gameTag:"HEROES OF NEWERTH", modsTitle:"มอดทั้งหมด", modsSub:"ทุกตัวแจกฟรี โหลดไฟล์เดียว ติดตั้งผ่าน Forge", search:"ค้นหา", searchPh:"ชื่อตัวละคร / ฮีโร่",
+    host:"ฮีโร่ฐาน", download:"โหลดมอด", soon:"เร็วๆ นี้", count:"มอด", none:"ไม่พบมอดที่ค้นหา", ver:"เวอร์ชัน",
+    descPh:"[คำอธิบายมอด: จุดเด่นและสกิล 1-2 บรรทัด]", trailerPh:"[คลิปตัวอย่างมอด {name}]", skillsTitle:"สกิล", skillPh:"[คลิปสกิล {k}]", galleryTitle:"ภาพในเกม", galleryPh:"[ภาพ {n}]",
+    instTag:"ติดตั้ง", instTitle:"ติดตั้งใน 4 ขั้น", shotPh:"[ภาพหน้าจอ Forge ขั้นที่ {n}]",
     s1:"โหลดไฟล์มอด", s1t:"ไฟล์ .honmod ไม่ต้องแตกไฟล์",
     s2:"เพิ่มใน Forge", s2t:"แท็บ Custom Mod (.honmod) แล้วกด เพิ่ม .honmod",
     s3:"เปิดสวิตช์", s3t:"เปิดสวิตช์ที่การ์ดมอดให้เป็นสีน้ำเงิน",
     s4:"ใช้งานม็อด", s4t:"กด ใช้งานม็อด แล้วเปิดเกมจาก Forge",
     noForge:"ยังไม่มี Heroes Forge? ติดตั้งจากเว็บทางการของผู้ทำ Forge เท่านั้น", forgeLink:"เว็บ Forge",
+    faqTag:"คำถามที่พบบ่อย", faqTitle:"ปัญหาที่พบบ่อย",
     t1:"มอดไม่ขึ้นในเกม", t1a:"ตรวจว่าสวิตช์เปิดอยู่ และกด \"ใช้งานม็อด\" แล้วเปิดเกมใหม่ทั้งหมด",
     t2:"โมเดลไม่ใช่ตัวที่ควรเป็น / ชนกัน", t2a:"อย่าเปิดสองมอดที่ใช้ฮีโร่ฐานตัวเดียวกันพร้อมกัน และปิด avatar/skin ของฮีโร่ตัวนั้น",
     t3:"เกมอัปเดตแล้วมอดพัง", t3a:"รอเวอร์ชันใหม่จากหน้านี้ เกมแพตช์อาจทำให้ไฟล์ที่มอดอ้างหายไป",
     t4:"อัปเดตมอด", t4a:"โหลดเวอร์ชันใหม่ ลบการ์ดเดิมใน Forge เพิ่มไฟล์ใหม่ เปิดสวิตช์ แล้วกด \"ใช้งานม็อด\" อีกครั้ง",
-    local:"มอดเปลี่ยนสิ่งที่เห็นและได้ยินบนเครื่องคุณ คนอื่นในแมตช์ไม่เห็นมอดของคุณ",
-    reqT:"อยากให้ทำตัวละครไหน", reqP:"บอกตัวละคร สกิลที่อยากเห็น และรูปอ้างอิง ไม่รับประกันว่าจะทำทุกคำขอ", reqA:"ส่งคำขอ →",
-    supT:"สนับสนุนช่อง", supP:"มอดแจกฟรีเสมอ การสนับสนุนเป็นทิปให้กำลังใจเท่านั้น", supA:"สนับสนุน →",
+    t5:"ใครเห็นมอดบ้าง", t5a:"มอดเปลี่ยนสิ่งที่เห็นและได้ยินบนเครื่องคุณ คนอื่นในแมตช์ไม่เห็นมอดของคุณ",
+    comTag:"ชุมชน", comTitle:"ขอมอด / สนับสนุน / ติดตาม",
+    reqT:"อยากให้ทำตัวละครไหน", reqP:"บอกตัวละคร สกิลที่อยากเห็น และรูปอ้างอิง ไม่รับประกันว่าจะทำทุกคำขอ", reqA:"ส่งคำขอ",
+    supT:"สนับสนุนช่อง", supP:"มอดแจกฟรีเสมอ การสนับสนุนเป็นทิปให้กำลังใจเท่านั้น", supA:"สนับสนุน",
+    folT:"ติดตามช่อง", folP:"คลิปสกิล มอดใหม่ และสตรีม",
     disc:"VoidWing mods เป็นงาน fan-made ไม่เกี่ยวข้องกับ Juvio หรือ Heroes of Newerth ตัวละครและชื่อเป็นของเจ้าของลิขสิทธิ์เดิม"
   },
   en: {
-    games:"Games", nextGame:"Next game · coming soon", help:"Help", navInstall:"How to install", navRequest:"Request a mod", navSupport:"Support the channel",
-    eyebrow:"ALL MODS", lead:"Free hand-made hero mods: models, skills, effects and sounds. Installed through Heroes Forge.",
-    modsTitle:"Mods", search:"Search", searchPh:"Character / hero",
-    host:"Base hero", download:"Download", soon:"Coming soon", count:"mods", none:"No mod matches your search",
-    instTitle:"Install in 4 steps",
+    games:"Games", nextGame:"Next game · coming soon", menu:"Menu", navMods:"All mods", navInstall:"How to install", navFaq:"Troubleshooting", navCommunity:"Request / support",
+    eyebrow:"MOD CHANNEL · ALWAYS FREE", lead:"Free hand-made hero mods for Heroes of Newerth: models, skills, effects and sounds. Installed through Heroes Forge in under 2 minutes.",
+    ctaMods:"Browse mods", ctaInstall:"Install in 4 steps", heroSlot:"[Showreel clip of all mods, 15-30 s, goes here]",
+    gameTag:"HEROES OF NEWERTH", modsTitle:"All mods", modsSub:"All free. One file each, installed through Forge.", search:"Search", searchPh:"Character / hero",
+    host:"Base hero", download:"Download", soon:"Coming soon", count:"mods", none:"No mod matches your search", ver:"Version",
+    descPh:"[Mod description: highlights and skills, 1-2 lines]", trailerPh:"[{name} trailer clip]", skillsTitle:"Skills", skillPh:"[Skill {k} clip]", galleryTitle:"In-game shots", galleryPh:"[Shot {n}]",
+    instTag:"INSTALL", instTitle:"Install in 4 steps", shotPh:"[Forge screenshot, step {n}]",
     s1:"Download the mod", s1t:"The .honmod file. Do not unzip it.",
     s2:"Add it in Forge", s2t:"Custom Mod (.honmod) tab, then click Add .honmod",
     s3:"Switch it on", s3t:"Turn the mod card's switch on (blue)",
     s4:"Apply", s4t:"Click Apply, then start the game from Forge",
     noForge:"No Heroes Forge yet? Get it only from its makers' official site.", forgeLink:"Forge site",
+    faqTag:"FAQ", faqTitle:"Troubleshooting",
     t1:"Mod doesn't show in game", t1a:"Make sure the switch is on, click Apply, then fully restart the game.",
     t2:"Wrong model / conflicts", t2a:"Don't enable two mods built on the same hero, and turn off avatar/skin packs for that hero.",
     t3:"Mod broke after a game patch", t3a:"Wait for a new version here. A patch can remove files a mod relies on.",
     t4:"Updating a mod", t4a:"Download the new version, remove the old card in Forge, add the new file, switch it on and click Apply again.",
-    local:"A mod changes what you see and hear on your own PC. Other players in the match don't see it.",
-    reqT:"Want a character made?", reqP:"Tell me the character, the skills you'd like to see and reference pictures. Not every request will be made.", reqA:"Send a request →",
-    supT:"Support the channel", supP:"Mods are always free. Support is an optional tip, nothing more.", supA:"Support →",
+    t5:"Who sees the mod?", t5a:"A mod changes what you see and hear on your own PC. Other players in the match don't see it.",
+    comTag:"COMMUNITY", comTitle:"Request / support / follow",
+    reqT:"Want a character made?", reqP:"Tell me the character, the skills you'd like to see and reference pictures. Not every request will be made.", reqA:"Send a request",
+    supT:"Support the channel", supP:"Mods are always free. Support is an optional tip, nothing more.", supA:"Support",
+    folT:"Follow the channel", folP:"Skill clips, new mods and streams",
     disc:"VoidWing mods are fan-made and not affiliated with Juvio or Heroes of Newerth. Characters and names belong to their original owners."
   }
 };
 
-let lang = localStorage.getItem("vw-lang") || (navigator.language && navigator.language.startsWith("th") ? "th" : "en");
+const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const SKILLS = ["q", "w", "e", "r"];
+const store = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* private mode */ } } };
+let lang = store.get("vw-lang") || (navigator.language && navigator.language.startsWith("th") ? "th" : "en");
+const t = (k, vars) => { let s = T[lang][k] || k; if (vars) for (const v in vars) s = s.replace("{" + v + "}", vars[v]); return s; };
+const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+const pick = (v) => (v && typeof v === "object" && !Array.isArray(v) && (v.th || v.en)) ? (v[lang] || v.en || v.th) : v;
+
+/* ---- media slot: mock-up frame until a clip/image is given ---- */
+const IMG = /\.(png|jpe?g|webp|gif|avif|svg)(\?.*)?$/i, VID = /\.(mp4|webm|mov)(\?.*)?$/i;
+const YT = /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|shorts\/|embed\/))([\w-]{11})/;
+function norm(m) {
+  if (!m) return null;
+  if (typeof m === "string") {
+    const y = m.match(YT); if (y) return { youtube: y[1] };
+    if (IMG.test(m)) return { image: m };
+    if (VID.test(m)) return { video: m };
+    return null;
+  }
+  return m;
+}
+function slot(m, ph, ratio, small) {
+  const fig = el("figure", "slot " + (ratio || "r169"));
+  m = norm(m);
+  if (!m) { fig.classList.add("empty"); if (small) fig.classList.add("small"); fig.appendChild(el("span", null, ph)); return fig; }
+  if (m.youtube) {
+    const b = el("button", "yt"); b.type = "button"; b.setAttribute("aria-label", ph || "play");
+    const im = el("img"); im.src = "https://i.ytimg.com/vi/" + m.youtube + "/hqdefault.jpg"; im.alt = ""; im.loading = "lazy";
+    b.append(im, el("i"));
+    b.addEventListener("click", () => {
+      const f = el("iframe"); f.src = "https://www.youtube-nocookie.com/embed/" + m.youtube + "?autoplay=1&rel=0";
+      f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen"; f.allowFullscreen = true; f.title = ph || "video";
+      b.replaceWith(f);
+    });
+    fig.appendChild(b);
+  } else if (m.video) {
+    const v = el("video"); v.src = m.video; v.playsInline = true; v.preload = "metadata"; if (m.poster) v.poster = m.poster;
+    if (m.loop) { v.muted = true; v.loop = true; v.autoplay = true; } else v.controls = true;
+    fig.appendChild(v);
+  } else if (m.image) {
+    const im = el("img"); im.src = m.image; im.alt = m.alt || ""; im.loading = "lazy"; fig.appendChild(im);
+  }
+  return fig;
+}
 
 function setLink(a) {
   const url = CONFIG.links[a.dataset.link];
   if (url) { a.href = url; a.removeAttribute("aria-disabled"); a.target = "_blank"; a.rel = "noopener"; a.removeAttribute("title"); }
-  else { a.removeAttribute("href"); a.setAttribute("aria-disabled", "true"); a.title = T[lang].soon; }
+  else { a.removeAttribute("href"); a.setAttribute("aria-disabled", "true"); a.title = t("soon"); }
+}
+
+function renderHero() {
+  const h = document.getElementById("heroSlot"); h.textContent = "";
+  h.appendChild(slot(CONFIG.hero && CONFIG.hero.media, t("heroSlot"), "r169"));
+}
+
+function feature(m, i) {
+  const art = el("article", "feature"); art.setAttribute("data-reveal", ""); art.dataset.name = (m.name + " " + m.host).toLowerCase();
+  const med = el("div", "f-media");
+  med.appendChild(slot(m.trailer, t("trailerPh", { name: m.name }), "r169"));
+  const gal = el("div", "gallery");
+  for (let n = 0; n < 3; n++) gal.appendChild(slot(m.gallery && m.gallery[n], t("galleryPh", { n: n + 1 }), "r169", true));
+  med.append(el("div", "h4", t("galleryTitle")), gal);
+
+  const body = el("div", "f-body");
+  body.appendChild(el("div", "no", String(i + 1).padStart(2, "0")));
+  const head = el("div", "f-head");
+  const ic = el("img"); ic.src = m.img; ic.alt = ""; ic.width = 64; ic.height = 64;
+  const hd = el("div"); hd.append(el("h3", null, m.name), el("div", "host", t("host") + " " + m.host));
+  head.append(ic, hd);
+  const chips = el("div", "chips"); chips.append(el("span", "chip v", "v" + m.version), el("span", "chip", "Heroes of Newerth"));
+  const d = pick(m.desc); const desc = el("p", "desc" + (d ? "" : " ph"), d || t("descPh"));
+  const sk = el("div", "skills");
+  for (const k of SKILLS) {
+    const s = (m.skills && m.skills[k]) || {};
+    const w = el("div", "skill tilt");
+    w.appendChild(slot(s.media, t("skillPh", { k: k.toUpperCase() }), "r11", true));
+    w.appendChild(el("span", "k", k.toUpperCase()));
+    const nm = pick(s.name); if (nm) w.appendChild(el("div", "nm", nm));
+    sk.appendChild(w);
+  }
+  const dl = el("div", "dl");
+  const a = el("a", "btn");
+  if (m.download) { a.href = m.download; a.textContent = t("download"); a.setAttribute("download", ""); }
+  else { a.setAttribute("aria-disabled", "true"); a.textContent = t("soon"); }
+  dl.append(a, el("small", null, ".honmod"));
+  body.append(head, chips, desc, el("div", "h4", t("skillsTitle")), sk, dl);
+  art.append(med, body);
+  return art;
 }
 
 function renderMods() {
-  const t = T[lang], q = document.getElementById("q").value.trim().toLowerCase();
-  const list = document.getElementById("modList");
-  list.textContent = "";
-  const shown = CONFIG.mods.filter(m => !q || (m.name + " " + m.host).toLowerCase().includes(q));
-  if (!shown.length) { const d = document.createElement("div"); d.className = "empty"; d.textContent = t.none; list.appendChild(d); return; }
-  for (const m of shown) {
-    const row = document.createElement("div"); row.className = "mod";
-    const img = document.createElement("img"); img.src = m.img; img.alt = ""; img.width = 72; img.height = 72;
-    const info = document.createElement("div"); info.className = "info";
-    const h = document.createElement("h3"); h.textContent = m.name;
-    const host = document.createElement("span"); host.className = "host"; host.textContent = t.host + " " + m.host;
-    info.append(h, host);
-    const ver = document.createElement("span"); ver.className = "ver"; ver.textContent = "v" + m.version;
-    const a = document.createElement("a"); a.className = "btn";
-    if (m.download) { a.href = m.download; a.textContent = t.download; a.setAttribute("download", ""); }
-    else { a.setAttribute("aria-disabled", "true"); a.textContent = t.soon; }
-    row.append(img, info, ver, a);
-    list.appendChild(row);
-  }
+  const q = document.getElementById("q").value.trim().toLowerCase();
+  const list = document.getElementById("modList"); list.textContent = "";
+  const shown = CONFIG.mods.map((m, i) => [m, i]).filter(([m]) => !q || (m.name + " " + m.host).toLowerCase().includes(q));
+  if (!shown.length) { list.appendChild(el("div", "empty-msg", t("none"))); return; }
+  for (const [m, i] of shown) list.appendChild(feature(m, i));
+  hookEffects(list);
+}
+
+function renderShots() {
+  document.querySelectorAll("#steps .step").forEach((s, i) => {
+    const box = s.querySelector(".shot"); box.textContent = "";
+    box.appendChild(slot(CONFIG.steps && CONFIG.steps[i], t("shotPh", { n: i + 1 }), "r1610", true));
+  });
 }
 
 function apply() {
-  const t = T[lang];
   document.documentElement.lang = lang;
   document.title = lang === "th" ? "VoidWing — มอด Heroes of Newerth" : "VoidWing — Heroes of Newerth mods";
-  document.querySelectorAll("[data-i]").forEach(e => { e.textContent = t[e.dataset.i]; });
-  document.querySelectorAll("[data-iph]").forEach(e => { e.placeholder = t[e.dataset.iph]; });
+  document.querySelectorAll("[data-i]").forEach(e => { e.textContent = t(e.dataset.i); });
+  document.querySelectorAll("[data-iph]").forEach(e => { e.placeholder = t(e.dataset.iph); });
   document.querySelectorAll("[data-link]").forEach(setLink);
-  document.getElementById("modCount").textContent = CONFIG.mods.length + " " + t.count;
-  renderMods();
+  document.getElementById("modCount").textContent = CONFIG.mods.length + " " + t("count");
+  renderHero(); renderMods(); renderShots();
 }
 
-document.getElementById("lang").addEventListener("click", () => {
-  lang = lang === "th" ? "en" : "th"; localStorage.setItem("vw-lang", lang); apply();
+/* ---- effects: reveal, tilt, cursor glow, particles, scroll-spy ---- */
+const io = "IntersectionObserver" in window ? new IntersectionObserver(es => {
+  for (const e of es) if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+}, { threshold: 0.12 }) : null;
+function hookEffects(root) {
+  root.querySelectorAll("[data-reveal]:not(.in)").forEach(n => { if (io && !reduced) io.observe(n); else n.classList.add("in"); });
+  if (!reduced) root.querySelectorAll(".tilt:not([data-t])").forEach(tilt);
+}
+function tilt(n) {
+  n.dataset.t = "1";
+  n.addEventListener("pointermove", e => {
+    if (e.pointerType !== "mouse") return;
+    const r = n.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+    n.style.transform = "perspective(700px) rotateY(" + (x * 9).toFixed(2) + "deg) rotateX(" + (-y * 9).toFixed(2) + "deg) translateY(-3px)";
+  });
+  n.addEventListener("pointerleave", () => { n.style.transform = ""; });
+}
+document.addEventListener("pointermove", e => {
+  const g = e.target.closest && e.target.closest(".glow"); if (!g) return;
+  const r = g.getBoundingClientRect(); g.style.setProperty("--mx", (e.clientX - r.left) + "px"); g.style.setProperty("--my", (e.clientY - r.top) + "px");
 });
+function particles(c) {
+  const ctx = c.getContext("2d"); let w = 0, h = 0, pts = [], raf = 0;
+  function size() {
+    const dpr = Math.min(devicePixelRatio || 1, 2); w = c.clientWidth; h = c.clientHeight; c.width = w * dpr; c.height = h * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const n = Math.round(Math.min(70, w * h / 15000));
+    pts = Array.from({ length: n }, () => ({ x: Math.random() * w, y: Math.random() * h, vx: (Math.random() - .5) * .25, vy: -(.12 + Math.random() * .3), r: 1 + Math.random() * 1.6, c: Math.random() < .5 ? "53,224,208" : "143,123,255" }));
+  }
+  function tick() {
+    ctx.clearRect(0, 0, w, h);
+    for (const p of pts) {
+      p.x += p.vx; p.y += p.vy;
+      if (p.y < -10) { p.y = h + 10; p.x = Math.random() * w; } if (p.x < -10) p.x = w + 10; if (p.x > w + 10) p.x = -10;
+      ctx.fillStyle = "rgba(" + p.c + ",.8)"; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.283); ctx.fill();
+    }
+    for (let i = 0; i < pts.length; i++) for (let j = i + 1; j < pts.length; j++) {
+      const a = pts[i], b = pts[j], dx = a.x - b.x, dy = a.y - b.y, d = dx * dx + dy * dy;
+      if (d < 9000) { ctx.strokeStyle = "rgba(143,123,255," + (.2 * (1 - d / 9000)).toFixed(3) + ")"; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); }
+    }
+    raf = requestAnimationFrame(tick);
+  }
+  new IntersectionObserver(es => {
+    if (es[0].isIntersecting) { if (!raf) raf = requestAnimationFrame(tick); } else { cancelAnimationFrame(raf); raf = 0; }
+  }).observe(c);
+  addEventListener("resize", size); size();
+}
+/* hero animations (title shine, spinning border, stripes) only run while the hero is on screen */
+function pauseHeroWhenHidden() {
+  const top = document.getElementById("top");
+  new IntersectionObserver(es => { top.classList.toggle("off", !es[0].isIntersecting); }).observe(top);
+}
+function spy() {
+  const secs = [...document.querySelectorAll(".nav a[data-sec]")].map(a => [a, document.getElementById(a.dataset.sec)]).filter(x => x[1]);
+  let queued = false;
+  const update = () => {
+    queued = false;
+    const line = innerHeight * 0.35, atEnd = innerHeight + scrollY >= document.documentElement.scrollHeight - 4;
+    let cur = null;
+    for (const [a, s] of secs) if (s.getBoundingClientRect().top <= line) cur = a;
+    if (atEnd && secs.length) cur = secs[secs.length - 1][0];
+    secs.forEach(([a]) => { if (a === cur) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current"); });
+  };
+  addEventListener("scroll", () => { if (!queued) { queued = true; setTimeout(update, 50); } }, { passive: true });
+  update();
+}
+
+document.getElementById("lang").addEventListener("click", () => { lang = lang === "th" ? "en" : "th"; store.set("vw-lang", lang); apply(); });
 document.getElementById("q").addEventListener("input", renderMods);
 apply();
+hookEffects(document);
+spy();
+pauseHeroWhenHidden();
+if (!reduced) {
+  particles(document.getElementById("fx"));
+  const bw = document.getElementById("bigwing");
+  addEventListener("scroll", () => { bw.style.transform = "translateY(" + (scrollY * .15).toFixed(1) + "px)"; }, { passive: true });
+}
 </script>
 </body>
 </html>
