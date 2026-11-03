@@ -461,7 +461,6 @@ const CONFIG = {
     discord: ""
   },
   hero: {"media": null},
-  upcoming: [{"id": "up1", "status": "in_dev", "name": null, "host": null, "hint": null, "progress": null, "eta": null, "silhouette": null}, {"id": "up2", "status": "teaser", "name": null, "host": null, "hint": null, "progress": null, "eta": null, "silhouette": null}],
   mods: [
     {"name": "Aizen Sosuke", "host": "Kinesis", "version": "1.2.105", "img": "img/aizen.png", "download": "https://github.com/khattiya-streamer/voidwing/releases/download/aizen-v1.2.105/Aizen_Kinesis_v1.2.105.honmod", "skills": {"q": {"media": "img/skills/aizen-q.png"}, "w": {"media": "img/skills/aizen-w.png"}, "e": {"media": "img/skills/aizen-e.png"}, "r": {"media": "img/skills/aizen-r.png"}}, "status": "released"},
     {"name": "Jin Mori", "host": "Monkey King", "version": "0.6.75", "img": "img/jin-mori.png", "download": "https://github.com/khattiya-streamer/voidwing/releases/download/jin-mori-v0.6.75/Jin_Mori__Monkey_King_v0.6.75.honmod", "skills": {"q": {"media": "img/skills/jin-mori-q.png"}, "w": {"media": "img/skills/jin-mori-w.png"}, "e": {"media": "img/skills/jin-mori-e.png"}, "r": {"media": "img/skills/jin-mori-r.png"}}, "status": "released"},
@@ -579,11 +578,14 @@ function setLink(a) {
   const url = CONFIG.links[a.dataset.link];
   if (url) { a.href = url; a.removeAttribute("aria-disabled"); if (!url.startsWith("mailto:")) { a.target = "_blank"; a.rel = "noopener"; } a.removeAttribute("title"); }
   else { a.removeAttribute("href"); a.setAttribute("aria-disabled", "true"); a.title = t("soon"); }
+  a.hidden = !url;   // not ready yet -> not shown (comes back by itself once the link is in registry.json)
 }
 
 function renderHero() {
   const h = document.getElementById("heroSlot"); h.textContent = "";
-  h.appendChild(slot(CONFIG.hero && CONFIG.hero.media, t("heroSlot"), "r169"));
+  const has = !!norm(CONFIG.hero && CONFIG.hero.media);   // mock-up frame stays hidden until a real clip / image is set
+  h.parentElement.hidden = !has;
+  if (has) h.appendChild(slot(CONFIG.hero.media, t("heroSlot"), "r169"));
 }
 
 /* ---- 3D viewer: model-viewer loads only after a click ---- */
@@ -677,7 +679,7 @@ function feature(m, i) {
   const st = m.status || "released";
   const chips = el("div", "chips"); chips.append(statusChip(st), el("span", "chip v", "v" + m.version), el("span", "chip", "Heroes of Newerth"));
   const sn = pick(m.status_note);
-  const d = pick(m.desc); const desc = el("p", "desc" + (d ? "" : " ph"), d || t("descPh"));
+  const d = pick(m.desc); const desc = d ? el("p", "desc", d) : null;
   const ready = st === "released" || st === "beta";
   const sk = el("div", "skills");
   for (const k of SKILLS) {
@@ -693,7 +695,7 @@ function feature(m, i) {
   if (m.download && ready) { a.href = m.download; a.textContent = t("download"); a.setAttribute("download", ""); }
   else { a.setAttribute("aria-disabled", "true"); a.textContent = ready ? t("soon") : t("notReady"); }
   dl.append(a, el("small", null, ".honmod"));
-  body.append(head, chips, desc); if (sn) body.appendChild(el("p", "snote", sn)); body.append(el("div", "h4", t("skillsTitle")), sk, dl);
+  body.append(head, chips); if (desc) body.appendChild(desc); if (sn) body.appendChild(el("p", "snote", sn)); body.append(el("div", "h4", t("skillsTitle")), sk, dl);
   if (med.children.length) art.append(med, body); else art.append(body);
   return art;
 }
@@ -745,7 +747,9 @@ function renderMods() {
 function renderShots() {
   document.querySelectorAll("#steps .step").forEach((s, i) => {
     const box = s.querySelector(".shot"); box.textContent = "";
-    box.appendChild(slot(CONFIG.steps && CONFIG.steps[i], t("shotPh", { n: i + 1 }), "r1610", true));
+    const has = !!norm(CONFIG.steps && CONFIG.steps[i]);
+    box.hidden = !has;
+    if (has) box.appendChild(slot(CONFIG.steps[i], t("shotPh", { n: i + 1 }), "r1610", true));
   });
 }
 
@@ -755,6 +759,7 @@ function apply() {
   document.querySelectorAll("[data-i]").forEach(e => { e.textContent = t(e.dataset.i); });
   document.querySelectorAll("[data-iph]").forEach(e => { e.placeholder = t(e.dataset.iph); });
   document.querySelectorAll("[data-link]").forEach(setLink);
+  document.querySelectorAll("#community .panel").forEach(c => { c.hidden = ![...c.querySelectorAll("[data-link]")].some(a => !a.hidden); });
   document.getElementById("modCount").textContent = CONFIG.mods.length + " " + t("count");
   renderHero(); renderMods(); renderUpcoming(); renderShots();
   document.querySelectorAll("#upcoming [data-link]").forEach(setLink);
