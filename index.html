@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VoidWing — มอด Heroes of Newerth</title>
+<meta name="description" content="มอดฮีโร่ Heroes of Newerth ที่ทำเอง แจกฟรี ติดตั้งผ่าน Heroes Forge / Free hand-made Heroes of Newerth hero mods">
+<link rel="icon" href="img/jin-mori.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --navy:#12263F; --navy2:#1E3A5C; --ink:#12263F; --muted:#3C5169;
+  --bg:#EEF2F6; --card:#FFFFFF; --line:#D3DCE6; --soft:#DCE5EE;
+  --accent:#0B7A72; --accent-dark:#0B5F59; --accent-tint:#DDF1EF; --accent-light:#6FE0D5;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans Thai',system-ui,sans-serif;font-size:16px;line-height:1.6}
+a{color:#0B6F68}
+a:hover{color:var(--navy)}
+:focus-visible{outline:3px solid #F2A900;outline-offset:2px}
+.layout{display:flex;flex-wrap:wrap;min-height:100vh}
+aside{flex:0 0 272px;background:var(--navy);color:#E6EDF5;padding:28px 20px;display:flex;flex-direction:column;gap:32px;position:sticky;top:0;height:100vh;align-self:flex-start;overflow:auto}
+aside a{color:#E6EDF5}
+.brand{display:flex;align-items:center;gap:12px;padding:0 8px;font-weight:700;font-size:22px}
+.label{padding:0 8px 8px;font-size:13px;font-weight:600;letter-spacing:.12em;color:#9FB2C8}
+.game{display:flex;align-items:center;justify-content:space-between;min-height:48px;padding:0 14px;border-radius:10px;background:var(--navy2);color:#fff;font-weight:600;text-decoration:none}
+.game small{font-size:14px;color:var(--accent-light);font-weight:600}
+.soon{display:flex;align-items:center;min-height:48px;padding:0 14px;border-radius:10px;border:1px dashed #3A5575;color:#9FB2C8;margin-top:8px}
+.nav{display:flex;flex-direction:column;gap:4px}
+.nav a{display:flex;align-items:center;min-height:44px;padding:0 14px;border-radius:8px;text-decoration:none}
+.nav a:hover{background:#1E3A5C;color:#fff}
+.side-foot{margin-top:auto;display:flex;flex-direction:column;gap:12px;padding:0 8px}
+.socials{display:flex;gap:18px;font-weight:600;flex-wrap:wrap}
+.socials a{text-decoration:none}
+.socials a:hover{text-decoration:underline}
+button.lang{align-self:flex-start;min-height:44px;padding:0 16px;border-radius:10px;border:1px solid #3A5575;background:transparent;color:#E6EDF5;font:inherit;font-weight:600;cursor:pointer}
+button.lang:hover{background:#1E3A5C}
+main{flex:1 1 640px;min-width:0;padding:40px 48px 56px;display:flex;flex-direction:column;gap:40px;max-width:1100px}
+.eyebrow{font-size:14px;font-weight:600;letter-spacing:.12em;color:#0B6F68}
+h1{margin:4px 0 8px;font-size:44px;line-height:1.15;font-weight:700;text-wrap:balance}
+h2{margin:0;font-size:26px;font-weight:700}
+h3{margin:0}
+.lead{margin:0;font-size:18px;color:var(--muted);max-width:640px;text-wrap:pretty}
+.head-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
+.search{display:flex;align-items:center;gap:10px;min-height:44px;padding:0 14px;border-radius:10px;background:#fff;border:1px solid #C2CEDB}
+.search span{color:var(--muted);font-size:15px}
+.search input{border:0;outline:0;background:transparent;font:inherit;width:200px;color:var(--ink)}
+.search:focus-within{outline:3px solid #F2A900;outline-offset:2px}
+.mods{display:flex;flex-direction:column;gap:12px;margin-top:12px}
+.mod{display:flex;flex-wrap:wrap;align-items:center;gap:20px;padding:16px 20px;border-radius:14px;background:var(--card);border:1px solid var(--line)}
+.mod img{width:72px;height:72px;border-radius:10px;object-fit:cover;background:var(--soft);flex:0 0 72px}
+.mod .info{flex:1 1 220px;display:flex;flex-direction:column}
+.mod h3{font-size:20px;font-weight:600}
+.mod .host{color:var(--muted);font-size:15px}
+.ver{padding:4px 12px;border-radius:999px;background:var(--accent-tint);color:var(--accent-dark);font-size:14px;font-weight:600}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 22px;border-radius:10px;background:var(--accent);color:#fff;font-weight:600;text-decoration:none;border:0;font-family:inherit;font-size:16px;cursor:pointer}
+.btn:hover{background:var(--accent-dark);color:#fff}
+.btn[aria-disabled=true]{background:#C9D3DE;color:#3C5169;cursor:not-allowed}
+.empty{padding:20px;color:var(--muted)}
+.panel{display:flex;flex-direction:column;gap:16px;padding:28px;border-radius:16px;background:var(--card);border:1px solid var(--line)}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:16px;margin:0;padding:0;list-style:none}
+.steps li{display:flex;gap:14px;align-items:flex-start}
+.steps .n{flex:0 0 36px;height:36px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
+.steps strong{display:block}
+.steps span.t{color:var(--muted);font-size:15px}
+details{border-top:1px solid var(--line);padding:10px 0}
+summary{cursor:pointer;font-weight:600;min-height:32px;display:flex;align-items:center}
+details p{margin:6px 0 0;color:var(--muted);font-size:15px}
+.two{display:flex;flex-wrap:wrap;gap:20px}
+.two .panel{flex:1 1 320px;padding:24px;gap:10px}
+.two p{margin:0;color:var(--muted)}
+.two a.more{align-self:flex-start;font-weight:600}
+a[aria-disabled=true]{color:#6C7F95;text-decoration:none;cursor:not-allowed}
+.socials a[aria-disabled=true]{color:#9FB2C8}
+.disc{margin:0;color:var(--muted);font-size:14px;max-width:680px}
+@media (max-width:860px){
+  aside{flex:1 1 100%;position:static;height:auto;flex-direction:row;flex-wrap:wrap;align-items:center;gap:16px 24px;padding:16px 20px}
+  aside .games{display:none}
+  .nav .label{display:none}
+  .nav{flex-direction:row;flex-wrap:wrap;gap:0}
+  .side-foot{margin-top:0;flex-direction:row;align-items:center;flex-wrap:wrap}
+  main{padding:28px 20px 48px}
+  h1{font-size:34px}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+
+<aside>
+  <div class="brand">
+    <svg width="34" height="34" viewBox="0 0 36 36" fill="none" stroke="#6FE0D5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9c8 1 13 5 15 12 2-7 7-11 15-12-2 8-6 13-15 18C9 22 5 17 3 9Z"/></svg>
+    VoidWing
+  </div>
+  <div class="games">
+    <div class="label" data-i="games">เกม</div>
+    <a class="game" href="#mods"><span>Heroes of Newerth</span><small id="modCount"></small></a>
+    <span class="soon" data-i="nextGame">เกมถัดไป · เร็วๆ นี้</span>
+  </div>
+  <nav class="nav" aria-label="menu">
+    <div class="label" data-i="help">ช่วยเหลือ</div>
+    <a href="#install" data-i="navInstall">วิธีติดตั้ง</a>
+    <a href="#request" data-i="navRequest">ขอมอดตัวละคร</a>
+    <a href="#support" data-i="navSupport">สนับสนุนช่อง</a>
+  </nav>
+  <div class="side-foot">
+    <div class="socials">
+      <a data-link="tiktok">TikTok</a><a data-link="youtube">YouTube</a><a data-link="stream">Stream</a>
+    </div>
+    <button class="lang" id="lang" type="button" aria-label="Language">TH / EN</button>
+  </div>
+</aside>
+
+<main>
+  <header>
+    <div class="eyebrow" data-i="eyebrow">มอดทั้งหมด</div>
+    <h1>Heroes of Newerth</h1>
+    <p class="lead" data-i="lead">มอดฮีโร่ที่ทำเอง แจกฟรี โมเดล สกิล เอฟเฟกต์ และเสียง ติดตั้งผ่าน Heroes Forge</p>
+  </header>
+
+  <section id="mods" aria-labelledby="modsTitle">
+    <div class="head-row">
+      <h2 id="modsTitle" data-i="modsTitle">รายการมอด</h2>
+      <label class="search"><span data-i="search">ค้นหา</span><input id="q" type="search" data-iph="searchPh" placeholder="ชื่อตัวละคร / ฮีโร่"></label>
+    </div>
+    <div class="mods" id="modList"></div>
+  </section>
+
+  <section id="install" class="panel" aria-labelledby="instTitle">
+    <h2 id="instTitle" data-i="instTitle">ติดตั้งใน 4 ขั้น</h2>
+    <ol class="steps">
+      <li><span class="n">1</span><div><strong data-i="s1">โหลดไฟล์มอด</strong><span class="t" data-i="s1t">ไฟล์ .honmod ไม่ต้องแตกไฟล์</span></div></li>
+      <li><span class="n">2</span><div><strong data-i="s2">เพิ่มใน Forge</strong><span class="t" data-i="s2t">แท็บ Custom Mod (.honmod) แล้วกด เพิ่ม .honmod</span></div></li>
+      <li><span class="n">3</span><div><strong data-i="s3">เปิดสวิตช์</strong><span class="t" data-i="s3t">เปิดสวิตช์ที่การ์ดมอดให้เป็นสีน้ำเงิน</span></div></li>
+      <li><span class="n">4</span><div><strong data-i="s4">ใช้งานม็อด</strong><span class="t" data-i="s4t">กด ใช้งานม็อด แล้วเปิดเกมจาก Forge</span></div></li>
+    </ol>
+    <span style="color:var(--muted);font-size:15px"><span data-i="noForge">ยังไม่มี Heroes Forge? ติดตั้งจากเว็บทางการของผู้ทำ Forge เท่านั้น</span> <a data-link="forge" style="font-weight:600" data-i="forgeLink">เว็บ Forge</a></span>
+    <div>
+      <details><summary data-i="t1">มอดไม่ขึ้นในเกม</summary><p data-i="t1a">ตรวจว่าสวิตช์เปิดอยู่ และกด "ใช้งานม็อด" แล้วเปิดเกมใหม่ทั้งหมด</p></details>
+      <details><summary data-i="t2">โมเดลไม่ใช่ตัวที่ควรเป็น / ชนกัน</summary><p data-i="t2a">อย่าเปิดสองมอดที่ใช้ฮีโร่ฐานตัวเดียวกันพร้อมกัน และปิด avatar/skin ของฮีโร่ตัวนั้น</p></details>
+      <details><summary data-i="t3">เกมอัปเดตแล้วมอดพัง</summary><p data-i="t3a">รอเวอร์ชันใหม่จากหน้านี้ เกมแพตช์อาจทำให้ไฟล์ที่มอดอ้างหายไป</p></details>
+      <details><summary data-i="t4">อัปเดตมอด</summary><p data-i="t4a">โหลดเวอร์ชันใหม่ ลบการ์ดเดิมใน Forge เพิ่มไฟล์ใหม่ เปิดสวิตช์ แล้วกด "ใช้งานม็อด" อีกครั้ง</p></details>
+    </div>
+    <p class="disc" data-i="local">มอดเปลี่ยนสิ่งที่เห็นและได้ยินบนเครื่องคุณ คนอื่นในแมตช์ไม่เห็นมอดของคุณ</p>
+  </section>
+
+  <section class="two">
+    <div id="request" class="panel">
+      <h3 data-i="reqT">อยากให้ทำตัวละครไหน</h3>
+      <p data-i="reqP">บอกตัวละคร สกิลที่อยากเห็น และรูปอ้างอิง ไม่รับประกันว่าจะทำทุกคำขอ</p>
+      <a class="more" data-link="request" data-i="reqA">ส่งคำขอ →</a>
+    </div>
+    <div id="support" class="panel">
+      <h3 data-i="supT">สนับสนุนช่อง</h3>
+      <p data-i="supP">มอดแจกฟรีเสมอ การสนับสนุนเป็นทิปให้กำลังใจเท่านั้น</p>
+      <a class="more" data-link="support" data-i="supA">สนับสนุน →</a>
+    </div>
+  </section>
+
+  <p class="disc" data-i="disc">VoidWing mods เป็นงาน fan-made ไม่เกี่ยวข้องกับ Juvio หรือ Heroes of Newerth ตัวละครและชื่อเป็นของเจ้าของลิขสิทธิ์เดิม</p>
+</main>
+</div>
+
+<script>
+/* ===== ตั้งค่า: แก้ตรงนี้ที่เดียว =====
+   href ว่าง = ปุ่มจะเป็น "เร็วๆ นี้" กดไม่ได้ (ไม่มีลิงก์ตาย)
+   ใส่ลิงก์ GitHub Releases ของแต่ละมอดใน download */
+const CONFIG = {
+  links: {
+    tiktok: "", youtube: "", stream: "",
+    forge: "", request: "", support: ""
+  },
+  mods: [
+    { name: "Aizen Sosuke",      host: "Kinesis",     version: "1.2.104",  img: "img/aizen.png",    download: "https://github.com/khattiya-streamer/voidwing/releases/download/aizen-v1.2.104/Aizen_Kinesis_v1.2.104.honmod" },
+    { name: "Jin Mori",          host: "Monkey King", version: "0.6.74",   img: "img/jin-mori.png", download: "https://github.com/khattiya-streamer/voidwing/releases/download/jin-mori-v0.6.74/Jin_Mori__Monkey_King_v0.6.74.honmod" },
+    { name: "Yoruichi Shihouin", host: "Silhouette",  version: "0.13.95",  img: "img/yoruichi.png", download: "https://github.com/khattiya-streamer/voidwing/releases/download/yoruichi-v0.13.95/Yoruichi_Shihouin_v0.13.95.honmod" },
+    { name: "Shanks",            host: "Nomad",       version: "0.8.4",    img: "img/shanks.png",   download: "https://github.com/khattiya-streamer/voidwing/releases/download/shanks-v0.8.4/Shanks_v0.8.4.honmod" }
+  ]
+};
+
+const T = {
+  th: {
+    games:"เกม", nextGame:"เกมถัดไป · เร็วๆ นี้", help:"ช่วยเหลือ", navInstall:"วิธีติดตั้ง", navRequest:"ขอมอดตัวละคร", navSupport:"สนับสนุนช่อง",
+    eyebrow:"มอดทั้งหมด", lead:"มอดฮีโร่ที่ทำเอง แจกฟรี โมเดล สกิล เอฟเฟกต์ และเสียง ติดตั้งผ่าน Heroes Forge",
+    modsTitle:"รายการมอด", search:"ค้นหา", searchPh:"ชื่อตัวละคร / ฮีโร่",
+    host:"ฮีโร่ฐาน", download:"โหลด", soon:"เร็วๆ นี้", count:"มอด", none:"ไม่พบมอดที่ค้นหา",
+    instTitle:"ติดตั้งใน 4 ขั้น",
+    s1:"โหลดไฟล์มอด", s1t:"ไฟล์ .honmod ไม่ต้องแตกไฟล์",
+    s2:"เพิ่มใน Forge", s2t:"แท็บ Custom Mod (.honmod) แล้วกด เพิ่ม .honmod",
+    s3:"เปิดสวิตช์", s3t:"เปิดสวิตช์ที่การ์ดมอดให้เป็นสีน้ำเงิน",
+    s4:"ใช้งานม็อด", s4t:"กด ใช้งานม็อด แล้วเปิดเกมจาก Forge",
+    noForge:"ยังไม่มี Heroes Forge? ติดตั้งจากเว็บทางการของผู้ทำ Forge เท่านั้น", forgeLink:"เว็บ Forge",
+    t1:"มอดไม่ขึ้นในเกม", t1a:"ตรวจว่าสวิตช์เปิดอยู่ และกด \"ใช้งานม็อด\" แล้วเปิดเกมใหม่ทั้งหมด",
+    t2:"โมเดลไม่ใช่ตัวที่ควรเป็น / ชนกัน", t2a:"อย่าเปิดสองมอดที่ใช้ฮีโร่ฐานตัวเดียวกันพร้อมกัน และปิด avatar/skin ของฮีโร่ตัวนั้น",
+    t3:"เกมอัปเดตแล้วมอดพัง", t3a:"รอเวอร์ชันใหม่จากหน้านี้ เกมแพตช์อาจทำให้ไฟล์ที่มอดอ้างหายไป",
+    t4:"อัปเดตมอด", t4a:"โหลดเวอร์ชันใหม่ ลบการ์ดเดิมใน Forge เพิ่มไฟล์ใหม่ เปิดสวิตช์ แล้วกด \"ใช้งานม็อด\" อีกครั้ง",
+    local:"มอดเปลี่ยนสิ่งที่เห็นและได้ยินบนเครื่องคุณ คนอื่นในแมตช์ไม่เห็นมอดของคุณ",
+    reqT:"อยากให้ทำตัวละครไหน", reqP:"บอกตัวละคร สกิลที่อยากเห็น และรูปอ้างอิง ไม่รับประกันว่าจะทำทุกคำขอ", reqA:"ส่งคำขอ →",
+    supT:"สนับสนุนช่อง", supP:"มอดแจกฟรีเสมอ การสนับสนุนเป็นทิปให้กำลังใจเท่านั้น", supA:"สนับสนุน →",
+    disc:"VoidWing mods เป็นงาน fan-made ไม่เกี่ยวข้องกับ Juvio หรือ Heroes of Newerth ตัวละครและชื่อเป็นของเจ้าของลิขสิทธิ์เดิม"
+  },
+  en: {
+    games:"Games", nextGame:"Next game · coming soon", help:"Help", navInstall:"How to install", navRequest:"Request a mod", navSupport:"Support the channel",
+    eyebrow:"ALL MODS", lead:"Free hand-made hero mods: models, skills, effects and sounds. Installed through Heroes Forge.",
+    modsTitle:"Mods", search:"Search", searchPh:"Character / hero",
+    host:"Base hero", download:"Download", soon:"Coming soon", count:"mods", none:"No mod matches your search",
+    instTitle:"Install in 4 steps",
+    s1:"Download the mod", s1t:"The .honmod file. Do not unzip it.",
+    s2:"Add it in Forge", s2t:"Custom Mod (.honmod) tab, then click Add .honmod",
+    s3:"Switch it on", s3t:"Turn the mod card's switch on (blue)",
+    s4:"Apply", s4t:"Click Apply, then start the game from Forge",
+    noForge:"No Heroes Forge yet? Get it only from its makers' official site.", forgeLink:"Forge site",
+    t1:"Mod doesn't show in game", t1a:"Make sure the switch is on, click Apply, then fully restart the game.",
+    t2:"Wrong model / conflicts", t2a:"Don't enable two mods built on the same hero, and turn off avatar/skin packs for that hero.",
+    t3:"Mod broke after a game patch", t3a:"Wait for a new version here. A patch can remove files a mod relies on.",
+    t4:"Updating a mod", t4a:"Download the new version, remove the old card in Forge, add the new file, switch it on and click Apply again.",
+    local:"A mod changes what you see and hear on your own PC. Other players in the match don't see it.",
+    reqT:"Want a character made?", reqP:"Tell me the character, the skills you'd like to see and reference pictures. Not every request will be made.", reqA:"Send a request →",
+    supT:"Support the channel", supP:"Mods are always free. Support is an optional tip, nothing more.", supA:"Support →",
+    disc:"VoidWing mods are fan-made and not affiliated with Juvio or Heroes of Newerth. Characters and names belong to their original owners."
+  }
+};
+
+let lang = localStorage.getItem("vw-lang") || (navigator.language && navigator.language.startsWith("th") ? "th" : "en");
+
+function setLink(a) {
+  const url = CONFIG.links[a.dataset.link];
+  if (url) { a.href = url; a.removeAttribute("aria-disabled"); a.target = "_blank"; a.rel = "noopener"; a.removeAttribute("title"); }
+  else { a.removeAttribute("href"); a.setAttribute("aria-disabled", "true"); a.title = T[lang].soon; }
+}
+
+function renderMods() {
+  const t = T[lang], q = document.getElementById("q").value.trim().toLowerCase();
+  const list = document.getElementById("modList");
+  list.textContent = "";
+  const shown = CONFIG.mods.filter(m => !q || (m.name + " " + m.host).toLowerCase().includes(q));
+  if (!shown.length) { const d = document.createElement("div"); d.className = "empty"; d.textContent = t.none; list.appendChild(d); return; }
+  for (const m of shown) {
+    const row = document.createElement("div"); row.className = "mod";
+    const img = document.createElement("img"); img.src = m.img; img.alt = ""; img.width = 72; img.height = 72;
+    const info = document.createElement("div"); info.className = "info";
+    const h = document.createElement("h3"); h.textContent = m.name;
+    const host = document.createElement("span"); host.className = "host"; host.textContent = t.host + " " + m.host;
+    info.append(h, host);
+    const ver = document.createElement("span"); ver.className = "ver"; ver.textContent = "v" + m.version;
+    const a = document.createElement("a"); a.className = "btn";
+    if (m.download) { a.href = m.download; a.textContent = t.download; a.setAttribute("download", ""); }
+    else { a.setAttribute("aria-disabled", "true"); a.textContent = t.soon; }
+    row.append(img, info, ver, a);
+    list.appendChild(row);
+  }
+}
+
+function apply() {
+  const t = T[lang];
+  document.documentElement.lang = lang;
+  document.title = lang === "th" ? "VoidWing — มอด Heroes of Newerth" : "VoidWing — Heroes of Newerth mods";
+  document.querySelectorAll("[data-i]").forEach(e => { e.textContent = t[e.dataset.i]; });
+  document.querySelectorAll("[data-iph]").forEach(e => { e.placeholder = t[e.dataset.iph]; });
+  document.querySelectorAll("[data-link]").forEach(setLink);
+  document.getElementById("modCount").textContent = CONFIG.mods.length + " " + t.count;
+  renderMods();
+}
+
+document.getElementById("lang").addEventListener("click", () => {
+  lang = lang === "th" ? "en" : "th"; localStorage.setItem("vw-lang", lang); apply();
+});
+document.getElementById("q").addEventListener("input", renderMods);
+apply();
+</script>
+</body>
+</html>
