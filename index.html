@@ -232,6 +232,33 @@ section{position:relative}
 .skill{position:relative;transition:transform .25s ease-out;will-change:transform}
 .skill .k{position:absolute;left:8px;top:8px;z-index:3;min-width:26px;height:26px;padding:0 6px;border-radius:8px;background:rgba(6,9,18,.85);border:1px solid var(--cyan);color:var(--cyan);font-family:var(--display);font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center}
 .skill .nm{margin:6px 2px 0;font-size:13px;color:var(--muted)}
+.skill-play{display:block;width:100%;margin:0;padding:0;border:0;background:none;color:inherit;font:inherit;cursor:pointer;border-radius:14px;position:relative}
+.skill-play:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
+.skill-play .slot{transition:border-color .2s,box-shadow .2s}
+.skill-play:hover .slot,.skill-play:focus-visible .slot{border-color:var(--cyan);box-shadow:0 0 0 1px var(--cyan),0 8px 26px rgba(53,224,208,.22)}
+.skill-play .pl{position:absolute;right:7px;bottom:7px;z-index:3;width:26px;height:26px;border-radius:50%;background:rgba(6,9,18,.85);border:1px solid var(--cyan);transition:transform .2s,background .2s}
+.skill-play .pl::after{content:"";position:absolute;left:50%;top:50%;margin:-6px 0 0 -4px;border-left:10px solid var(--cyan);border-top:6px solid transparent;border-bottom:6px solid transparent}
+.skill-play:hover .pl{transform:scale(1.12);background:rgba(53,224,208,.25)}
+.skill-play video.pv{z-index:2;animation:pvIn .25s both}
+@keyframes pvIn{from{opacity:0}}
+.skill-hint{margin:-2px 0 0;font-size:12px;color:#7C8DAE}
+dialog.lb{padding:0;border:0;background:transparent;color:var(--ink);max-width:none;max-height:none;overflow:visible}
+dialog.lb::backdrop{background:rgba(3,5,12,.82);backdrop-filter:blur(4px)}
+.lb-box{width:min(92vw,calc(100vh - 170px),720px);display:flex;flex-direction:column;gap:12px}
+.lb-head{display:flex;align-items:flex-start;gap:12px}
+.lb-k{flex:none;min-width:34px;height:34px;padding:0 8px;border-radius:9px;background:rgba(6,9,18,.85);border:1px solid var(--cyan);color:var(--cyan);font-family:var(--display);font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center}
+.lb-t{flex:1;min-width:0}
+.lb-t b{display:block;font-family:var(--display);font-size:20px;line-height:1.2}
+.lb-t span{display:block;color:var(--muted);font-size:14px;margin-top:2px;text-wrap:pretty}
+.lb-btn{flex:none;width:38px;height:38px;border-radius:50%;border:1px solid var(--line2);background:var(--panel2);color:var(--ink);font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
+.lb-btn:hover{border-color:var(--cyan);color:var(--cyan)}
+.lb-btn:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.lb-btn[hidden]{display:none}
+.lb-stage{position:relative;aspect-ratio:1/1;border-radius:14px;overflow:hidden;background:#0B1224;border:1px solid var(--line2)}
+.lb-stage video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.lb-stage .lb-btn{position:absolute;top:50%;margin-top:-19px;z-index:2;background:rgba(6,9,18,.7)}
+.lb-prev{left:10px}.lb-next{right:10px}
+.lb-foot{display:flex;justify-content:space-between;color:#7C8DAE;font-size:12px}
 .gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 .dl{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:6px}
 .dl small{color:#8394B5}
@@ -519,7 +546,7 @@ const CONFIG = {
   },
   hero: {"media": null},
   mods: [
-    {"name": "Aizen Sosuke", "host": "Kinesis", "version": "1.2.105", "img": "img/aizen.png", "download": "https://github.com/khattiya-streamer/voidwing/releases/download/aizen-v1.2.105/Aizen_Kinesis_v1.2.105.honmod", "skills": {"q": {"media": "img/skills/aizen-q.png"}, "w": {"media": "img/skills/aizen-w.png"}, "e": {"media": "img/skills/aizen-e.png"}, "r": {"media": "img/skills/aizen-r.png"}}, "status": "released"},
+    {"name": "Aizen Sosuke", "host": "Kinesis", "version": "1.2.105", "img": "img/aizen.png", "download": "https://github.com/khattiya-streamer/voidwing/releases/download/aizen-v1.2.105/Aizen_Kinesis_v1.2.105.honmod", "trailer": {"video": "video/aizen/overview.mp4", "poster": "video/aizen/overview.jpg"}, "skills": {"q": {"media": "img/skills/aizen-q.png", "name": "Kurohitsugi", "note": {"th": "Hado 90 โลงดำ ขังศัตรูไว้ในโลงแล้วระเบิด", "en": "Hado 90: a black coffin traps the target, then shatters"}, "clip": {"video": "video/aizen/skill-q-l.mp4", "preview": "video/aizen/skill-q.mp4", "poster": "video/aizen/skill-q.jpg"}}, "w": {"media": "img/skills/aizen-w.png", "name": "Rikujokoro", "note": {"th": "Bakudo 61 แท่งแสงหกแท่งตรึงเป้าหมาย", "en": "Bakudo 61: six rods of light pin the target"}, "clip": {"video": "video/aizen/skill-w-l.mp4", "preview": "video/aizen/skill-w.mp4", "poster": "video/aizen/skill-w.jpg"}}, "e": {"media": "img/skills/aizen-e.png", "name": "Danku", "note": {"th": "Bakudo 81 กำแพงกระจกกันการโจมตี", "en": "Bakudo 81: a glass wall that blocks attacks"}, "clip": {"video": "video/aizen/skill-e-l.mp4", "preview": "video/aizen/skill-e.mp4", "poster": "video/aizen/skill-e.jpg"}}, "r": {"media": "img/skills/aizen-r.png", "name": "Goryutenmetsu", "note": {"th": "Hado 99 มังกรพลังงานพุ่งใส่ทั้งบริเวณ", "en": "Hado 99: energy dragons strike the whole area"}, "clip": {"video": "video/aizen/skill-r-l.mp4", "preview": "video/aizen/skill-r.mp4", "poster": "video/aizen/skill-r.jpg"}}}, "watch": {"youtube": "https://youtube.com/shorts/GxIa0Cao5fg", "tiktok": "https://www.tiktok.com/@voidwing_g/video/7704361760513445127"}, "status": "released"},
     {"name": "Jin Mori", "host": "Monkey King", "version": "0.6.75", "img": "img/jin-mori.png", "download": "https://github.com/khattiya-streamer/voidwing/releases/download/jin-mori-v0.6.75/Jin_Mori__Monkey_King_v0.6.75.honmod", "skills": {"q": {"media": "img/skills/jin-mori-q.png"}, "w": {"media": "img/skills/jin-mori-w.png"}, "e": {"media": "img/skills/jin-mori-e.png"}, "r": {"media": "img/skills/jin-mori-r.png"}}, "status": "released"},
     {"name": "Yoruichi Shihouin", "host": "Silhouette", "version": "0.13.96", "img": "img/yoruichi.png", "download": "https://github.com/khattiya-streamer/voidwing/releases/download/yoruichi-v0.13.96/Yoruichi_Shihouin_v0.13.96.honmod", "skills": {"q": {"media": "img/skills/yoruichi-q.png"}, "w": {"media": "img/skills/yoruichi-w.png"}, "e": {"media": "img/skills/yoruichi-e.png"}, "r": {"media": "img/skills/yoruichi-r.png"}}, "status": "soon"},
     {"name": "Shanks", "host": "Nomad", "version": "0.8.5", "img": "img/shanks.png", "download": "https://github.com/khattiya-streamer/voidwing/releases/download/shanks-v0.8.5/Shanks_v0.8.5.honmod", "skills": {"q": {"media": "img/skills/shanks-q.png"}, "w": {"media": "img/skills/shanks-w.png"}, "e": {"media": "img/skills/shanks-e.png"}, "r": {"media": "img/skills/shanks-r.png"}}, "status": "in_dev"}
@@ -537,7 +564,7 @@ const T = {
     callTitle:"ก่อนเริ่ม: ต้องมี HoN Reborn - Mod Launcher", callText:"HoN Reborn - Mod Launcher คือโปรแกรมติดตั้งมอดฟรีที่ชุมชนทำขึ้น (ไม่ใช่ของ VoidWing) ติดตั้งก่อน แล้วค่อยเพิ่มไฟล์ .honmod ที่โหลดจากหน้านี้", callGet:"ดาวน์โหลด Mod Launcher", callCom:"เข้า HoN Reborn Discord", comFTitle:"HoN Reborn Discord", comFText:"พูดคุย • แจ้งบั๊ก • ขอ Mod • ติดตามอัปเดต", comFBtn:"เข้า HoN Reborn Discord", ctTitle:"ติดต่อ", ctText:"ถามเรื่องมอด ปัญหาการติดตั้ง หรืองานร่วมกัน ทักได้ที่นี่ (หรือ DM ที่ TikTok / YouTube)", ctEmail:"อีเมล",
     navVote:"โหวตมอด", voteTag:"VOTE", voteTitle:"โหวตมอดตัวต่อไป", voteSub:"ทุกรอบคัดตัวเลือกจากคำขอที่ส่งมา โหวตได้รอบละ 1 สัปดาห์ 3 อันดับแรกเข้าคิวที่จะทำแน่นอน (ยังไม่ระบุวันเสร็จ)", queueTitle:"คิวที่จะทำ", queueSub:"ตัวละครที่ชนะโหวตแล้ว เข้ารายการที่จะทำแน่นอน ลำดับการทำและวันเสร็จจะแจ้งอีกที", pastTitle:"รอบที่ผ่านมา", roundNow:"รอบนี้", roundEnds:"ปิดโหวต", leftDH:"เหลือ {d} วัน {h} ชม.", leftHM:"เหลือ {h} ชม. {m} นาที", leftM:"เหลือ {m} นาที", roundClosed:"ปิดโหวตแล้ว รอประกาศผล", votesWord:"โหวต", voteBtn:"โหวตเลย", voteReqBtn:"ส่งคำขอใหม่", voteTop3:"อันดับ 1-3 ตอนนี้ = เข้าคิวที่จะทำ", voteNoVotes:"ยังไม่มีโหวต", voteNote:"คะแนนอัปเดตเป็นระยะ ไม่ใช่ทันที", winnerWord:"เข้าคิว", topNow:"ติด 3 อันดับแรก", roundOf:"จบ", queueRound:"จากรอบ", stReleased:"พร้อมโหลด", stBeta:"ทดสอบ (Beta)", stDev:"กำลังพัฒนา", stSoon:"ใกล้เสร็จ", stTeaser:"แอบใบ้", notReady:"ยังไม่พร้อมโหลด", navUpcoming:"เร็วๆ นี้", upTag:"COMING SOON", upTitle:"กำลังจะมา", upSub:"ตัวละครที่กำลังทำอยู่ ใบ้ให้ดูก่อน เดาออกไหม?", hintLabel:"คำใบ้", hintPh:"[คำใบ้: บอกใบ้ตัวละครแบบไม่เฉลย 1-2 บรรทัด]", unknownName:"???", hostUnknown:"ฮีโร่ฐาน: ???", progressLabel:"ความคืบหน้า", etaLabel:"คาดว่า", followFirst:"อยากรู้ก่อนใคร:",
     watchYt:"ดูคลิปเต็มบน YouTube", watchTt:"ดูบน TikTok", tab3d:"3D", tabClip:"คลิป", view3d:"ดูโมเดล 3D", loading3d:"กำลังโหลดโมเดล...", err3d:"โหลดโมเดลไม่สำเร็จ ลองใหม่อีกครั้ง", hint3d:"ลากเพื่อหมุน · ท่ายืนในเกม", modelAlt:"โมเดล 3D ของ {name} (ท่ายืนในเกม)",
-    descPh:"[คำอธิบายมอด: จุดเด่นและสกิล 1-2 บรรทัด]", trailerPh:"[คลิปตัวอย่างมอด {name}]", skillsTitle:"สกิล", skillPh:"[คลิปสกิล {k}]", galleryTitle:"ภาพในเกม", galleryPh:"[ภาพ {n}]",
+    descPh:"[คำอธิบายมอด: จุดเด่นและสกิล 1-2 บรรทัด]", trailerPh:"[คลิปตัวอย่างมอด {name}]", skillsTitle:"สกิล", skillHint:"กดที่สกิลเพื่อดูคลิป", playSkill:"ดูคลิปสกิล {k}: {name}", closeBtn:"ปิด", prevBtn:"สกิลก่อนหน้า", nextBtn:"สกิลถัดไป", skillPh:"[คลิปสกิล {k}]", galleryTitle:"ภาพในเกม", galleryPh:"[ภาพ {n}]",
     instTag:"ติดตั้ง", instTitle:"ติดตั้งใน 4 ขั้น", shotPh:"[ภาพหน้าจอ Mod Launcher ขั้นที่ {n}]",
     s1:"โหลดไฟล์มอด", s1t:"ไฟล์ .honmod ไม่ต้องแตกไฟล์",
     s2:"เพิ่มใน Mod Launcher", s2t:"แท็บ Custom Mod (.honmod) แล้วกด เพิ่ม .honmod",
@@ -565,7 +592,7 @@ const T = {
     callTitle:"Before you start: you need HoN Reborn - Mod Launcher", callText:"HoN Reborn - Mod Launcher is the free mod installer made by the community (not by VoidWing). Install it first, then add the .honmod file you download here.", callGet:"Download Mod Launcher", callCom:"Join HoN Reborn Discord", comFTitle:"HoN Reborn Discord", comFText:"Chat • Report bugs • Request mods • Follow updates", comFBtn:"Join HoN Reborn Discord", ctTitle:"Contact", ctText:"Questions about a mod, install problems or collaboration: reach out here (or DM on TikTok / YouTube).", ctEmail:"Email",
     navVote:"Vote", voteTag:"VOTE", voteTitle:"Vote for the next mod", voteSub:"Each round is a short list picked from the requests I get. Voting stays open for 1 week; the top 3 go into the queue of mods that will be made (no release date promised).", queueTitle:"Queue", queueSub:"Characters that won a vote and are now on the list of mods that will be made. Order and release dates will be announced later.", pastTitle:"Past rounds", roundNow:"This round", roundEnds:"Closes", leftDH:"{d} d {h} h left", leftHM:"{h} h {m} min left", leftM:"{m} min left", roundClosed:"Voting closed, results coming", votesWord:"votes", voteBtn:"Vote now", voteReqBtn:"Request another", voteTop3:"Current top 3 = into the queue", voteNoVotes:"No votes yet", voteNote:"Counts refresh periodically, not instantly.", winnerWord:"In the queue", topNow:"In the top 3", roundOf:"ended", queueRound:"from", stReleased:"Available", stBeta:"Beta", stDev:"In development", stSoon:"Almost ready", stTeaser:"Teaser", notReady:"Not ready yet", navUpcoming:"Coming soon", upTag:"COMING SOON", upTitle:"Coming soon", upSub:"Characters in the works. A hint first: can you guess who?", hintLabel:"HINT", hintPh:"[Hint: a clue about the character without naming them, 1-2 lines]", unknownName:"???", hostUnknown:"Base hero: ???", progressLabel:"Progress", etaLabel:"Expected", followFirst:"Be the first to know:",
     watchYt:"Watch the full video on YouTube", watchTt:"Watch on TikTok", tab3d:"3D", tabClip:"Clip", view3d:"View 3D model", loading3d:"Loading model...", err3d:"Could not load the model, try again", hint3d:"Drag to rotate · in-game idle", modelAlt:"3D model of {name} (in-game idle pose)",
-    descPh:"[Mod description: highlights and skills, 1-2 lines]", trailerPh:"[{name} trailer clip]", skillsTitle:"Skills", skillPh:"[Skill {k} clip]", galleryTitle:"In-game shots", galleryPh:"[Shot {n}]",
+    descPh:"[Mod description: highlights and skills, 1-2 lines]", trailerPh:"[{name} trailer clip]", skillsTitle:"Skills", skillHint:"Tap a skill to watch its clip", playSkill:"Watch skill {k} clip: {name}", closeBtn:"Close", prevBtn:"Previous skill", nextBtn:"Next skill", skillPh:"[Skill {k} clip]", galleryTitle:"In-game shots", galleryPh:"[Shot {n}]",
     instTag:"INSTALL", instTitle:"Install in 4 steps", shotPh:"[Mod Launcher screenshot, step {n}]",
     s1:"Download the mod", s1t:"The .honmod file. Do not unzip it.",
     s2:"Add it in Mod Launcher", s2t:"Custom Mod (.honmod) tab, then click Add .honmod",
@@ -686,6 +713,45 @@ function viewer3d(m) {
   return box;
 }
 
+/* ---- skill clip viewer (native <dialog>: Esc closes, focus returns, arrows switch skill) ---- */
+let lb = null;
+function openClip(m, k) {
+  const list = SKILLS.filter(x => m.skills && m.skills[x] && m.skills[x].clip && m.skills[x].clip.video);
+  const i = Math.max(0, list.indexOf(k));
+  if (!lb) {
+    const d = document.createElement("dialog"); d.className = "lb";
+    const box = el("div", "lb-box"), head = el("div", "lb-head"), kk = el("div", "lb-k"), tt = el("div", "lb-t");
+    const x = el("button", "lb-btn", "\u00D7"); x.type = "button";
+    head.append(kk, tt, x);
+    const stage = el("div", "lb-stage"), v = el("video"); v.loop = true; v.muted = true; v.controls = true; v.playsInline = true;
+    const pr = el("button", "lb-btn lb-prev", "\u2039"), nx = el("button", "lb-btn lb-next", "\u203A"); pr.type = nx.type = "button";
+    stage.append(v, pr, nx);
+    const foot = el("div", "lb-foot");
+    box.append(head, stage, foot); d.appendChild(box); document.body.appendChild(d);
+    lb = { d, kk, tt, x, v, pr, nx, foot, m: null, list: [], i: 0 };
+    const release = () => { v.pause(); v.removeAttribute("src"); v.load(); };   // also runs on Esc (close event); buttons do it at once
+    x.addEventListener("click", () => { d.close(); release(); });
+    d.addEventListener("click", (e) => { if (e.target === d) { d.close(); release(); } });
+    d.addEventListener("close", release);
+    const go = (n) => { lb.i = (lb.i + n + lb.list.length) % lb.list.length; showClip(); };
+    pr.addEventListener("click", () => go(-1)); nx.addEventListener("click", () => go(1));
+    d.addEventListener("keydown", (e) => { if (e.key === "ArrowLeft") go(-1); else if (e.key === "ArrowRight") go(1); });
+  }
+  lb.m = m; lb.list = list; lb.i = i;
+  showClip();
+  if (!lb.d.open) lb.d.showModal();
+}
+function showClip() {
+  const { m, list, i, v } = lb, k = list[i], s = m.skills[k];
+  lb.kk.textContent = k.toUpperCase();
+  lb.tt.textContent = "";
+  lb.tt.append(el("b", null, pick(s.name) || m.name), ...(pick(s.note) ? [el("span", null, pick(s.note))] : []));
+  lb.x.setAttribute("aria-label", t("closeBtn")); lb.pr.setAttribute("aria-label", t("prevBtn")); lb.nx.setAttribute("aria-label", t("nextBtn"));
+  lb.pr.hidden = lb.nx.hidden = list.length < 2;
+  lb.foot.textContent = ""; lb.foot.append(el("span", null, m.name), el("span", null, (i + 1) + " / " + list.length));
+  v.poster = s.clip.poster || ""; v.src = s.clip.video; v.play().catch(() => {});
+}
+
 let revealOnRender = true;   // fade-in only on the first render; search / language switch show cards at once
 function feature(m, i) {
   const art = el("article", "feature"); if (revealOnRender) art.setAttribute("data-reveal", ""); else art.classList.add("in"); art.dataset.name = (m.name + " " + m.host).toLowerCase();
@@ -742,7 +808,22 @@ function feature(m, i) {
   for (const k of SKILLS) {
     const s = (m.skills && m.skills[k]) || {};
     const w = el("div", "skill tilt");
-    w.appendChild(slot(s.media, t("skillPh", { k: k.toUpperCase() }), "r11", true));
+    const sl = slot(s.media, t("skillPh", { k: k.toUpperCase() }), "r11", true);
+    if (s.clip && s.clip.video) {
+      // image tile that opens its clip: hover (mouse) plays a small preview, click / tap / Enter opens the viewer
+      const b = el("button", "skill-play"); b.type = "button";
+      b.setAttribute("aria-label", t("playSkill", { k: k.toUpperCase(), name: pick(s.name) || m.name }));
+      b.append(sl, el("i", "pl"));
+      let pv = null;
+      b.addEventListener("pointerenter", (e) => {
+        if (e.pointerType !== "mouse" || reduced || !s.clip.preview || pv) return;
+        pv = el("video", "pv"); pv.src = s.clip.preview; pv.muted = true; pv.loop = true; pv.playsInline = true;
+        sl.appendChild(pv); pv.play().catch(() => {});
+      });
+      b.addEventListener("pointerleave", () => { if (pv) { pv.remove(); pv = null; } });
+      b.addEventListener("click", () => openClip(m, k));
+      w.appendChild(b);
+    } else w.appendChild(sl);
     w.appendChild(el("span", "k", k.toUpperCase()));
     const nm = pick(s.name); if (nm) w.appendChild(el("div", "nm", nm));
     sk.appendChild(w);
@@ -752,7 +833,9 @@ function feature(m, i) {
   if (m.download && ready) { a.href = m.download; a.textContent = t("download"); a.setAttribute("download", ""); }
   else { a.setAttribute("aria-disabled", "true"); a.textContent = ready ? t("soon") : t("notReady"); }
   dl.append(a, el("small", null, ".honmod"));
-  body.append(head, chips); if (desc) body.appendChild(desc); if (sn) body.appendChild(el("p", "snote", sn)); body.append(el("div", "h4", t("skillsTitle")), sk, dl);
+  body.append(head, chips); if (desc) body.appendChild(desc); if (sn) body.appendChild(el("p", "snote", sn)); body.append(el("div", "h4", t("skillsTitle")), sk);
+  if (SKILLS.some(k => m.skills && m.skills[k] && m.skills[k].clip)) body.appendChild(el("p", "skill-hint", t("skillHint")));
+  body.appendChild(dl);
   if (med.children.length) art.append(med, body); else art.append(body);
   return art;
 }
