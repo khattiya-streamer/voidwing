@@ -158,6 +158,40 @@ section{position:relative}
 .follow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:26px}
 .follow span{color:var(--muted)}
 
+/* vote rounds */
+.vote-box{display:flex;flex-direction:column;gap:18px;margin-bottom:44px}
+.vote-box h3.h3{font-size:clamp(22px,2.6vw,30px);font-weight:700}
+.vote-box .sub{margin:0;color:var(--muted);max-width:70ch}
+.round{display:flex;flex-direction:column;gap:18px;padding:22px;border-radius:20px;background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line2)}
+.round-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 20px}
+.round-head h3{font-size:clamp(22px,2.6vw,30px);font-weight:700}
+.rt{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.rt .chip.left{background:rgba(53,224,208,.1);border-color:var(--cyan);color:#8FF2E8;font-weight:700}
+.rt .chip.closed{background:rgba(255,181,71,.12);border-color:rgba(255,181,71,.55);color:#FFC97A;font-weight:700}
+.cands{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(190px,100%),1fr));gap:14px}
+.cand{position:relative;display:flex;flex-direction:column;gap:8px;padding:10px;border-radius:16px;background:#0B1224;border:1px solid var(--line);transition:border-color .25s,transform .25s}
+.cand:hover{border-color:var(--line2);transform:translateY(-3px)}
+.cand.top{border-color:rgba(53,224,208,.6);box-shadow:0 0 0 1px rgba(53,224,208,.18),0 10px 30px -12px rgba(53,224,208,.4)}
+.cimg{position:relative;overflow:hidden;border-radius:11px;aspect-ratio:1/1;background:radial-gradient(70% 80% at 50% 40%,#1A2547,#0A1020);display:flex;align-items:center;justify-content:center}
+.cimg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cimg .ini{font-family:var(--display);font-weight:800;font-size:56px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;opacity:.85}
+.rank{position:absolute;left:8px;top:8px;z-index:2;min-width:30px;height:30px;padding:0 8px;border-radius:99px;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:14px;background:rgba(6,9,18,.82);border:1px solid var(--line2);color:#C7D3E8}
+.cand.top .rank{background:var(--grad);color:#061018;border-color:transparent}
+.cand .cn{font-family:var(--display);font-weight:700;font-size:18px;line-height:1.15}
+.cand .ch{font-size:13px;color:#8EA0C2}
+.cand .meta{font-size:13px}
+.cand .flag{font-size:12px;font-weight:700;color:#8FF2E8}
+.round-foot{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.round-foot small{color:var(--muted)}
+.q-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(170px,100%),1fr));gap:14px}
+.past details{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:0 16px}
+.past details+details{margin-top:10px}
+.past summary{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;min-height:48px;cursor:pointer;font-weight:600}
+.past summary .win{color:#8FF2E8;font-weight:700}
+.past ol{margin:0 0 16px;padding-left:22px;color:#C7D3E8;display:flex;flex-direction:column;gap:4px}
+.past li.w{color:#8FF2E8;font-weight:700}
+
+
 
 /* "before you start" callout + help/contact cards */
 .callout{display:flex;flex-wrap:wrap;align-items:center;gap:16px 24px;padding:20px 24px;margin-bottom:28px;border-radius:16px;background:linear-gradient(135deg,rgba(53,224,208,.12),rgba(143,123,255,.12));border:1px solid var(--line2)}
@@ -285,6 +319,7 @@ footer p{margin:0;max-width:660px}
   <nav class="nav" aria-label="menu">
     <div class="label" data-i="menu">เมนู</div>
     <a href="#mods" data-sec="mods" data-i="navMods">มอดทั้งหมด</a>
+    <a href="#vote" data-sec="vote" id="navVote" data-i="navVote" hidden>โหวตมอด</a>
     <a href="#upcoming" data-sec="upcoming" id="navUpcoming" data-i="navUpcoming" hidden>เร็วๆ นี้</a>
     <a href="#install" data-sec="install" data-i="navInstall">วิธีติดตั้ง</a>
     <a href="#faq" data-sec="faq" data-i="navFaq">ปัญหาที่พบบ่อย</a>
@@ -328,6 +363,28 @@ footer p{margin:0;max-width:660px}
         <label class="search"><span data-i="search">ค้นหา</span><input id="q" type="search" data-iph="searchPh" placeholder="ชื่อตัวละคร / ฮีโร่"></label>
       </div>
       <div class="mods" id="modList"></div>
+    </div>
+  </section>
+
+  <section id="vote" class="sec" aria-labelledby="voteTitle" hidden>
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <div>
+          <div class="eyebrow" data-i="voteTag">VOTE</div>
+          <h2 id="voteTitle" data-i="voteTitle">โหวตมอดตัวต่อไป</h2>
+          <p data-i="voteSub">ทุกรอบคัดตัวเลือกจากคำขอที่ส่งมา โหวตได้รอบละ 1 สัปดาห์ 3 อันดับแรกเข้าคิวที่จะทำแน่นอน (ยังไม่ระบุวันเสร็จ)</p>
+        </div>
+      </div>
+      <div class="vote-box" id="voteNow" hidden></div>
+      <div class="vote-box" id="voteQueueBox" hidden>
+        <h3 class="h3" data-i="queueTitle">คิวที่จะทำ</h3>
+        <p class="sub" data-i="queueSub">ตัวละครที่ชนะโหวตแล้ว เข้ารายการที่จะทำแน่นอน ลำดับการทำและวันเสร็จจะแจ้งอีกที</p>
+        <div class="q-grid" id="voteQueue"></div>
+      </div>
+      <div class="vote-box past" id="votePastBox" hidden>
+        <h3 class="h3" data-i="pastTitle">รอบที่ผ่านมา</h3>
+        <div id="votePast"></div>
+      </div>
     </div>
   </section>
 
@@ -478,7 +535,7 @@ const T = {
     gameTag:"HEROES OF NEWERTH", modsTitle:"มอดทั้งหมด", modsSub:"ทุกตัวแจกฟรี โหลดไฟล์เดียว ติดตั้งผ่าน Mod Launcher", search:"ค้นหา", searchPh:"ชื่อตัวละคร / ฮีโร่",
     host:"ฮีโร่ฐาน", download:"โหลดมอด", soon:"เร็วๆ นี้", count:"มอด", none:"ไม่พบมอดที่ค้นหา", ver:"เวอร์ชัน",
     callTitle:"ก่อนเริ่ม: ต้องมี HoN Reborn - Mod Launcher", callText:"HoN Reborn - Mod Launcher คือโปรแกรมติดตั้งมอดฟรีที่ชุมชนทำขึ้น (ไม่ใช่ของ VoidWing) ติดตั้งก่อน แล้วค่อยเพิ่มไฟล์ .honmod ที่โหลดจากหน้านี้", callGet:"ดาวน์โหลด Mod Launcher", callCom:"เข้า HoN Reborn Discord", comFTitle:"HoN Reborn Discord", comFText:"พูดคุย • แจ้งบั๊ก • ขอ Mod • ติดตามอัปเดต", comFBtn:"เข้า HoN Reborn Discord", ctTitle:"ติดต่อ", ctText:"ถามเรื่องมอด ปัญหาการติดตั้ง หรืองานร่วมกัน ทักได้ที่นี่ (หรือ DM ที่ TikTok / YouTube)", ctEmail:"อีเมล",
-    stReleased:"พร้อมโหลด", stBeta:"ทดสอบ (Beta)", stDev:"กำลังพัฒนา", stSoon:"ใกล้เสร็จ", stTeaser:"แอบใบ้", notReady:"ยังไม่พร้อมโหลด", navUpcoming:"เร็วๆ นี้", upTag:"COMING SOON", upTitle:"กำลังจะมา", upSub:"ตัวละครที่กำลังทำอยู่ ใบ้ให้ดูก่อน เดาออกไหม?", hintLabel:"คำใบ้", hintPh:"[คำใบ้: บอกใบ้ตัวละครแบบไม่เฉลย 1-2 บรรทัด]", unknownName:"???", hostUnknown:"ฮีโร่ฐาน: ???", progressLabel:"ความคืบหน้า", etaLabel:"คาดว่า", followFirst:"อยากรู้ก่อนใคร:",
+    navVote:"โหวตมอด", voteTag:"VOTE", voteTitle:"โหวตมอดตัวต่อไป", voteSub:"ทุกรอบคัดตัวเลือกจากคำขอที่ส่งมา โหวตได้รอบละ 1 สัปดาห์ 3 อันดับแรกเข้าคิวที่จะทำแน่นอน (ยังไม่ระบุวันเสร็จ)", queueTitle:"คิวที่จะทำ", queueSub:"ตัวละครที่ชนะโหวตแล้ว เข้ารายการที่จะทำแน่นอน ลำดับการทำและวันเสร็จจะแจ้งอีกที", pastTitle:"รอบที่ผ่านมา", roundNow:"รอบนี้", roundEnds:"ปิดโหวต", leftDH:"เหลือ {d} วัน {h} ชม.", leftHM:"เหลือ {h} ชม. {m} นาที", leftM:"เหลือ {m} นาที", roundClosed:"ปิดโหวตแล้ว รอประกาศผล", votesWord:"โหวต", voteBtn:"โหวตเลย", voteReqBtn:"ส่งคำขอใหม่", voteTop3:"อันดับ 1-3 ตอนนี้ = เข้าคิวที่จะทำ", voteNoVotes:"ยังไม่มีโหวต", voteNote:"คะแนนอัปเดตเป็นระยะ ไม่ใช่ทันที", winnerWord:"เข้าคิว", topNow:"ติด 3 อันดับแรก", roundOf:"จบ", queueRound:"จากรอบ", stReleased:"พร้อมโหลด", stBeta:"ทดสอบ (Beta)", stDev:"กำลังพัฒนา", stSoon:"ใกล้เสร็จ", stTeaser:"แอบใบ้", notReady:"ยังไม่พร้อมโหลด", navUpcoming:"เร็วๆ นี้", upTag:"COMING SOON", upTitle:"กำลังจะมา", upSub:"ตัวละครที่กำลังทำอยู่ ใบ้ให้ดูก่อน เดาออกไหม?", hintLabel:"คำใบ้", hintPh:"[คำใบ้: บอกใบ้ตัวละครแบบไม่เฉลย 1-2 บรรทัด]", unknownName:"???", hostUnknown:"ฮีโร่ฐาน: ???", progressLabel:"ความคืบหน้า", etaLabel:"คาดว่า", followFirst:"อยากรู้ก่อนใคร:",
     watchYt:"ดูคลิปเต็มบน YouTube", watchTt:"ดูบน TikTok", tab3d:"3D", tabClip:"คลิป", view3d:"ดูโมเดล 3D", loading3d:"กำลังโหลดโมเดล...", err3d:"โหลดโมเดลไม่สำเร็จ ลองใหม่อีกครั้ง", hint3d:"ลากเพื่อหมุน · ท่ายืนในเกม", modelAlt:"โมเดล 3D ของ {name} (ท่ายืนในเกม)",
     descPh:"[คำอธิบายมอด: จุดเด่นและสกิล 1-2 บรรทัด]", trailerPh:"[คลิปตัวอย่างมอด {name}]", skillsTitle:"สกิล", skillPh:"[คลิปสกิล {k}]", galleryTitle:"ภาพในเกม", galleryPh:"[ภาพ {n}]",
     instTag:"ติดตั้ง", instTitle:"ติดตั้งใน 4 ขั้น", shotPh:"[ภาพหน้าจอ Mod Launcher ขั้นที่ {n}]",
@@ -506,7 +563,7 @@ const T = {
     gameTag:"HEROES OF NEWERTH", modsTitle:"All mods", modsSub:"All free. One file each, installed through Mod Launcher.", search:"Search", searchPh:"Character / hero",
     host:"Base hero", download:"Download", soon:"Coming soon", count:"mods", none:"No mod matches your search", ver:"Version",
     callTitle:"Before you start: you need HoN Reborn - Mod Launcher", callText:"HoN Reborn - Mod Launcher is the free mod installer made by the community (not by VoidWing). Install it first, then add the .honmod file you download here.", callGet:"Download Mod Launcher", callCom:"Join HoN Reborn Discord", comFTitle:"HoN Reborn Discord", comFText:"Chat • Report bugs • Request mods • Follow updates", comFBtn:"Join HoN Reborn Discord", ctTitle:"Contact", ctText:"Questions about a mod, install problems or collaboration: reach out here (or DM on TikTok / YouTube).", ctEmail:"Email",
-    stReleased:"Available", stBeta:"Beta", stDev:"In development", stSoon:"Almost ready", stTeaser:"Teaser", notReady:"Not ready yet", navUpcoming:"Coming soon", upTag:"COMING SOON", upTitle:"Coming soon", upSub:"Characters in the works. A hint first: can you guess who?", hintLabel:"HINT", hintPh:"[Hint: a clue about the character without naming them, 1-2 lines]", unknownName:"???", hostUnknown:"Base hero: ???", progressLabel:"Progress", etaLabel:"Expected", followFirst:"Be the first to know:",
+    navVote:"Vote", voteTag:"VOTE", voteTitle:"Vote for the next mod", voteSub:"Each round is a short list picked from the requests I get. Voting stays open for 1 week; the top 3 go into the queue of mods that will be made (no release date promised).", queueTitle:"Queue", queueSub:"Characters that won a vote and are now on the list of mods that will be made. Order and release dates will be announced later.", pastTitle:"Past rounds", roundNow:"This round", roundEnds:"Closes", leftDH:"{d} d {h} h left", leftHM:"{h} h {m} min left", leftM:"{m} min left", roundClosed:"Voting closed, results coming", votesWord:"votes", voteBtn:"Vote now", voteReqBtn:"Request another", voteTop3:"Current top 3 = into the queue", voteNoVotes:"No votes yet", voteNote:"Counts refresh periodically, not instantly.", winnerWord:"In the queue", topNow:"In the top 3", roundOf:"ended", queueRound:"from", stReleased:"Available", stBeta:"Beta", stDev:"In development", stSoon:"Almost ready", stTeaser:"Teaser", notReady:"Not ready yet", navUpcoming:"Coming soon", upTag:"COMING SOON", upTitle:"Coming soon", upSub:"Characters in the works. A hint first: can you guess who?", hintLabel:"HINT", hintPh:"[Hint: a clue about the character without naming them, 1-2 lines]", unknownName:"???", hostUnknown:"Base hero: ???", progressLabel:"Progress", etaLabel:"Expected", followFirst:"Be the first to know:",
     watchYt:"Watch the full video on YouTube", watchTt:"Watch on TikTok", tab3d:"3D", tabClip:"Clip", view3d:"View 3D model", loading3d:"Loading model...", err3d:"Could not load the model, try again", hint3d:"Drag to rotate · in-game idle", modelAlt:"3D model of {name} (in-game idle pose)",
     descPh:"[Mod description: highlights and skills, 1-2 lines]", trailerPh:"[{name} trailer clip]", skillsTitle:"Skills", skillPh:"[Skill {k} clip]", galleryTitle:"In-game shots", galleryPh:"[Shot {n}]",
     instTag:"INSTALL", instTitle:"Install in 4 steps", shotPh:"[Mod Launcher screenshot, step {n}]",
@@ -735,6 +792,102 @@ function renderUpcoming() {
   });
   hookEffects(box);
 }
+
+/* ---- vote rounds: current round (candidates + live counts + countdown), queue (past winners), past rounds ---- */
+const R = () => CONFIG.rounds || {};
+const initial = (n) => (String(n).trim()[0] || "?").toUpperCase();
+function candImg(c) {
+  const box = el("div", "cimg");
+  if (c.image) { const im = el("img"); im.src = c.image; im.alt = ""; im.loading = "lazy"; box.appendChild(im); } else box.appendChild(el("span", "ini", initial(c.name)));
+  return box;
+}
+function fmtDate(d) { return new Date(d).toLocaleDateString(lang === "th" ? "th-TH" : "en-GB", { day: "numeric", month: "short", year: "numeric" }); }
+function leftText(ms) {
+  const m = Math.max(0, Math.floor(ms / 60000)), d = Math.floor(m / 1440), h = Math.floor(m % 1440 / 60), mi = m % 60;
+  return d > 0 ? t("leftDH", { d, h }) : h > 0 ? t("leftHM", { h, m: mi }) : t("leftM", { m: mi });
+}
+function tickCountdown() {
+  const c = R().current, n = document.getElementById("roundLeft");
+  if (!c || !n) return;
+  const ms = new Date(c.end).getTime() - Date.now();
+  if (ms <= 0) { n.textContent = t("roundClosed"); n.className = "chip closed"; const b = document.getElementById("voteGo"); if (b) b.hidden = true; }
+  else { n.textContent = leftText(ms); n.className = "chip left"; }
+}
+let countdownTimer = 0;
+function renderVote() {
+  const r = R(), cur = r.current, queue = r.queue || [], past = r.past || [];
+  const sec = document.getElementById("vote"), nav = document.getElementById("navVote");
+  const any = !!(cur || queue.length || past.length);
+  sec.hidden = nav.hidden = !any;
+  const now = document.getElementById("voteNow"); now.textContent = ""; now.hidden = !cur;
+  if (cur) {
+    const box = el("div", "round"); if (revealOnRender) box.setAttribute("data-reveal", ""); else box.classList.add("in");
+    const head = el("div", "round-head");
+    head.appendChild(el("h3", null, (pick(cur.title) || t("roundNow"))));
+    const rt = el("div", "rt");
+    if (cur.end) { rt.appendChild(Object.assign(el("span", "chip left"), { id: "roundLeft" })); rt.appendChild(el("span", "chip", t("roundEnds") + " " + fmtDate(cur.end))); }
+    head.appendChild(rt); box.appendChild(head);
+    const cands = (cur.candidates || []).map(c => ({ ...c, votes: Number(c.votes) || 0 })).sort((a, b) => b.votes - a.votes);
+    const closed = !!cur.end && new Date(cur.end).getTime() <= Date.now();
+    const total = cands.reduce((s2, c) => s2 + c.votes, 0);
+    const grid = el("div", "cands");
+    cands.forEach((c, i) => {
+      const top = i < 3 && c.votes > 0;
+      const card = el("article", "cand" + (top ? " top" : "")); card.dataset.rank = i + 1;
+      const im = candImg(c); im.appendChild(el("span", "rank", "#" + (i + 1))); card.appendChild(im);
+      card.appendChild(el("div", "cn", c.name));
+      if (c.host) card.appendChild(el("div", "ch", t("host") + " " + c.host));
+      const pct = total ? Math.round(c.votes * 100 / total) : 0;
+      const bar = el("div", "bar"); bar.setAttribute("role", "progressbar"); bar.setAttribute("aria-valuemin", "0"); bar.setAttribute("aria-valuemax", "100"); bar.setAttribute("aria-valuenow", pct); bar.setAttribute("aria-label", c.name);
+      const f = el("span"); bar.appendChild(f); card.appendChild(bar);
+      requestAnimationFrame(() => requestAnimationFrame(() => { f.style.width = pct + "%"; }));
+      card.appendChild(el("div", "meta", c.votes ? c.votes + " " + t("votesWord") + " (" + pct + "%)" : t("voteNoVotes")));
+      if (top) card.appendChild(el("div", "flag", "✓ " + t(closed ? "winnerWord" : "topNow")));
+      grid.appendChild(card);
+    });
+    box.appendChild(grid);
+    const foot = el("div", "round-foot");
+    const go = el("a", "btn", t("voteBtn")); go.id = "voteGo";
+    if (cur.vote_url) { go.href = cur.vote_url; go.target = "_blank"; go.rel = "noopener"; } else go.hidden = true;
+    const rq = el("a", "btn ghost", t("voteReqBtn")); rq.dataset.link = "request"; setLink(rq);
+    foot.append(go, rq, el("small", null, t("voteTop3") + " · " + t("voteNote")));
+    box.appendChild(foot); now.appendChild(box);
+    tickCountdown();
+  }
+  const qb = document.getElementById("voteQueueBox"), qg = document.getElementById("voteQueue"); qg.textContent = ""; qb.hidden = !queue.length;
+  queue.forEach((c) => {
+    const card = el("article", "cand top"); if (revealOnRender) card.setAttribute("data-reveal", ""); else card.classList.add("in");
+    const im = candImg(c); im.appendChild(el("span", "rank", c.rank ? "#" + c.rank : "✓")); card.appendChild(im);
+    card.appendChild(el("div", "cn", c.name));
+    if (c.host) card.appendChild(el("div", "ch", t("host") + " " + c.host));
+    if (c.round) card.appendChild(el("div", "meta", pick(c.round) || ""));
+    qg.appendChild(card);
+  });
+  const pb = document.getElementById("votePastBox"), pl = document.getElementById("votePast"); pl.textContent = ""; pb.hidden = !past.length;
+  past.forEach((p) => {
+    const d = el("details"), sm = el("summary");
+    const win = (p.results || []).filter(x => x.winner).map(x => x.name);
+    sm.append(el("span", null, pick(p.title) || p.id), el("span", "ch", p.ended ? t("roundOf") + " " + fmtDate(p.ended) : ""), el("span", "win", win.length ? "✓ " + win.join(", ") : ""));
+    d.appendChild(sm);
+    const ol = el("ol");
+    (p.results || []).slice().sort((a, b) => (b.votes || 0) - (a.votes || 0)).forEach((x) => { const li = el("li", x.winner ? "w" : "", x.name + (x.votes != null ? " — " + x.votes + " " + t("votesWord") : "") + (x.winner ? " ✓" : "")); ol.appendChild(li); });
+    d.appendChild(ol); pl.appendChild(d);
+  });
+  clearInterval(countdownTimer); if (cur && cur.end) countdownTimer = setInterval(tickCountdown, 30000);
+  hookEffects(document.getElementById("vote"));
+}
+/* live counts: optional published CSV of the 'tally' tab (columns: round id, name, votes); falls back to the numbers in registry.json */
+async function loadTally() {
+  const cur = R().current;
+  if (!cur || !cur.csv) return;
+  try {
+    const res = await fetch(cur.csv, { cache: "no-store" }); if (!res.ok) return;
+    const rows = (await res.text()).split(/\r?\n/).slice(1).map(l => l.split(",").map(x => x.replace(/^"|"$/g, "").trim()));
+    let hit = 0;
+    for (const c of cur.candidates || []) { const row = rows.find(x => x[0] === cur.id && x[1].toLowerCase() === String(c.name).toLowerCase()); if (row && !isNaN(+row[2])) { c.votes = +row[2]; hit++; } }
+    if (hit) renderVote();
+  } catch (e) { /* offline / blocked: keep registry numbers */ }
+}
 function renderMods() {
   const q = document.getElementById("q").value.trim().toLowerCase();
   const list = document.getElementById("modList"); list.textContent = "";
@@ -761,7 +914,7 @@ function apply() {
   document.querySelectorAll("[data-link]").forEach(setLink);
   document.querySelectorAll("#community .panel").forEach(c => { c.hidden = ![...c.querySelectorAll("[data-link]")].some(a => !a.hidden); });
   document.getElementById("modCount").textContent = CONFIG.mods.length + " " + t("count");
-  renderHero(); renderMods(); renderUpcoming(); renderShots();
+  renderHero(); renderMods(); renderVote(); renderUpcoming(); renderShots();
   document.querySelectorAll("#upcoming [data-link]").forEach(setLink);
 }
 
@@ -837,6 +990,7 @@ document.getElementById("q").addEventListener("input", renderMods);
 apply();
 hookEffects(document);
 revealOnRender = false;
+loadTally();
 spy();
 pauseHeroWhenHidden();
 if (!reduced) {
