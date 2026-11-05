@@ -197,6 +197,9 @@ section{position:relative}
 
 
 /* "before you start" callout + help/contact cards */
+.howto{margin:0 auto 28px;max-width:760px}
+.howto video{display:block;width:100%;aspect-ratio:16/9;border-radius:16px;border:1px solid var(--line2);background:#060912}
+.howto figcaption{margin-top:8px;text-align:center;color:var(--muted);font-size:14px}
 .callout{display:flex;flex-wrap:wrap;align-items:center;gap:16px 24px;padding:20px 24px;margin-bottom:28px;border-radius:16px;background:linear-gradient(135deg,rgba(53,224,208,.12),rgba(143,123,255,.12));border:1px solid var(--line2)}
 .callout .ct{flex:1 1 320px;display:flex;flex-direction:column;gap:4px}
 .callout strong{font-family:var(--display);font-size:20px}
@@ -510,6 +513,10 @@ footer p{margin:0;max-width:660px}
           <a class="btn ghost" data-link="forgeCommunity" data-i="callCom">เข้า HoN Reborn Discord</a>
         </div>
       </div>
+      <figure class="howto" id="howto" data-reveal hidden>
+        <video id="howtoVideo" controls playsinline preload="none"></video>
+        <figcaption data-i="howtoCap">ดูวิดีโอสั้น 17 วินาที: ติดตั้งมอดด้วย Mod Launcher</figcaption>
+      </figure>
       <ol class="steps" id="steps" data-reveal>
         <li class="step"><span class="n">1</span><strong data-i="s1">โหลดไฟล์มอด</strong><span class="t" data-i="s1t">ไฟล์ .honmod ไม่ต้องแตกไฟล์</span><div class="shot"></div></li>
         <li class="step"><span class="n">2</span><strong data-i="s2">เพิ่มใน Mod Launcher</strong><span class="t" data-i="s2t">แท็บ Custom Mod (.honmod) แล้วกด เพิ่ม .honmod</span><div class="shot"></div></li>
@@ -620,6 +627,7 @@ const CONFIG = {
   },
   hero: {"media": null},
   steps: ["img/install/step-1.jpg", "img/install/step-2.jpg", "img/install/step-3.jpg", "img/install/step-4.jpg"],
+  installVideo: {"video": "video/install/howto.mp4", "poster": "video/install/howto.jpg"},
   milestone: {"goal": 1000, "current": 350, "unlock": "Shanks", "img": "img/shanks.png", "count": {"th": "ผู้ติดตามรวมทุกช่อง (TikTok + YouTube)", "en": "followers across all channels (TikTok + YouTube)"}, "updated": "2026-11-05"},
   mods: [
     {"name": "Aizen Sosuke", "host": "Kinesis", "version": "1.2.105", "img": "img/aizen.png", "download": "https://github.com/khattiya-streamer/voidwing/releases/download/aizen-v1.2.105/Aizen_Kinesis_v1.2.105.honmod", "trailer": {"video": "video/aizen/overview.mp4", "poster": "video/aizen/overview.jpg"}, "skills": {"q": {"media": "img/skills/aizen-q.png", "name": "Kurohitsugi", "note": {"th": "Hado 90 โลงดำ ขังศัตรูไว้ในโลงแล้วระเบิด", "en": "Hado 90: a black coffin traps the target, then shatters"}, "clip": {"video": "video/aizen/skill-q-l.mp4", "preview": "video/aizen/skill-q.mp4", "poster": "video/aizen/skill-q.jpg"}}, "w": {"media": "img/skills/aizen-w.png", "name": "Rikujokoro", "note": {"th": "Bakudo 61 แท่งแสงหกแท่งตรึงเป้าหมาย", "en": "Bakudo 61: six rods of light pin the target"}, "clip": {"video": "video/aizen/skill-w-l.mp4", "preview": "video/aizen/skill-w.mp4", "poster": "video/aizen/skill-w.jpg"}}, "e": {"media": "img/skills/aizen-e.png", "name": "Danku", "note": {"th": "Bakudo 81 กำแพงกระจกกันการโจมตี", "en": "Bakudo 81: a glass wall that blocks attacks"}, "clip": {"video": "video/aizen/skill-e-l.mp4", "preview": "video/aizen/skill-e.mp4", "poster": "video/aizen/skill-e.jpg"}}, "r": {"media": "img/skills/aizen-r.png", "name": "Goryutenmetsu", "note": {"th": "Hado 99 มังกรพลังงานพุ่งใส่ทั้งบริเวณ", "en": "Hado 99: energy dragons strike the whole area"}, "clip": {"video": "video/aizen/skill-r-l.mp4", "preview": "video/aizen/skill-r.mp4", "poster": "video/aizen/skill-r.jpg"}}}, "watch": {"youtube": "https://youtube.com/shorts/GxIa0Cao5fg", "tiktok": "https://www.tiktok.com/@voidwing_g/video/7704361760513445127"}, "status": "released"},
@@ -655,7 +663,7 @@ const T = {
     t5:"ใครเห็นมอดบ้าง", t5a:"มอดเปลี่ยนสิ่งที่เห็นและได้ยินบนเครื่องคุณ คนอื่นในแมตช์ไม่เห็นมอดของคุณ",
     comTag:"ชุมชน", comTitle:"ขอมอด / สนับสนุน / ติดตาม",
     reqT:"อยากให้ทำตัวละครไหน", reqP:"บอกตัวละคร สกิลที่อยากเห็น และรูปอ้างอิง ไม่รับประกันว่าจะทำทุกคำขอ", reqA:"ส่งคำขอ",
-    goalTag:"เป้าหมายช่อง", goalTitle:"ครบ {goal} ผู้ติดตาม = ปล่อย {mod}", goalTitleDone:"ครบ {goal} แล้ว! {mod} เปิดให้โหลดเร็วๆ นี้", goalSub:"นับ {how} ช่วยกดติดตามเพื่อปลดล็อก", goalOf:"{cur} / {goal} ผู้ติดตาม", goalLeft:"เหลืออีก {n} คน", goalUpd:"อัปเดต {date}", followTt:"ติดตาม TikTok", followYt:"ติดตาม YouTube", navTesters:"ผู้ทดสอบ", testTag:"TESTED BY", testTitle:"ผู้ทดสอบและสตรีมเมอร์", testSub:"คนที่ลองเล่นมอดของ VoidWing ก่อนเปิดตัว ขอบคุณที่ช่วยทดสอบและแนะนำให้คนอื่นรู้จัก", testedLabel:"ลองเล่น", anaNote:"เว็บนี้นับจำนวนผู้เข้าชมแบบไม่ใช้คุกกี้ (GoatCounter)", supT:"สนับสนุนช่อง", supP:"มอดแจกฟรีเสมอ การสนับสนุนเป็นทิปให้กำลังใจเท่านั้น", supA:"สนับสนุน",
+    howtoCap:"ดูวิดีโอสั้น 17 วินาที: ติดตั้งมอดด้วย Mod Launcher", howtoLabel:"วิดีโอสอนติดตั้งมอด (17 วินาที ไม่มีเสียง)", goalTag:"เป้าหมายช่อง", goalTitle:"ครบ {goal} ผู้ติดตาม = ปล่อย {mod}", goalTitleDone:"ครบ {goal} แล้ว! {mod} เปิดให้โหลดเร็วๆ นี้", goalSub:"นับ {how} ช่วยกดติดตามเพื่อปลดล็อก", goalOf:"{cur} / {goal} ผู้ติดตาม", goalLeft:"เหลืออีก {n} คน", goalUpd:"อัปเดต {date}", followTt:"ติดตาม TikTok", followYt:"ติดตาม YouTube", navTesters:"ผู้ทดสอบ", testTag:"TESTED BY", testTitle:"ผู้ทดสอบและสตรีมเมอร์", testSub:"คนที่ลองเล่นมอดของ VoidWing ก่อนเปิดตัว ขอบคุณที่ช่วยทดสอบและแนะนำให้คนอื่นรู้จัก", testedLabel:"ลองเล่น", anaNote:"เว็บนี้นับจำนวนผู้เข้าชมแบบไม่ใช้คุกกี้ (GoatCounter)", supT:"สนับสนุนช่อง", supP:"มอดแจกฟรีเสมอ การสนับสนุนเป็นทิปให้กำลังใจเท่านั้น", supA:"สนับสนุน",
     folT:"ติดตามช่อง", folP:"คลิปสกิล มอดใหม่ และสตรีม",
     disc:"VoidWing mods เป็นงาน fan-made ไม่เกี่ยวข้องกับ Juvio หรือ Heroes of Newerth ตัวละครและชื่อเป็นของเจ้าของลิขสิทธิ์เดิม"
   },
@@ -683,7 +691,7 @@ const T = {
     t5:"Who sees the mod?", t5a:"A mod changes what you see and hear on your own PC. Other players in the match don't see it.",
     comTag:"COMMUNITY", comTitle:"Request / support / follow",
     reqT:"Want a character made?", reqP:"Tell me the character, the skills you'd like to see and reference pictures. Not every request will be made.", reqA:"Send a request",
-    goalTag:"CHANNEL GOAL", goalTitle:"{goal} followers = {mod} is released", goalTitleDone:"{goal} reached! {mod} opens for download soon", goalSub:"Counting {how}. Follow to help unlock it.", goalOf:"{cur} / {goal} followers", goalLeft:"{n} to go", goalUpd:"updated {date}", followTt:"Follow on TikTok", followYt:"Follow on YouTube", navTesters:"Testers", testTag:"TESTED BY", testTitle:"Testers and streamers", testSub:"People who played VoidWing mods before release. Thank you for testing and for spreading the word.", testedLabel:"Played", anaNote:"This site counts visits without cookies (GoatCounter)", supT:"Support the channel", supP:"Mods are always free. Support is an optional tip, nothing more.", supA:"Support",
+    howtoCap:"17-second walkthrough: install a mod with Mod Launcher (captions are in Thai)", howtoLabel:"Mod install walkthrough video (17 seconds, no sound)", goalTag:"CHANNEL GOAL", goalTitle:"{goal} followers = {mod} is released", goalTitleDone:"{goal} reached! {mod} opens for download soon", goalSub:"Counting {how}. Follow to help unlock it.", goalOf:"{cur} / {goal} followers", goalLeft:"{n} to go", goalUpd:"updated {date}", followTt:"Follow on TikTok", followYt:"Follow on YouTube", navTesters:"Testers", testTag:"TESTED BY", testTitle:"Testers and streamers", testSub:"People who played VoidWing mods before release. Thank you for testing and for spreading the word.", testedLabel:"Played", anaNote:"This site counts visits without cookies (GoatCounter)", supT:"Support the channel", supP:"Mods are always free. Support is an optional tip, nothing more.", supA:"Support",
     folT:"Follow the channel", folP:"Skill clips, new mods and streams",
     disc:"VoidWing mods are fan-made and not affiliated with Juvio or Heroes of Newerth. Characters and names belong to their original owners."
   }
@@ -938,6 +946,13 @@ const ST_KEY = { released: "stReleased", beta: "stBeta", in_dev: "stDev", soon: 
 function statusChip(st) {
   const c = el("span", "chip st st-" + st); c.append(el("i"), document.createTextNode(t(ST_KEY[st] || "stDev"))); c.dataset.status = st; return c;
 }
+function renderHowto() {
+  const h = CONFIG.installVideo, fig = document.getElementById("howto"), v = document.getElementById("howtoVideo");
+  const ok = !!h && !!norm(h.video);
+  fig.hidden = !ok;
+  if (!ok) { v.removeAttribute("src"); v.removeAttribute("poster"); return; }
+  v.poster = h.poster || ""; v.src = h.video; v.setAttribute("aria-label", t("howtoLabel"));
+}
 function renderGoal() {
   const g = CONFIG.milestone, sec = document.getElementById("goal");
   const goal = g && +g.goal, cur = g && Math.max(0, +g.current || 0);
@@ -1142,7 +1157,7 @@ function apply() {
   document.querySelectorAll("[data-link]").forEach(setLink);
   document.querySelectorAll("#community .panel").forEach(c => { c.hidden = ![...c.querySelectorAll("[data-link]")].some(a => !a.hidden); });
   document.getElementById("modCount").textContent = CONFIG.mods.length + " " + t("count");
-  renderHero(); renderMods(); renderVote(); renderUpcoming(); renderTesters(); renderGoal(); renderShots();
+  renderHero(); renderMods(); renderVote(); renderUpcoming(); renderTesters(); renderGoal(); renderHowto(); renderShots();
   document.querySelectorAll("#upcoming [data-link]").forEach(setLink);
 }
 
