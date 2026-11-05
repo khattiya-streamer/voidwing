@@ -563,12 +563,18 @@ footer p{margin:0;max-width:660px}
             <a class="btn ghost" data-link="tiktok">TikTok</a>
             <a class="btn ghost" data-link="youtube">YouTube</a>
             <a class="btn ghost" data-link="stream">Stream</a>
+            <a class="btn ghost" data-link="facebookPage">Facebook</a>
           </div>
         </div>
         <div id="forgecom" class="panel glow" data-reveal style="--d:.35s">
           <h3 data-i="comFTitle">HoN Reborn Discord</h3>
           <p data-i="comFText">พูดคุย • แจ้งบั๊ก • ขอ Mod • ติดตามอัปเดต</p>
           <div class="row-links"><a class="btn ghost" data-link="forgeCommunity" data-i="comFBtn">เข้า HoN Reborn Discord</a></div>
+        </div>
+        <div id="fbgroup" class="panel glow" data-reveal style="--d:.4s">
+          <h3 data-i="fbTitle">กลุ่ม Facebook VoidWing</h3>
+          <p data-i="fbText">ถามวิธีติดตั้ง • แจ้งบั๊ก • เสนอตัวละคร • โชว์คลิปที่คุณเล่น</p>
+          <div class="row-links"><a class="btn ghost" data-link="facebook" data-i="fbBtn">เข้ากลุ่ม Facebook</a></div>
         </div>
         <div id="contact" class="panel glow" data-reveal style="--d:.45s">
           <h3 data-i="ctTitle">ติดต่อ</h3>
@@ -607,6 +613,8 @@ const CONFIG = {
     request: "https://docs.google.com/forms/d/e/1FAIpQLSeqtVd31Ed_y9sOaV7d9gB9QuTCoYQNFy89bIZuo38ZwFoFkg/viewform",
     support: "",
     forgeCommunity: "https://discord.gg/q5KjPGT2Hv",
+    facebook: "https://www.facebook.com/share/g/1H8T3Cg6g1/",
+    facebookPage: "https://www.facebook.com/profile.php?id=61596318838631",
     email: "mailto:khattiya.streamer@gmail.com",
     discord: ""
   },
@@ -629,7 +637,7 @@ const T = {
     ctaMods:"ดูมอดทั้งหมด", ctaInstall:"วิธีติดตั้ง 4 ขั้น", heroSlot:"[คลิปรวมมอดทั้งหมด 15-30 วินาที วางตรงนี้]",
     gameTag:"HEROES OF NEWERTH", modsTitle:"มอดทั้งหมด", modsSub:"ทุกตัวแจกฟรี โหลดไฟล์เดียว ติดตั้งผ่าน Mod Launcher", search:"ค้นหา", searchPh:"ชื่อตัวละคร / ฮีโร่",
     host:"ฮีโร่ฐาน", download:"โหลดมอด", soon:"เร็วๆ นี้", count:"มอด", none:"ไม่พบมอดที่ค้นหา", ver:"เวอร์ชัน",
-    callTitle:"ก่อนเริ่ม: ต้องมี HoN Reborn - Mod Launcher", callText:"HoN Reborn - Mod Launcher คือโปรแกรมติดตั้งมอดฟรีที่ชุมชนทำขึ้น (ไม่ใช่ของ VoidWing) ติดตั้งก่อน แล้วค่อยเพิ่มไฟล์ .honmod ที่โหลดจากหน้านี้", callGet:"ดาวน์โหลด Mod Launcher", callCom:"เข้า HoN Reborn Discord", comFTitle:"HoN Reborn Discord", comFText:"พูดคุย • แจ้งบั๊ก • ขอ Mod • ติดตามอัปเดต", comFBtn:"เข้า HoN Reborn Discord", ctTitle:"ติดต่อ", ctText:"ถามเรื่องมอด ปัญหาการติดตั้ง หรืองานร่วมกัน ทักได้ที่นี่ (หรือ DM ที่ TikTok / YouTube)", ctEmail:"อีเมล",
+    callTitle:"ก่อนเริ่ม: ต้องมี HoN Reborn - Mod Launcher", callText:"HoN Reborn - Mod Launcher คือโปรแกรมติดตั้งมอดฟรีที่ชุมชนทำขึ้น (ไม่ใช่ของ VoidWing) ติดตั้งก่อน แล้วค่อยเพิ่มไฟล์ .honmod ที่โหลดจากหน้านี้", callGet:"ดาวน์โหลด Mod Launcher", callCom:"เข้า HoN Reborn Discord", comFTitle:"HoN Reborn Discord", comFText:"พูดคุย • แจ้งบั๊ก • ขอ Mod • ติดตามอัปเดต", fbTitle:"กลุ่ม Facebook VoidWing", fbText:"ถามวิธีติดตั้ง • แจ้งบั๊ก • เสนอตัวละคร • โชว์คลิปที่คุณเล่น", fbBtn:"เข้ากลุ่ม Facebook", comFBtn:"เข้า HoN Reborn Discord", ctTitle:"ติดต่อ", ctText:"ถามเรื่องมอด ปัญหาการติดตั้ง หรืองานร่วมกัน ทักได้ที่นี่ (หรือ DM ที่ TikTok / YouTube)", ctEmail:"อีเมล",
     navVote:"โหวตมอด", voteTag:"VOTE", voteTitle:"โหวตมอดตัวต่อไป", voteSub:"ทุกรอบคัดตัวเลือกจากคำขอที่ส่งมา โหวตได้รอบละ 1 สัปดาห์ 3 อันดับแรกเข้าคิวที่จะทำแน่นอน (ยังไม่ระบุวันเสร็จ)", queueTitle:"คิวที่จะทำ", queueSub:"ตัวละครที่ชนะโหวตแล้ว เข้ารายการที่จะทำแน่นอน ลำดับการทำและวันเสร็จจะแจ้งอีกที", pastTitle:"รอบที่ผ่านมา", roundNow:"รอบนี้", roundEnds:"ปิดโหวต", leftDH:"เหลือ {d} วัน {h} ชม.", leftHM:"เหลือ {h} ชม. {m} นาที", leftM:"เหลือ {m} นาที", roundClosed:"ปิดโหวตแล้ว รอประกาศผล", votesWord:"โหวต", voteBtn:"โหวตเลย", voteReqBtn:"ส่งคำขอใหม่", voteTop3:"อันดับ 1-3 ตอนนี้ = เข้าคิวที่จะทำ", voteNoVotes:"ยังไม่มีโหวต", voteNote:"คะแนนอัปเดตเป็นระยะ ไม่ใช่ทันที", winnerWord:"เข้าคิว", topNow:"ติด 3 อันดับแรก", roundOf:"จบ", queueRound:"จากรอบ", stReleased:"พร้อมโหลด", stBeta:"ทดสอบ (Beta)", stDev:"กำลังพัฒนา", stSoon:"ใกล้เสร็จ", stTeaser:"แอบใบ้", notReady:"ยังไม่พร้อมโหลด", navUpcoming:"เร็วๆ นี้", upTag:"COMING SOON", upTitle:"กำลังจะมา", upSub:"ตัวละครที่กำลังทำอยู่ ใบ้ให้ดูก่อน เดาออกไหม?", hintLabel:"คำใบ้", hintPh:"[คำใบ้: บอกใบ้ตัวละครแบบไม่เฉลย 1-2 บรรทัด]", unknownName:"???", hostUnknown:"ฮีโร่ฐาน: ???", progressLabel:"ความคืบหน้า", etaLabel:"คาดว่า", followFirst:"อยากรู้ก่อนใคร:",
     watchYt:"ดูคลิปเต็มบน YouTube", watchTt:"ดูบน TikTok", tab3d:"3D", tabClip:"คลิป", view3d:"ดูโมเดล 3D", loading3d:"กำลังโหลดโมเดล...", err3d:"โหลดโมเดลไม่สำเร็จ ลองใหม่อีกครั้ง", hint3d:"ลากเพื่อหมุน · ท่ายืนในเกม", modelAlt:"โมเดล 3D ของ {name} (ท่ายืนในเกม)",
     descPh:"[คำอธิบายมอด: จุดเด่นและสกิล 1-2 บรรทัด]", trailerPh:"[คลิปตัวอย่างมอด {name}]", skillsTitle:"สกิล", skillHint:"กดที่สกิลเพื่อดูคลิป", playSkill:"ดูคลิปสกิล {k}: {name}", closeBtn:"ปิด", zoomShot:"ขยายภาพขั้นที่ {n}", prevBtn:"สกิลก่อนหน้า", nextBtn:"สกิลถัดไป", skillPh:"[คลิปสกิล {k}]", galleryTitle:"ภาพในเกม", galleryPh:"[ภาพ {n}]",
@@ -657,7 +665,7 @@ const T = {
     ctaMods:"Browse mods", ctaInstall:"Install in 4 steps", heroSlot:"[Showreel clip of all mods, 15-30 s, goes here]",
     gameTag:"HEROES OF NEWERTH", modsTitle:"All mods", modsSub:"All free. One file each, installed through Mod Launcher.", search:"Search", searchPh:"Character / hero",
     host:"Base hero", download:"Download", soon:"Coming soon", count:"mods", none:"No mod matches your search", ver:"Version",
-    callTitle:"Before you start: you need HoN Reborn - Mod Launcher", callText:"HoN Reborn - Mod Launcher is the free mod installer made by the community (not by VoidWing). Install it first, then add the .honmod file you download here.", callGet:"Download Mod Launcher", callCom:"Join HoN Reborn Discord", comFTitle:"HoN Reborn Discord", comFText:"Chat • Report bugs • Request mods • Follow updates", comFBtn:"Join HoN Reborn Discord", ctTitle:"Contact", ctText:"Questions about a mod, install problems or collaboration: reach out here (or DM on TikTok / YouTube).", ctEmail:"Email",
+    callTitle:"Before you start: you need HoN Reborn - Mod Launcher", callText:"HoN Reborn - Mod Launcher is the free mod installer made by the community (not by VoidWing). Install it first, then add the .honmod file you download here.", callGet:"Download Mod Launcher", callCom:"Join HoN Reborn Discord", comFTitle:"HoN Reborn Discord", comFText:"Chat • Report bugs • Request mods • Follow updates", fbTitle:"VoidWing Facebook group", fbText:"Install help, bug reports, character ideas, and clips from players", fbBtn:"Join the Facebook group", comFBtn:"Join HoN Reborn Discord", ctTitle:"Contact", ctText:"Questions about a mod, install problems or collaboration: reach out here (or DM on TikTok / YouTube).", ctEmail:"Email",
     navVote:"Vote", voteTag:"VOTE", voteTitle:"Vote for the next mod", voteSub:"Each round is a short list picked from the requests I get. Voting stays open for 1 week; the top 3 go into the queue of mods that will be made (no release date promised).", queueTitle:"Queue", queueSub:"Characters that won a vote and are now on the list of mods that will be made. Order and release dates will be announced later.", pastTitle:"Past rounds", roundNow:"This round", roundEnds:"Closes", leftDH:"{d} d {h} h left", leftHM:"{h} h {m} min left", leftM:"{m} min left", roundClosed:"Voting closed, results coming", votesWord:"votes", voteBtn:"Vote now", voteReqBtn:"Request another", voteTop3:"Current top 3 = into the queue", voteNoVotes:"No votes yet", voteNote:"Counts refresh periodically, not instantly.", winnerWord:"In the queue", topNow:"In the top 3", roundOf:"ended", queueRound:"from", stReleased:"Available", stBeta:"Beta", stDev:"In development", stSoon:"Almost ready", stTeaser:"Teaser", notReady:"Not ready yet", navUpcoming:"Coming soon", upTag:"COMING SOON", upTitle:"Coming soon", upSub:"Characters in the works. A hint first: can you guess who?", hintLabel:"HINT", hintPh:"[Hint: a clue about the character without naming them, 1-2 lines]", unknownName:"???", hostUnknown:"Base hero: ???", progressLabel:"Progress", etaLabel:"Expected", followFirst:"Be the first to know:",
     watchYt:"Watch the full video on YouTube", watchTt:"Watch on TikTok", tab3d:"3D", tabClip:"Clip", view3d:"View 3D model", loading3d:"Loading model...", err3d:"Could not load the model, try again", hint3d:"Drag to rotate · in-game idle", modelAlt:"3D model of {name} (in-game idle pose)",
     descPh:"[Mod description: highlights and skills, 1-2 lines]", trailerPh:"[{name} trailer clip]", skillsTitle:"Skills", skillHint:"Tap a skill to watch its clip", playSkill:"Watch skill {k} clip: {name}", closeBtn:"Close", zoomShot:"Enlarge step {n} screenshot", prevBtn:"Previous skill", nextBtn:"Next skill", skillPh:"[Skill {k} clip]", galleryTitle:"In-game shots", galleryPh:"[Shot {n}]",
