@@ -625,7 +625,7 @@ const CONFIG = {
     email: "mailto:khattiya.streamer@gmail.com",
     discord: ""
   },
-  hero: {"media": null},
+  hero: {"media": {"video": "video/hero/hero.mp4", "poster": "video/hero/hero.jpg", "loop": true}},
   steps: ["img/install/step-1.jpg", "img/install/step-2.jpg", "img/install/step-3.jpg", "img/install/step-4.jpg"],
   installVideo: {"video": "video/install/howto.mp4", "poster": "video/install/howto.jpg"},
   milestone: {"goal": 1000, "current": 350, "unlock": "Shanks", "img": "img/shanks.png", "count": {"th": "ผู้ติดตามรวมทุกช่อง (TikTok + YouTube)", "en": "followers across all channels (TikTok + YouTube)"}, "updated": "2026-11-05"},
@@ -734,7 +734,8 @@ function slot(m, ph, ratio, small) {
     fig.appendChild(b);
   } else if (m.video) {
     const v = el("video"); v.src = m.video; v.playsInline = true; v.preload = "metadata"; if (m.poster) v.poster = m.poster;
-    if (m.loop) { v.muted = true; v.loop = true; v.autoplay = true; } else v.controls = true;
+    if (m.loop && !(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) { v.muted = true; v.loop = true; v.autoplay = true; }
+    else v.controls = true;   // a loop that moves by itself is skipped for people who asked their system for less motion
     fig.appendChild(v);
   } else if (m.image) {
     const im = el("img"); im.src = m.image; im.alt = m.alt || ""; im.loading = "lazy"; fig.appendChild(im);
