@@ -242,6 +242,28 @@ section{position:relative}
 .skill-play video.pv{z-index:2;animation:pvIn .25s both}
 @keyframes pvIn{from{opacity:0}}
 .skill-hint{margin:-2px 0 0;font-size:12px;color:#7C8DAE}
+.goal{padding-top:8px;padding-bottom:0}
+.goal-box{display:flex;gap:22px;align-items:center;flex-wrap:wrap;padding:24px;border:1px solid var(--line2);border-radius:20px;background:linear-gradient(135deg,rgba(143,123,255,.14),rgba(53,224,208,.08))}
+.goal-ic{position:relative;flex:none;width:84px;height:84px;border-radius:18px;overflow:hidden;border:1px solid var(--line2);background:#0B1224}
+.goal-ic img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(1) brightness(.55);transition:filter .6s}
+.goal-ic svg{position:absolute;left:50%;top:50%;width:34px;height:34px;margin:-17px 0 0 -17px;fill:rgba(6,9,18,.7);stroke:#fff;stroke-width:1.8;stroke-linecap:round}
+.goal.done .goal-ic img{filter:none}.goal.done .goal-ic svg{display:none}
+.goal-main{flex:1 1 320px;min-width:0;display:flex;flex-direction:column;gap:8px}
+.goal-main h2{margin:0;font-family:var(--display);font-size:clamp(22px,3vw,30px);line-height:1.15}
+.goal-main p{margin:0;color:var(--muted);text-wrap:pretty}
+.goal-bar{height:14px;border-radius:999px;background:#0B1224;border:1px solid var(--line2);overflow:hidden}
+.goal-bar span{display:block;height:100%;width:0;background:var(--grad);border-radius:999px;transition:width 1.2s ease}
+.goal-meta{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline}
+.goal-meta b{font-family:var(--display);font-size:20px}
+.goal-meta span{color:#8FF2E8}.goal-meta small{color:#7C8DAE;font-size:12px}
+.goal-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+.testers{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.tester{display:flex;align-items:center;gap:12px;padding:14px;border:1px solid var(--line);border-radius:14px;background:var(--panel);color:inherit;text-decoration:none;transition:border-color .2s,transform .2s}
+a.tester:hover,a.tester:focus-visible{border-color:var(--cyan);transform:translateY(-2px)}
+.tester .av{flex:none;width:44px;height:44px;border-radius:50%;background:var(--grad);color:#06111a;display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:20px}
+.tester b{display:block;line-height:1.25}
+.tester small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+footer .ana{margin:0 0 6px;font-size:12px;color:#7C8DAE}
 .shot-zoom{display:block;width:100%;margin:0;padding:0;border:0;background:none;color:inherit;cursor:zoom-in;border-radius:14px;position:relative}
 .shot-zoom:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
 .shot-zoom .slot{transition:border-color .2s,box-shadow .2s}
@@ -358,6 +380,7 @@ footer p{margin:0;max-width:660px}
     <a href="#mods" data-sec="mods" data-i="navMods">มอดทั้งหมด</a>
     <a href="#vote" data-sec="vote" id="navVote" data-i="navVote" hidden>โหวตมอด</a>
     <a href="#upcoming" data-sec="upcoming" id="navUpcoming" data-i="navUpcoming" hidden>เร็วๆ นี้</a>
+    <a href="#testers" data-sec="testers" id="navTesters" data-i="navTesters" hidden>ผู้ทดสอบ</a>
     <a href="#install" data-sec="install" data-i="navInstall">วิธีติดตั้ง</a>
     <a href="#faq" data-sec="faq" data-i="navFaq">ปัญหาที่พบบ่อย</a>
     <a href="#community" data-sec="community" data-i="navCommunity">ขอมอด / สนับสนุน</a>
@@ -387,6 +410,22 @@ footer p{margin:0;max-width:660px}
       <div class="hero-media"><div class="frame tilt" id="heroSlot"></div></div>
     </div>
     <div class="scroll-hint" aria-hidden="true"></div>
+  </section>
+
+  <section id="goal" class="sec goal" aria-labelledby="goalTitle" hidden>
+    <div class="wrap">
+      <div class="goal-box" data-reveal>
+        <div class="goal-ic" id="goalIc"><img id="goalImg" alt="" width="84" height="84"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+        <div class="goal-main">
+          <div class="eyebrow" data-i="goalTag">เป้าหมายช่อง</div>
+          <h2 id="goalTitle"></h2>
+          <p id="goalSub"></p>
+          <div class="goal-bar" id="goalBar" role="progressbar" aria-valuemin="0" aria-valuemax="100"><span id="goalFill"></span></div>
+          <div class="goal-meta"><b id="goalOf"></b><span id="goalLeft"></span><small id="goalUpd"></small></div>
+          <div class="goal-cta"><a class="btn" data-link="tiktok" data-i="followTt">ติดตาม TikTok</a><a class="btn ghost" data-link="youtube" data-i="followYt">ติดตาม YouTube</a></div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <section id="mods" class="sec" aria-labelledby="modsTitle">
@@ -422,6 +461,19 @@ footer p{margin:0;max-width:660px}
         <h3 class="h3" data-i="pastTitle">รอบที่ผ่านมา</h3>
         <div id="votePast"></div>
       </div>
+    </div>
+  </section>
+
+  <section id="testers" class="sec" aria-labelledby="testTitle" hidden>
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <div>
+          <div class="eyebrow" data-i="testTag">TESTED BY</div>
+          <h2 id="testTitle" data-i="testTitle">ผู้ทดสอบและสตรีมเมอร์</h2>
+          <p data-i="testSub">คนที่ลองเล่นมอดของ VoidWing ก่อนเปิดตัว ขอบคุณที่ช่วยทดสอบและแนะนำให้คนอื่นรู้จัก</p>
+        </div>
+      </div>
+      <div class="testers" id="testerList"></div>
     </div>
   </section>
 
@@ -530,6 +582,7 @@ footer p{margin:0;max-width:660px}
   <footer>
     <div class="wrap">
       <p data-i="disc"></p>
+      <p class="ana" id="anaNote" data-i="anaNote" hidden></p>
       <span>© VoidWing</span>
     </div>
   </footer>
@@ -556,6 +609,7 @@ const CONFIG = {
   },
   hero: {"media": null},
   steps: ["img/install/step-1.jpg", "img/install/step-2.jpg", "img/install/step-3.jpg", "img/install/step-4.jpg"],
+  milestone: {"goal": 1000, "current": 350, "unlock": "Shanks", "img": "img/shanks.png", "count": {"th": "ผู้ติดตามรวมทุกช่อง (TikTok + YouTube)", "en": "followers across all channels (TikTok + YouTube)"}, "updated": "2026-11-05"},
   mods: [
     {"name": "Aizen Sosuke", "host": "Kinesis", "version": "1.2.105", "img": "img/aizen.png", "download": "https://github.com/khattiya-streamer/voidwing/releases/download/aizen-v1.2.105/Aizen_Kinesis_v1.2.105.honmod", "trailer": {"video": "video/aizen/overview.mp4", "poster": "video/aizen/overview.jpg"}, "skills": {"q": {"media": "img/skills/aizen-q.png", "name": "Kurohitsugi", "note": {"th": "Hado 90 โลงดำ ขังศัตรูไว้ในโลงแล้วระเบิด", "en": "Hado 90: a black coffin traps the target, then shatters"}, "clip": {"video": "video/aizen/skill-q-l.mp4", "preview": "video/aizen/skill-q.mp4", "poster": "video/aizen/skill-q.jpg"}}, "w": {"media": "img/skills/aizen-w.png", "name": "Rikujokoro", "note": {"th": "Bakudo 61 แท่งแสงหกแท่งตรึงเป้าหมาย", "en": "Bakudo 61: six rods of light pin the target"}, "clip": {"video": "video/aizen/skill-w-l.mp4", "preview": "video/aizen/skill-w.mp4", "poster": "video/aizen/skill-w.jpg"}}, "e": {"media": "img/skills/aizen-e.png", "name": "Danku", "note": {"th": "Bakudo 81 กำแพงกระจกกันการโจมตี", "en": "Bakudo 81: a glass wall that blocks attacks"}, "clip": {"video": "video/aizen/skill-e-l.mp4", "preview": "video/aizen/skill-e.mp4", "poster": "video/aizen/skill-e.jpg"}}, "r": {"media": "img/skills/aizen-r.png", "name": "Goryutenmetsu", "note": {"th": "Hado 99 มังกรพลังงานพุ่งใส่ทั้งบริเวณ", "en": "Hado 99: energy dragons strike the whole area"}, "clip": {"video": "video/aizen/skill-r-l.mp4", "preview": "video/aizen/skill-r.mp4", "poster": "video/aizen/skill-r.jpg"}}}, "watch": {"youtube": "https://youtube.com/shorts/GxIa0Cao5fg", "tiktok": "https://www.tiktok.com/@voidwing_g/video/7704361760513445127"}, "status": "released"},
     {"name": "Jin Mori", "host": "Monkey King", "version": "0.6.75", "img": "img/jin-mori.png", "download": "https://github.com/khattiya-streamer/voidwing/releases/download/jin-mori-v0.6.75/Jin_Mori__Monkey_King_v0.6.75.honmod", "trailer": {"video": "video/jin-mori/overview.mp4", "poster": "video/jin-mori/overview.jpg"}, "skills": {"q": {"media": "img/skills/jin-mori-q.png", "name": "Illusive Dash", "note": {"th": "พุ่งไปข้างหน้า ทิ้งเงาค้างไว้เบื้องหลัง", "en": "Dash forward, leaving shadows behind"}, "clip": {"video": "video/jin-mori/skill-q-l.mp4", "preview": "video/jin-mori/skill-q.mp4", "poster": "video/jin-mori/skill-q.jpg"}}, "w": {"media": "img/skills/jin-mori-w.png", "name": "Heavenly Vault", "note": {"th": "กระโดดสูงแล้วลงพื้นแตกเป็นหลุม", "en": "Leap high and land in a cracked crater"}, "clip": {"video": "video/jin-mori/skill-w-l.mp4", "preview": "video/jin-mori/skill-w.mp4", "poster": "video/jin-mori/skill-w.jpg"}}, "e": {"media": "img/skills/jin-mori-e.png", "name": "Wan Jin Slam", "note": {"th": "กระบองสายฟ้ายักษ์ปักพื้นแล้วระเบิด", "en": "A giant lightning staff plunges down and erupts"}, "clip": {"video": "video/jin-mori/skill-e-l.mp4", "preview": "video/jin-mori/skill-e.mp4", "poster": "video/jin-mori/skill-e.jpg"}}, "r": {"media": "img/skills/jin-mori-r.png", "name": "Flying Nimbus", "note": {"th": "เรียกเมฆทองมาขี่", "en": "Summon a golden cloud and ride it"}, "clip": {"video": "video/jin-mori/skill-r-l.mp4", "preview": "video/jin-mori/skill-r.mp4", "poster": "video/jin-mori/skill-r.jpg"}}}, "watch": {"youtube": "https://youtube.com/shorts/sKuzXIVzmRM", "tiktok": "https://www.tiktok.com/@voidwing_g/video/7704383960079518994"}, "status": "released"},
@@ -590,7 +644,7 @@ const T = {
     t5:"ใครเห็นมอดบ้าง", t5a:"มอดเปลี่ยนสิ่งที่เห็นและได้ยินบนเครื่องคุณ คนอื่นในแมตช์ไม่เห็นมอดของคุณ",
     comTag:"ชุมชน", comTitle:"ขอมอด / สนับสนุน / ติดตาม",
     reqT:"อยากให้ทำตัวละครไหน", reqP:"บอกตัวละคร สกิลที่อยากเห็น และรูปอ้างอิง ไม่รับประกันว่าจะทำทุกคำขอ", reqA:"ส่งคำขอ",
-    supT:"สนับสนุนช่อง", supP:"มอดแจกฟรีเสมอ การสนับสนุนเป็นทิปให้กำลังใจเท่านั้น", supA:"สนับสนุน",
+    goalTag:"เป้าหมายช่อง", goalTitle:"ครบ {goal} ผู้ติดตาม = ปล่อย {mod}", goalTitleDone:"ครบ {goal} แล้ว! {mod} เปิดให้โหลดเร็วๆ นี้", goalSub:"นับ {how} ช่วยกดติดตามเพื่อปลดล็อก", goalOf:"{cur} / {goal} ผู้ติดตาม", goalLeft:"เหลืออีก {n} คน", goalUpd:"อัปเดต {date}", followTt:"ติดตาม TikTok", followYt:"ติดตาม YouTube", navTesters:"ผู้ทดสอบ", testTag:"TESTED BY", testTitle:"ผู้ทดสอบและสตรีมเมอร์", testSub:"คนที่ลองเล่นมอดของ VoidWing ก่อนเปิดตัว ขอบคุณที่ช่วยทดสอบและแนะนำให้คนอื่นรู้จัก", testedLabel:"ลองเล่น", anaNote:"เว็บนี้นับจำนวนผู้เข้าชมแบบไม่ใช้คุกกี้ (GoatCounter)", supT:"สนับสนุนช่อง", supP:"มอดแจกฟรีเสมอ การสนับสนุนเป็นทิปให้กำลังใจเท่านั้น", supA:"สนับสนุน",
     folT:"ติดตามช่อง", folP:"คลิปสกิล มอดใหม่ และสตรีม",
     disc:"VoidWing mods เป็นงาน fan-made ไม่เกี่ยวข้องกับ Juvio หรือ Heroes of Newerth ตัวละครและชื่อเป็นของเจ้าของลิขสิทธิ์เดิม"
   },
@@ -618,7 +672,7 @@ const T = {
     t5:"Who sees the mod?", t5a:"A mod changes what you see and hear on your own PC. Other players in the match don't see it.",
     comTag:"COMMUNITY", comTitle:"Request / support / follow",
     reqT:"Want a character made?", reqP:"Tell me the character, the skills you'd like to see and reference pictures. Not every request will be made.", reqA:"Send a request",
-    supT:"Support the channel", supP:"Mods are always free. Support is an optional tip, nothing more.", supA:"Support",
+    goalTag:"CHANNEL GOAL", goalTitle:"{goal} followers = {mod} is released", goalTitleDone:"{goal} reached! {mod} opens for download soon", goalSub:"Counting {how}. Follow to help unlock it.", goalOf:"{cur} / {goal} followers", goalLeft:"{n} to go", goalUpd:"updated {date}", followTt:"Follow on TikTok", followYt:"Follow on YouTube", navTesters:"Testers", testTag:"TESTED BY", testTitle:"Testers and streamers", testSub:"People who played VoidWing mods before release. Thank you for testing and for spreading the word.", testedLabel:"Played", anaNote:"This site counts visits without cookies (GoatCounter)", supT:"Support the channel", supP:"Mods are always free. Support is an optional tip, nothing more.", supA:"Support",
     folT:"Follow the channel", folP:"Skill clips, new mods and streams",
     disc:"VoidWing mods are fan-made and not affiliated with Juvio or Heroes of Newerth. Characters and names belong to their original owners."
   }
@@ -873,6 +927,48 @@ const ST_KEY = { released: "stReleased", beta: "stBeta", in_dev: "stDev", soon: 
 function statusChip(st) {
   const c = el("span", "chip st st-" + st); c.append(el("i"), document.createTextNode(t(ST_KEY[st] || "stDev"))); c.dataset.status = st; return c;
 }
+function renderGoal() {
+  const g = CONFIG.milestone, sec = document.getElementById("goal");
+  const goal = g && +g.goal, cur = g && Math.max(0, +g.current || 0);
+  const ok = !!g && goal > 0 && isFinite(goal) && isFinite(cur);
+  sec.hidden = !ok;
+  if (!ok) return;
+  const done = cur >= goal, pct = Math.min(100, Math.round(cur / goal * 100)), nf = (n) => n.toLocaleString(lang === "th" ? "th-TH" : "en-GB");
+  const how = pick(g.count) || "", mod = g.unlock || "";
+  sec.classList.toggle("done", done);
+  const img = document.getElementById("goalImg"); img.src = g.img || ""; document.getElementById("goalIc").hidden = !g.img;
+  document.getElementById("goalTitle").textContent = t(done ? "goalTitleDone" : "goalTitle", { goal: nf(goal), mod });
+  const sub = document.getElementById("goalSub"); sub.textContent = how && !done ? t("goalSub", { how }) : ""; sub.hidden = !sub.textContent;
+  const bar = document.getElementById("goalBar"); bar.setAttribute("aria-valuenow", String(pct)); bar.setAttribute("aria-label", t("goalOf", { cur: nf(cur), goal: nf(goal) }));
+  const fill = document.getElementById("goalFill"); fill.style.width = "0";
+  requestAnimationFrame(() => requestAnimationFrame(() => { fill.style.width = pct + "%"; }));
+  document.getElementById("goalOf").textContent = t("goalOf", { cur: nf(cur), goal: nf(goal) });
+  document.getElementById("goalLeft").textContent = done ? "" : t("goalLeft", { n: nf(goal - cur) });
+  const up = document.getElementById("goalUpd"); up.textContent = g.updated ? t("goalUpd", { date: fmtDate(g.updated) }) : "";
+}
+function renderTesters() {
+  const list = (CONFIG.testers || []).filter(x => x && x.name), sec = document.getElementById("testers"), nav = document.getElementById("navTesters");
+  sec.hidden = nav.hidden = !list.length;
+  const box = document.getElementById("testerList"); box.textContent = "";
+  for (const x of list) {
+    const url = /^https?:\/\//i.test(x.url || "") ? x.url : "";   // only http(s): no javascript: links from the data
+    const card = el(url ? "a" : "div", "tester");
+    if (url) { card.href = url; card.target = "_blank"; card.rel = "noopener noreferrer"; }
+    const av = el("span", "av", Array.from(String(x.name))[0].toUpperCase()); av.setAttribute("aria-hidden", "true");
+    const tx = el("span"); tx.appendChild(el("b", null, String(x.name)));
+    const mods = (x.mods || []).join(", "); if (mods) tx.appendChild(el("small", null, t("testedLabel") + " " + mods));
+    const nt = pick(x.note); if (nt) tx.appendChild(el("small", null, nt));
+    card.append(av, tx); box.appendChild(card);
+  }
+}
+/* optional visit counter: only when registry.json has analytics.goatcounter = "<site code>" (cookie-free; needs the user's own GoatCounter account) */
+function initAnalytics() {
+  const c = CONFIG.analytics && CONFIG.analytics.goatcounter;
+  if (!c || !/^[a-z0-9-]{2,40}$/.test(c) || document.querySelector("script[data-goatcounter]")) return;
+  const s = document.createElement("script"); s.async = true; s.src = "https://gc.zgo.at/count.js"; s.dataset.goatcounter = "https://" + c + ".goatcounter.com/count";
+  document.head.appendChild(s);
+  document.getElementById("anaNote").hidden = false;
+}
 function renderUpcoming() {
   const list = CONFIG.upcoming || [], sec = document.getElementById("upcoming"), nav = document.getElementById("navUpcoming");
   sec.hidden = nav.hidden = !list.length;
@@ -1035,7 +1131,7 @@ function apply() {
   document.querySelectorAll("[data-link]").forEach(setLink);
   document.querySelectorAll("#community .panel").forEach(c => { c.hidden = ![...c.querySelectorAll("[data-link]")].some(a => !a.hidden); });
   document.getElementById("modCount").textContent = CONFIG.mods.length + " " + t("count");
-  renderHero(); renderMods(); renderVote(); renderUpcoming(); renderShots();
+  renderHero(); renderMods(); renderVote(); renderUpcoming(); renderTesters(); renderGoal(); renderShots();
   document.querySelectorAll("#upcoming [data-link]").forEach(setLink);
 }
 
@@ -1110,7 +1206,7 @@ document.getElementById("lang").addEventListener("click", () => { lang = lang ==
 document.getElementById("q").addEventListener("input", renderMods);
 apply();
 hookEffects(document);
-revealOnRender = false;
+revealOnRender = false; initAnalytics();
 loadTally();
 spy();
 pauseHeroWhenHidden();
