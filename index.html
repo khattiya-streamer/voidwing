@@ -141,7 +141,7 @@ section{position:relative}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
 .snote{margin:0;color:#FFC97A;font-size:14px}
 .legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-.up-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:20px}
+.up-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),400px));justify-content:start;gap:20px}   /* a lone teaser stays card-sized instead of stretching across the page */
 .up{position:relative;display:flex;flex-direction:column;gap:12px;padding:16px;border-radius:18px;background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);transition:border-color .25s,transform .25s}
 .up:hover{border-color:var(--line2);transform:translateY(-3px)}
 .mystery{position:relative;overflow:hidden;border-radius:12px;aspect-ratio:4/3;background:radial-gradient(70% 80% at 50% 40%,#1A2547,#0A1020);display:flex;align-items:center;justify-content:center;border:1px solid var(--line)}
@@ -627,6 +627,7 @@ const CONFIG = {
   },
   hero: {"media": {"video": "video/hero/hero.mp4", "poster": "video/hero/hero.jpg", "loop": true}},
   steps: ["img/install/step-1.jpg", "img/install/step-2.jpg", "img/install/step-3.jpg", "img/install/step-4.jpg"],
+  upcoming: [{"id": "up1", "status": "in_dev", "name": null, "host": "Sand Wraith", "hint": {"th": "ชายชราที่ไม่มีใครกล้าขัด ไฟในดาบของเขาลุกมานับพันปี", "en": "An old man nobody dares to cross. The fire in his blade has burned for a thousand years."}, "progress": null, "eta": null, "silhouette": "img/teasers/up1.png"}],
   installVideo: {"video": "video/install/howto.mp4", "poster": "video/install/howto.jpg"},
   milestone: {"goal": 1000, "current": 350, "unlock": "Shanks", "img": "img/shanks.png", "count": {"th": "ผู้ติดตามรวมทุกช่อง (TikTok + YouTube)", "en": "followers across all channels (TikTok + YouTube)"}, "updated": "2026-11-05"},
   mods: [
