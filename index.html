@@ -194,6 +194,25 @@ section{position:relative}
 .past ol{margin:0 0 16px;padding-left:22px;color:#C7D3E8;display:flex;flex-direction:column;gap:4px}
 .past li.w{color:#8FF2E8;font-weight:700}
 
+/* community wishlist (requests the owner approved; data = CONFIG.wishes) */
+.wish-bar{display:flex;flex-wrap:wrap;align-items:center;gap:12px 14px;margin-bottom:22px}
+.wish-bar .chip.count{background:rgba(143,123,255,.12);border-color:rgba(143,123,255,.55);color:#C9BFFF;font-weight:700}
+.wishes{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:16px}
+.wish{--h:200;position:relative;display:flex;flex-direction:column;gap:12px;padding:18px 18px 16px;border-radius:20px;background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);overflow:hidden;transition:border-color .25s,transform .25s,box-shadow .25s}
+.wish::before{content:"";position:absolute;inset:-1px -1px auto -1px;height:4px;background:linear-gradient(90deg,hsl(var(--h) 85% 62%),hsl(calc(var(--h) + 60) 85% 66%))}
+.wish::after{content:"";position:absolute;right:-60px;top:-60px;width:170px;height:170px;border-radius:50%;background:radial-gradient(circle,hsl(var(--h) 85% 60% / .22),transparent 68%);pointer-events:none}
+.wish:hover{border-color:hsl(var(--h) 70% 60% / .7);transform:translateY(-3px);box-shadow:0 14px 34px -16px hsl(var(--h) 85% 55% / .55)}
+.wish-top{display:flex;align-items:center;gap:12px;position:relative;z-index:1}
+.wish-ava{flex:0 0 auto;width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:22px;color:#061018;background:linear-gradient(135deg,hsl(var(--h) 85% 62%),hsl(calc(var(--h) + 60) 85% 68%))}
+.wish-name{font-family:var(--display);font-weight:700;font-size:20px;line-height:1.15;overflow-wrap:anywhere}
+.wish-host{font-size:13px;color:#8EA0C2;margin-top:2px}
+.wish-skills{margin:0;color:#C7D3E8;font-size:15px;line-height:1.55;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;position:relative;z-index:1}
+.wish-skills.none{color:var(--muted);font-style:italic}
+.wish-foot{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:auto;position:relative;z-index:1}
+.wish-foot .by{font-size:13px;color:var(--muted)}
+.wish-foot .chip.hot{background:rgba(255,181,71,.12);border-color:rgba(255,181,71,.55);color:#FFC97A;font-weight:700}
+.wish-more{margin-top:18px}
+@media (prefers-reduced-motion:reduce){.wish{transition:none}.wish:hover{transform:none}}
 
 
 /* "before you start" callout + help/contact cards */
@@ -385,6 +404,7 @@ footer p{margin:0;max-width:660px}
     <div class="label" data-i="menu">เมนู</div>
     <a href="#mods" data-sec="mods" data-i="navMods">มอดทั้งหมด</a>
     <a href="#vote" data-sec="vote" id="navVote" data-i="navVote" hidden>โหวตมอด</a>
+    <a href="#wishes" data-sec="wishes" id="navWishes" data-i="navWish" hidden>คำขอชุมชน</a>
     <a href="#upcoming" data-sec="upcoming" id="navUpcoming" data-i="navUpcoming" hidden>เร็วๆ นี้</a>
     <a href="#testers" data-sec="testers" id="navTesters" data-i="navTesters" hidden>ผู้ทดสอบ</a>
     <a href="#install" data-sec="install" data-i="navInstall">วิธีติดตั้ง</a>
@@ -467,6 +487,24 @@ footer p{margin:0;max-width:660px}
         <h3 class="h3" data-i="pastTitle">รอบที่ผ่านมา</h3>
         <div id="votePast"></div>
       </div>
+    </div>
+  </section>
+
+  <section id="wishes" class="sec" aria-labelledby="wishTitle" hidden>
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <div>
+          <div class="eyebrow" data-i="wishTag">WISHLIST</div>
+          <h2 id="wishTitle" data-i="wishTitle">ตัวละครที่ชุมชนอยากได้</h2>
+          <p data-i="wishSub">คำขอที่ส่งมาและผ่านการคัดแล้ว ยังไม่ใช่สัญญาว่าจะทำทุกตัว ตัวที่คนขอเยอะจะถูกเลือกเข้ารอบโหวต</p>
+        </div>
+      </div>
+      <div class="wish-bar">
+        <span class="chip count" id="wishCount"></span>
+        <a class="btn" data-link="request" data-i="wishCta">ส่งคำขอของคุณ</a>
+      </div>
+      <div class="wishes" id="wishList"></div>
+      <button type="button" class="btn ghost wish-more" id="wishMore" hidden>ดูทั้งหมด</button>
     </div>
   </section>
 
@@ -628,8 +666,9 @@ const CONFIG = {
   hero: {"media": {"video": "video/hero/hero.mp4", "poster": "video/hero/hero.jpg", "loop": true}},
   steps: ["img/install/step-1.jpg", "img/install/step-2.jpg", "img/install/step-3.jpg", "img/install/step-4.jpg"],
   upcoming: [{"id": "up1", "status": "in_dev", "name": null, "host": "Sand Wraith", "hint": {"th": "ชายชราที่ไม่มีใครกล้าขัด ไฟในดาบของเขาลุกมานับพันปี", "en": "An old man nobody dares to cross. The fire in his blade has burned for a thousand years."}, "progress": null, "eta": null, "silhouette": "img/teasers/up1.png"}],
+  wishes: {"csv": "", "items": []},
   installVideo: {"video": "video/install/howto.mp4", "poster": "video/install/howto.jpg"},
-  milestone: {"goal": 600, "current": 441, "unlock": "Shanks", "img": "img/shanks.png", "count": {"th": "ผู้ติดตามรวมทุกช่อง (TikTok + YouTube)", "en": "followers across all channels (TikTok + YouTube)"}, "updated": "2026-11-06"},
+  milestone: {"goal": 600, "current": 518, "unlock": "Shanks", "img": "img/shanks.png", "count": {"th": "ผู้ติดตามรวมทุกช่อง (TikTok + YouTube)", "en": "followers across all channels (TikTok + YouTube)"}, "updated": "2026-11-07"},
   mods: [
     {"name": "Aizen Sosuke", "host": "Kinesis", "version": "1.2.105", "img": "img/aizen.png", "download": "https://github.com/khattiya-streamer/voidwing/releases/download/aizen-v1.2.105/Aizen_Kinesis_v1.2.105.honmod", "trailer": {"video": "video/aizen/overview.mp4", "poster": "video/aizen/overview.jpg"}, "skills": {"q": {"media": "img/skills/aizen-q.png", "name": "Kurohitsugi", "note": {"th": "Hado 90 โลงดำ ขังศัตรูไว้ในโลงแล้วระเบิด", "en": "Hado 90: a black coffin traps the target, then shatters"}, "clip": {"video": "video/aizen/skill-q-l.mp4", "preview": "video/aizen/skill-q.mp4", "poster": "video/aizen/skill-q.jpg"}}, "w": {"media": "img/skills/aizen-w.png", "name": "Rikujokoro", "note": {"th": "Bakudo 61 แท่งแสงหกแท่งตรึงเป้าหมาย", "en": "Bakudo 61: six rods of light pin the target"}, "clip": {"video": "video/aizen/skill-w-l.mp4", "preview": "video/aizen/skill-w.mp4", "poster": "video/aizen/skill-w.jpg"}}, "e": {"media": "img/skills/aizen-e.png", "name": "Danku", "note": {"th": "Bakudo 81 กำแพงกระจกกันการโจมตี", "en": "Bakudo 81: a glass wall that blocks attacks"}, "clip": {"video": "video/aizen/skill-e-l.mp4", "preview": "video/aizen/skill-e.mp4", "poster": "video/aizen/skill-e.jpg"}}, "r": {"media": "img/skills/aizen-r.png", "name": "Goryutenmetsu", "note": {"th": "Hado 99 มังกรพลังงานพุ่งใส่ทั้งบริเวณ", "en": "Hado 99: energy dragons strike the whole area"}, "clip": {"video": "video/aizen/skill-r-l.mp4", "preview": "video/aizen/skill-r.mp4", "poster": "video/aizen/skill-r.jpg"}}}, "watch": {"youtube": "https://youtube.com/shorts/GxIa0Cao5fg", "tiktok": "https://www.tiktok.com/@voidwing_g/video/7704361760513445127"}, "status": "released"},
     {"name": "Jin Mori", "host": "Monkey King", "version": "0.6.75", "img": "img/jin-mori.png", "download": "https://github.com/khattiya-streamer/voidwing/releases/download/jin-mori-v0.6.75/Jin_Mori__Monkey_King_v0.6.75.honmod", "trailer": {"video": "video/jin-mori/overview.mp4", "poster": "video/jin-mori/overview.jpg"}, "skills": {"q": {"media": "img/skills/jin-mori-q.png", "name": "Illusive Dash", "note": {"th": "พุ่งไปข้างหน้า ทิ้งเงาค้างไว้เบื้องหลัง", "en": "Dash forward, leaving shadows behind"}, "clip": {"video": "video/jin-mori/skill-q-l.mp4", "preview": "video/jin-mori/skill-q.mp4", "poster": "video/jin-mori/skill-q.jpg"}}, "w": {"media": "img/skills/jin-mori-w.png", "name": "Heavenly Vault", "note": {"th": "กระโดดสูงแล้วลงพื้นแตกเป็นหลุม", "en": "Leap high and land in a cracked crater"}, "clip": {"video": "video/jin-mori/skill-w-l.mp4", "preview": "video/jin-mori/skill-w.mp4", "poster": "video/jin-mori/skill-w.jpg"}}, "e": {"media": "img/skills/jin-mori-e.png", "name": "Wan Jin Slam", "note": {"th": "กระบองสายฟ้ายักษ์ปักพื้นแล้วระเบิด", "en": "A giant lightning staff plunges down and erupts"}, "clip": {"video": "video/jin-mori/skill-e-l.mp4", "preview": "video/jin-mori/skill-e.mp4", "poster": "video/jin-mori/skill-e.jpg"}}, "r": {"media": "img/skills/jin-mori-r.png", "name": "Flying Nimbus", "note": {"th": "เรียกเมฆทองมาขี่", "en": "Summon a golden cloud and ride it"}, "clip": {"video": "video/jin-mori/skill-r-l.mp4", "preview": "video/jin-mori/skill-r.mp4", "poster": "video/jin-mori/skill-r.jpg"}}}, "watch": {"youtube": "https://youtube.com/shorts/sKuzXIVzmRM", "tiktok": "https://www.tiktok.com/@voidwing_g/video/7704383960079518994"}, "status": "released"},
@@ -647,6 +686,7 @@ const T = {
     gameTag:"HEROES OF NEWERTH", modsTitle:"มอดทั้งหมด", modsSub:"ทุกตัวแจกฟรี โหลดไฟล์เดียว ติดตั้งผ่าน Mod Launcher", search:"ค้นหา", searchPh:"ชื่อตัวละคร / ฮีโร่",
     host:"ฮีโร่ฐาน", download:"โหลดมอด", soon:"เร็วๆ นี้", count:"มอด", none:"ไม่พบมอดที่ค้นหา", ver:"เวอร์ชัน",
     callTitle:"ก่อนเริ่ม: ต้องมี HoN Reborn - Mod Launcher", callText:"HoN Reborn - Mod Launcher คือโปรแกรมติดตั้งมอดฟรีที่ชุมชนทำขึ้น (ไม่ใช่ของ VoidWing) ติดตั้งก่อน แล้วค่อยเพิ่มไฟล์ .honmod ที่โหลดจากหน้านี้", callGet:"ดาวน์โหลด Mod Launcher", callCom:"เข้า HoN Reborn Discord", comFTitle:"HoN Reborn Discord", comFText:"พูดคุย • แจ้งบั๊ก • ขอ Mod • ติดตามอัปเดต", fbTitle:"กลุ่ม Facebook VoidWing", fbText:"ถามวิธีติดตั้ง • แจ้งบั๊ก • เสนอตัวละคร • โชว์คลิปที่คุณเล่น", fbBtn:"เข้ากลุ่ม Facebook", comFBtn:"เข้า HoN Reborn Discord", ctTitle:"ติดต่อ", ctText:"ถามเรื่องมอด ปัญหาการติดตั้ง หรืองานร่วมกัน ทักได้ที่นี่ (หรือ DM ที่ TikTok / YouTube)", ctEmail:"อีเมล",
+    navWish:"คำขอชุมชน", wishTag:"WISHLIST", wishTitle:"ตัวละครที่ชุมชนอยากได้", wishSub:"คำขอที่ส่งมาและผ่านการคัดแล้ว ยังไม่ใช่สัญญาว่าจะทำทุกตัว ตัวที่คนขอเยอะจะถูกเลือกเข้ารอบโหวต", wishCta:"ส่งคำขอของคุณ", wishCount:"{n} ตัวละคร · {m} คำขอ", wishBy:"ขอโดย", wishBase:"บน", wishHot:"{n} คนขอ", wishNoSkills:"ยังไม่ได้ระบุสกิล", wishAll:"ดูทั้งหมด ({n})", wishLess:"แสดงน้อยลง",
     navVote:"โหวตมอด", voteTag:"VOTE", voteTitle:"โหวตมอดตัวต่อไป", voteSub:"ทุกรอบคัดตัวเลือกจากคำขอที่ส่งมา โหวตได้รอบละ 1 สัปดาห์ 3 อันดับแรกเข้าคิวที่จะทำแน่นอน (ยังไม่ระบุวันเสร็จ)", queueTitle:"คิวที่จะทำ", queueSub:"ตัวละครที่ชนะโหวตแล้ว เข้ารายการที่จะทำแน่นอน ลำดับการทำและวันเสร็จจะแจ้งอีกที", pastTitle:"รอบที่ผ่านมา", roundNow:"รอบนี้", roundEnds:"ปิดโหวต", leftDH:"เหลือ {d} วัน {h} ชม.", leftHM:"เหลือ {h} ชม. {m} นาที", leftM:"เหลือ {m} นาที", roundClosed:"ปิดโหวตแล้ว รอประกาศผล", votesWord:"โหวต", voteBtn:"โหวตเลย", voteReqBtn:"ส่งคำขอใหม่", voteTop3:"อันดับ 1-3 ตอนนี้ = เข้าคิวที่จะทำ", voteNoVotes:"ยังไม่มีโหวต", voteNote:"คะแนนอัปเดตเป็นระยะ ไม่ใช่ทันที", winnerWord:"เข้าคิว", topNow:"ติด 3 อันดับแรก", roundOf:"จบ", queueRound:"จากรอบ", stReleased:"พร้อมโหลด", stBeta:"ทดสอบ (Beta)", stDev:"กำลังพัฒนา", stSoon:"ใกล้เสร็จ", stTeaser:"แอบใบ้", notReady:"ยังไม่พร้อมโหลด", navUpcoming:"เร็วๆ นี้", upTag:"COMING SOON", upTitle:"กำลังจะมา", upSub:"ตัวละครที่กำลังทำอยู่ ใบ้ให้ดูก่อน เดาออกไหม?", hintLabel:"คำใบ้", hintPh:"[คำใบ้: บอกใบ้ตัวละครแบบไม่เฉลย 1-2 บรรทัด]", unknownName:"???", hostUnknown:"ฮีโร่ฐาน: ???", progressLabel:"ความคืบหน้า", etaLabel:"คาดว่า", followFirst:"อยากรู้ก่อนใคร:",
     watchYt:"ดูคลิปเต็มบน YouTube", watchTt:"ดูบน TikTok", tab3d:"3D", tabClip:"คลิป", view3d:"ดูโมเดล 3D", loading3d:"กำลังโหลดโมเดล...", err3d:"โหลดโมเดลไม่สำเร็จ ลองใหม่อีกครั้ง", hint3d:"ลากเพื่อหมุน · ท่ายืนในเกม", modelAlt:"โมเดล 3D ของ {name} (ท่ายืนในเกม)",
     descPh:"[คำอธิบายมอด: จุดเด่นและสกิล 1-2 บรรทัด]", trailerPh:"[คลิปตัวอย่างมอด {name}]", skillsTitle:"สกิล", skillHint:"กดที่สกิลเพื่อดูคลิป", playSkill:"ดูคลิปสกิล {k}: {name}", closeBtn:"ปิด", zoomShot:"ขยายภาพขั้นที่ {n}", prevBtn:"สกิลก่อนหน้า", nextBtn:"สกิลถัดไป", skillPh:"[คลิปสกิล {k}]", galleryTitle:"ภาพในเกม", galleryPh:"[ภาพ {n}]",
@@ -675,6 +715,7 @@ const T = {
     gameTag:"HEROES OF NEWERTH", modsTitle:"All mods", modsSub:"All free. One file each, installed through Mod Launcher.", search:"Search", searchPh:"Character / hero",
     host:"Base hero", download:"Download", soon:"Coming soon", count:"mods", none:"No mod matches your search", ver:"Version",
     callTitle:"Before you start: you need HoN Reborn - Mod Launcher", callText:"HoN Reborn - Mod Launcher is the free mod installer made by the community (not by VoidWing). Install it first, then add the .honmod file you download here.", callGet:"Download Mod Launcher", callCom:"Join HoN Reborn Discord", comFTitle:"HoN Reborn Discord", comFText:"Chat • Report bugs • Request mods • Follow updates", fbTitle:"VoidWing Facebook group", fbText:"Install help, bug reports, character ideas, and clips from players", fbBtn:"Join the Facebook group", comFBtn:"Join HoN Reborn Discord", ctTitle:"Contact", ctText:"Questions about a mod, install problems or collaboration: reach out here (or DM on TikTok / YouTube).", ctEmail:"Email",
+    navWish:"Wishlist", wishTag:"WISHLIST", wishTitle:"Characters the community wants", wishSub:"Requests that were sent in and approved. Not a promise to make every one; the most requested go into the vote rounds.", wishCta:"Send your request", wishCount:"{n} characters · {m} requests", wishBy:"Requested by", wishBase:"on", wishHot:"{n} requests", wishNoSkills:"No skills listed", wishAll:"Show all ({n})", wishLess:"Show less",
     navVote:"Vote", voteTag:"VOTE", voteTitle:"Vote for the next mod", voteSub:"Each round is a short list picked from the requests I get. Voting stays open for 1 week; the top 3 go into the queue of mods that will be made (no release date promised).", queueTitle:"Queue", queueSub:"Characters that won a vote and are now on the list of mods that will be made. Order and release dates will be announced later.", pastTitle:"Past rounds", roundNow:"This round", roundEnds:"Closes", leftDH:"{d} d {h} h left", leftHM:"{h} h {m} min left", leftM:"{m} min left", roundClosed:"Voting closed, results coming", votesWord:"votes", voteBtn:"Vote now", voteReqBtn:"Request another", voteTop3:"Current top 3 = into the queue", voteNoVotes:"No votes yet", voteNote:"Counts refresh periodically, not instantly.", winnerWord:"In the queue", topNow:"In the top 3", roundOf:"ended", queueRound:"from", stReleased:"Available", stBeta:"Beta", stDev:"In development", stSoon:"Almost ready", stTeaser:"Teaser", notReady:"Not ready yet", navUpcoming:"Coming soon", upTag:"COMING SOON", upTitle:"Coming soon", upSub:"Characters in the works. A hint first: can you guess who?", hintLabel:"HINT", hintPh:"[Hint: a clue about the character without naming them, 1-2 lines]", unknownName:"???", hostUnknown:"Base hero: ???", progressLabel:"Progress", etaLabel:"Expected", followFirst:"Be the first to know:",
     watchYt:"Watch the full video on YouTube", watchTt:"Watch on TikTok", tab3d:"3D", tabClip:"Clip", view3d:"View 3D model", loading3d:"Loading model...", err3d:"Could not load the model, try again", hint3d:"Drag to rotate · in-game idle", modelAlt:"3D model of {name} (in-game idle pose)",
     descPh:"[Mod description: highlights and skills, 1-2 lines]", trailerPh:"[{name} trailer clip]", skillsTitle:"Skills", skillHint:"Tap a skill to watch its clip", playSkill:"Watch skill {k} clip: {name}", closeBtn:"Close", zoomShot:"Enlarge step {n} screenshot", prevBtn:"Previous skill", nextBtn:"Next skill", skillPh:"[Skill {k} clip]", galleryTitle:"In-game shots", galleryPh:"[Shot {n}]",
@@ -1124,6 +1165,75 @@ async function loadTally() {
     if (hit) renderVote();
   } catch (e) { /* offline / blocked: keep registry numbers */ }
 }
+
+/* ---- community wishlist: CONFIG.wishes = {csv: published CSV of the 'public' tab (round, character, skills, nickname, base hero), items: fallback rows}. Only textContent is used: sheet text is untrusted. ---- */
+let wishRows = null, wishAll = false;
+function parseCsv(text) {
+  const rows = []; let row = [], cur = "", q = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (q) { if (c === '"') { if (text[i + 1] === '"') { cur += '"'; i++; } else q = false; } else cur += c; }
+    else if (c === '"') q = true;
+    else if (c === ",") { row.push(cur); cur = ""; }
+    else if (c === "\n") { row.push(cur); rows.push(row); row = []; cur = ""; }
+    else if (c !== "\r") cur += c;
+  }
+  if (cur || row.length) { row.push(cur); rows.push(row); }
+  return rows;
+}
+const clip = (v, n) => { v = String(v == null ? "" : v).replace(/\s+/g, " ").trim(); return v.length > n ? v.slice(0, n - 1) + "…" : v; };
+function wishHue(name) { let h = 0; for (const ch of name.toLowerCase()) h = (h * 31 + ch.codePointAt(0)) % 360; return h; }
+function groupWishes(items) {
+  const m = new Map();
+  for (const it of items) {
+    const name = clip(it.name, 60); if (!name) continue;
+    const k = name.toLowerCase(); let g = m.get(k);
+    if (!g) { g = { name, host: clip(it.host, 40), skills: "", by: [], n: 0 }; m.set(k, g); }
+    g.n++;
+    const sk = clip(it.skills, 320); if (sk && sk.length > g.skills.length) g.skills = sk;
+    const by = clip(it.by, 30); if (by && !g.by.includes(by)) g.by.push(by);
+    if (!g.host) g.host = clip(it.host, 40);
+  }
+  return [...m.values()].sort((a, b) => b.n - a.n || a.name.localeCompare(b.name));
+}
+function renderWishes() {
+  const W = CONFIG.wishes || {}, items = wishRows || W.items || [];
+  const groups = groupWishes(items);
+  const sec = document.getElementById("wishes"), nav = document.getElementById("navWishes");
+  sec.hidden = nav.hidden = !groups.length;
+  if (!groups.length) return;
+  document.getElementById("wishCount").textContent = t("wishCount", { n: groups.length, m: groups.reduce((s2, g) => s2 + g.n, 0) });
+  const list = document.getElementById("wishList"); list.textContent = "";
+  const LIMIT = 6, shown = wishAll ? groups : groups.slice(0, LIMIT);
+  shown.forEach((g) => {
+    const card = el("article", "wish"); card.style.setProperty("--h", wishHue(g.name));
+    if (revealOnRender) card.setAttribute("data-reveal", ""); else card.classList.add("in");
+    const top = el("div", "wish-top");
+    top.appendChild(el("div", "wish-ava", [...g.name][0].toUpperCase()));
+    const tt = el("div"); tt.appendChild(el("div", "wish-name", g.name));
+    if (g.host) tt.appendChild(el("div", "wish-host", t("wishBase") + " " + g.host));
+    top.appendChild(tt); card.appendChild(top);
+    card.appendChild(el("p", "wish-skills" + (g.skills ? "" : " none"), g.skills || t("wishNoSkills")));
+    const foot = el("div", "wish-foot");
+    if (g.n > 1) foot.appendChild(el("span", "chip hot", "🔥 " + t("wishHot", { n: g.n })));
+    if (g.by.length) foot.appendChild(el("span", "by", t("wishBy") + " " + g.by.slice(0, 3).join(", ") + (g.by.length > 3 ? " +" + (g.by.length - 3) : "")));
+    card.appendChild(foot); list.appendChild(card);
+  });
+  const more = document.getElementById("wishMore"); more.hidden = groups.length <= LIMIT;
+  more.textContent = wishAll ? t("wishLess") : t("wishAll", { n: groups.length });
+  hookEffects(list);
+}
+document.getElementById("wishMore").addEventListener("click", () => { wishAll = !wishAll; renderWishes(); });
+async function loadWishes() {
+  const W = CONFIG.wishes || {};
+  if (!W.csv) return;
+  try {
+    const res = await fetch(W.csv, { cache: "no-store" }); if (!res.ok) return;
+    const rows = parseCsv(await res.text()).slice(1).filter(r => r.length > 1 && (r[1] || "").trim());
+    wishRows = rows.map(r => ({ round: r[0], name: r[1], skills: r[2], by: r[3], host: r[4] }));
+    renderWishes();
+  } catch (e) { /* offline / blocked: keep the fallback rows */ }
+}
 function renderMods() {
   const q = document.getElementById("q").value.trim().toLowerCase();
   const list = document.getElementById("modList"); list.textContent = "";
@@ -1159,7 +1269,7 @@ function apply() {
   document.querySelectorAll("[data-link]").forEach(setLink);
   document.querySelectorAll("#community .panel").forEach(c => { c.hidden = ![...c.querySelectorAll("[data-link]")].some(a => !a.hidden); });
   document.getElementById("modCount").textContent = CONFIG.mods.length + " " + t("count");
-  renderHero(); renderMods(); renderVote(); renderUpcoming(); renderTesters(); renderGoal(); renderHowto(); renderShots();
+  renderHero(); renderMods(); renderVote(); renderWishes(); renderUpcoming(); renderTesters(); renderGoal(); renderHowto(); renderShots();
   document.querySelectorAll("#upcoming [data-link]").forEach(setLink);
 }
 
@@ -1236,6 +1346,7 @@ apply();
 hookEffects(document);
 revealOnRender = false; initAnalytics();
 loadTally();
+loadWishes();
 spy();
 pauseHeroWhenHidden();
 if (!reduced) {
