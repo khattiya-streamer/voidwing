@@ -319,6 +319,7 @@ dialog.lb::backdrop{background:rgba(3,5,12,.82);backdrop-filter:blur(4px)}
 .gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 .dl{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:6px}
 .dl small{color:#8394B5}
+.dl .dlc{margin-left:auto;color:#9FB0CE;font-size:14px;font-weight:600;white-space:nowrap}
 
 /* glow panel + reveal */
 .glow{position:relative}
@@ -684,7 +685,7 @@ const T = {
     eyebrow:"MOD CHANNEL · แจกฟรีทุกตัว", lead:"มอดฮีโร่ Heroes of Newerth ที่ทำเอง โมเดล สกิล เอฟเฟกต์ และเสียง ติดตั้งผ่าน HoN Reborn - Mod Launcher ไม่ถึง 2 นาที",
     ctaMods:"ดูมอดทั้งหมด", ctaInstall:"วิธีติดตั้ง 4 ขั้น", heroSlot:"[คลิปรวมมอดทั้งหมด 15-30 วินาที วางตรงนี้]",
     gameTag:"HEROES OF NEWERTH", modsTitle:"มอดทั้งหมด", modsSub:"ทุกตัวแจกฟรี โหลดไฟล์เดียว ติดตั้งผ่าน Mod Launcher", search:"ค้นหา", searchPh:"ชื่อตัวละคร / ฮีโร่",
-    host:"ฮีโร่ฐาน", download:"โหลดมอด", soon:"เร็วๆ นี้", count:"มอด", none:"ไม่พบมอดที่ค้นหา", ver:"เวอร์ชัน",
+    host:"ฮีโร่ฐาน", download:"โหลดมอด", dlCount:"โหลดแล้ว {n} ครั้ง", soon:"เร็วๆ นี้", count:"มอด", none:"ไม่พบมอดที่ค้นหา", ver:"เวอร์ชัน",
     callTitle:"ก่อนเริ่ม: ต้องมี HoN Reborn - Mod Launcher", callText:"HoN Reborn - Mod Launcher คือโปรแกรมติดตั้งมอดฟรีที่ชุมชนทำขึ้น (ไม่ใช่ของ VoidWing) ติดตั้งก่อน แล้วค่อยเพิ่มไฟล์ .honmod ที่โหลดจากหน้านี้", callGet:"ดาวน์โหลด Mod Launcher", callCom:"เข้า HoN Reborn Discord", comFTitle:"HoN Reborn Discord", comFText:"พูดคุย • แจ้งบั๊ก • ขอ Mod • ติดตามอัปเดต", fbTitle:"กลุ่ม Facebook VoidWing", fbText:"ถามวิธีติดตั้ง • แจ้งบั๊ก • เสนอตัวละคร • โชว์คลิปที่คุณเล่น", fbBtn:"เข้ากลุ่ม Facebook", comFBtn:"เข้า HoN Reborn Discord", ctTitle:"ติดต่อ", ctText:"ถามเรื่องมอด ปัญหาการติดตั้ง หรืองานร่วมกัน ทักได้ที่นี่ (หรือ DM ที่ TikTok / YouTube)", ctEmail:"อีเมล",
     navWish:"คำขอชุมชน", wishTag:"WISHLIST", wishTitle:"ตัวละครที่ชุมชนอยากได้", wishSub:"คำขอที่ส่งมาและผ่านการคัดแล้ว ยังไม่ใช่สัญญาว่าจะทำทุกตัว ตัวที่คนขอเยอะจะถูกเลือกเข้ารอบโหวต", wishCta:"ส่งคำขอของคุณ", wishCount:"{n} ตัวละคร · {m} คำขอ", wishBy:"ขอโดย", wishBase:"บน", wishHot:"{n} คนขอ", wishNoSkills:"ยังไม่ได้ระบุสกิล", wishAll:"ดูทั้งหมด ({n})", wishLess:"แสดงน้อยลง",
     navVote:"โหวตมอด", voteTag:"VOTE", voteTitle:"โหวตมอดตัวต่อไป", voteSub:"ทุกรอบคัดตัวเลือกจากคำขอที่ส่งมา โหวตได้รอบละ 1 สัปดาห์ 3 อันดับแรกเข้าคิวที่จะทำแน่นอน (ยังไม่ระบุวันเสร็จ)", queueTitle:"คิวที่จะทำ", queueSub:"ตัวละครที่ชนะโหวตแล้ว เข้ารายการที่จะทำแน่นอน ลำดับการทำและวันเสร็จจะแจ้งอีกที", pastTitle:"รอบที่ผ่านมา", roundNow:"รอบนี้", roundEnds:"ปิดโหวต", leftDH:"เหลือ {d} วัน {h} ชม.", leftHM:"เหลือ {h} ชม. {m} นาที", leftM:"เหลือ {m} นาที", roundClosed:"ปิดโหวตแล้ว รอประกาศผล", votesWord:"โหวต", voteBtn:"โหวตเลย", voteReqBtn:"ส่งคำขอใหม่", voteTop3:"อันดับ 1-3 ตอนนี้ = เข้าคิวที่จะทำ", voteNoVotes:"ยังไม่มีโหวต", voteNote:"คะแนนอัปเดตเป็นระยะ ไม่ใช่ทันที", winnerWord:"เข้าคิว", topNow:"ติด 3 อันดับแรก", roundOf:"จบ", queueRound:"จากรอบ", stReleased:"พร้อมโหลด", stBeta:"ทดสอบ (Beta)", stDev:"กำลังพัฒนา", stSoon:"ใกล้เสร็จ", stTeaser:"แอบใบ้", notReady:"ยังไม่พร้อมโหลด", navUpcoming:"เร็วๆ นี้", upTag:"COMING SOON", upTitle:"กำลังจะมา", upSub:"ตัวละครที่กำลังทำอยู่ ใบ้ให้ดูก่อน เดาออกไหม?", hintLabel:"คำใบ้", hintPh:"[คำใบ้: บอกใบ้ตัวละครแบบไม่เฉลย 1-2 บรรทัด]", unknownName:"???", hostUnknown:"ฮีโร่ฐาน: ???", progressLabel:"ความคืบหน้า", etaLabel:"คาดว่า", followFirst:"อยากรู้ก่อนใคร:",
@@ -713,7 +714,7 @@ const T = {
     eyebrow:"MOD CHANNEL · ALWAYS FREE", lead:"Free hand-made hero mods for Heroes of Newerth: models, skills, effects and sounds. Installed through HoN Reborn - Mod Launcher in under 2 minutes.",
     ctaMods:"Browse mods", ctaInstall:"Install in 4 steps", heroSlot:"[Showreel clip of all mods, 15-30 s, goes here]",
     gameTag:"HEROES OF NEWERTH", modsTitle:"All mods", modsSub:"All free. One file each, installed through Mod Launcher.", search:"Search", searchPh:"Character / hero",
-    host:"Base hero", download:"Download", soon:"Coming soon", count:"mods", none:"No mod matches your search", ver:"Version",
+    host:"Base hero", download:"Download", dlCount:"{n} downloads", soon:"Coming soon", count:"mods", none:"No mod matches your search", ver:"Version",
     callTitle:"Before you start: you need HoN Reborn - Mod Launcher", callText:"HoN Reborn - Mod Launcher is the free mod installer made by the community (not by VoidWing). Install it first, then add the .honmod file you download here.", callGet:"Download Mod Launcher", callCom:"Join HoN Reborn Discord", comFTitle:"HoN Reborn Discord", comFText:"Chat • Report bugs • Request mods • Follow updates", fbTitle:"VoidWing Facebook group", fbText:"Install help, bug reports, character ideas, and clips from players", fbBtn:"Join the Facebook group", comFBtn:"Join HoN Reborn Discord", ctTitle:"Contact", ctText:"Questions about a mod, install problems or collaboration: reach out here (or DM on TikTok / YouTube).", ctEmail:"Email",
     navWish:"Wishlist", wishTag:"WISHLIST", wishTitle:"Characters the community wants", wishSub:"Requests that were sent in and approved. Not a promise to make every one; the most requested go into the vote rounds.", wishCta:"Send your request", wishCount:"{n} characters · {m} requests", wishBy:"Requested by", wishBase:"on", wishHot:"{n} requests", wishNoSkills:"No skills listed", wishAll:"Show all ({n})", wishLess:"Show less",
     navVote:"Vote", voteTag:"VOTE", voteTitle:"Vote for the next mod", voteSub:"Each round is a short list picked from the requests I get. Voting stays open for 1 week; the top 3 go into the queue of mods that will be made (no release date promised).", queueTitle:"Queue", queueSub:"Characters that won a vote and are now on the list of mods that will be made. Order and release dates will be announced later.", pastTitle:"Past rounds", roundNow:"This round", roundEnds:"Closes", leftDH:"{d} d {h} h left", leftHM:"{h} h {m} min left", leftM:"{m} min left", roundClosed:"Voting closed, results coming", votesWord:"votes", voteBtn:"Vote now", voteReqBtn:"Request another", voteTop3:"Current top 3 = into the queue", voteNoVotes:"No votes yet", voteNote:"Counts refresh periodically, not instantly.", winnerWord:"In the queue", topNow:"In the top 3", roundOf:"ended", queueRound:"from", stReleased:"Available", stBeta:"Beta", stDev:"In development", stSoon:"Almost ready", stTeaser:"Teaser", notReady:"Not ready yet", navUpcoming:"Coming soon", upTag:"COMING SOON", upTitle:"Coming soon", upSub:"Characters in the works. A hint first: can you guess who?", hintLabel:"HINT", hintPh:"[Hint: a clue about the character without naming them, 1-2 lines]", unknownName:"???", hostUnknown:"Base hero: ???", progressLabel:"Progress", etaLabel:"Expected", followFirst:"Be the first to know:",
@@ -978,6 +979,8 @@ function feature(m, i) {
   if (m.download && ready) { a.href = m.download; a.textContent = t("download"); a.setAttribute("download", ""); }
   else { a.setAttribute("aria-disabled", "true"); a.textContent = ready ? t("soon") : t("notReady"); }
   dl.append(a, el("small", null, ".honmod"));
+  const dn = dlTotal(m);
+  if (dn > 0 && ready) { const c = el("span", "dlc", "⬇ " + t("dlCount", { n: dn.toLocaleString(lang === "th" ? "th-TH" : "en-US") })); c.dataset.downloads = String(dn); dl.appendChild(c); }
   body.append(head, chips); if (desc) body.appendChild(desc); if (sn) body.appendChild(el("p", "snote", sn)); body.append(el("div", "h4", t("skillsTitle")), sk);
   if (SKILLS.some(k => m.skills && m.skills[k] && m.skills[k].clip)) body.appendChild(el("p", "skill-hint", t("skillHint")));
   body.appendChild(dl);
@@ -1234,6 +1237,30 @@ async function loadWishes() {
     renderWishes();
   } catch (e) { /* offline / blocked: keep the fallback rows */ }
 }
+/* ---- download counts: GitHub counts every Release asset download. Live from the public API (60 req/h per visitor IP, so cached 30 min in sessionStorage).
+   A mod's total = all releases whose tag is "<slug>-v<version>"; slug comes from the mod's download URL. Any failure = no counter shown. ---- */
+let dlCounts = null;
+const modSlug = (m) => { const x = /\/releases\/download\/([^/]+)\//.exec(m.download || ""); return x ? x[1].replace(/-v[\d.]+$/, "") : ""; };
+function dlTotal(m) { return (dlCounts && dlCounts[modSlug(m)]) || 0; }
+async function loadDownloads() {
+  const repo = CONFIG.repo || "khattiya-streamer/voidwing", KEY = "vw-dl-v1";
+  try {
+    const c = JSON.parse(sessionStorage.getItem(KEY) || "null");
+    if (c && Date.now() - c.at < 1800000) { dlCounts = c.counts; renderMods(); return; }
+  } catch (e) { /* storage blocked */ }
+  try {
+    const res = await fetch("https://api.github.com/repos/" + repo + "/releases?per_page=100", { headers: { Accept: "application/vnd.github+json" } });
+    if (!res.ok) return;
+    const counts = {};
+    for (const r of await res.json()) {
+      const slug = String(r.tag_name || "").replace(/-v[\d.]+$/, "");
+      for (const a of r.assets || []) if (/\.honmod$/i.test(a.name)) counts[slug] = (counts[slug] || 0) + (a.download_count || 0);
+    }
+    dlCounts = counts;
+    try { sessionStorage.setItem(KEY, JSON.stringify({ at: Date.now(), counts })); } catch (e) { /* ignore */ }
+    renderMods();
+  } catch (e) { /* offline / rate limited: no counter */ }
+}
 function renderMods() {
   const q = document.getElementById("q").value.trim().toLowerCase();
   const list = document.getElementById("modList"); list.textContent = "";
@@ -1347,6 +1374,7 @@ hookEffects(document);
 revealOnRender = false; initAnalytics();
 loadTally();
 loadWishes();
+loadDownloads();
 spy();
 pauseHeroWhenHidden();
 if (!reduced) {
