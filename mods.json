@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "mods": {
+    "aizen": {
+      "name": "Aizen Sosuke",
+      "version": "1.2.107",
+      "releaseTag": "aizen-v1.2.107",
+      "asset": "Aizen_Kinesis_v1.2.107.honmod",
+      "sha256": "9a9369a7dd848ffe4470458fd6ab8445f38d0676069b5ee440a1170bcfa97553",
+      "size": 15917868,
+      "notes": "VoidWing mod: Aizen Sosuke on Kinesis"
+    }
+  }
+}
