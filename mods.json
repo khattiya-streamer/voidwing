@@ -27,6 +27,15 @@
       "sha256": "1811d73629558be179b504d406a5985c57604422349825be02d5116dd96a4f71",
       "size": 17210826,
       "notes": "VoidWing mod: Yoruichi Shihouin on Silhouette"
+    },
+    "yamamoto": {
+      "name": "Yamamoto Genryusai",
+      "version": "0.7.31",
+      "releaseTag": "yamamoto-v0.7.31",
+      "asset": "Yamamoto_Genryusai_v0.7.31.honmod",
+      "sha256": "74b960ecdfb693b57da2dd535185642250fcd41044afba8328ec44833f80a362",
+      "size": 24275864,
+      "notes": "VoidWing mod: Yamamoto Genryusai on Sand Wraith"
     }
   }
 }
