@@ -18,6 +18,15 @@
       "sha256": "ce30ab2acc01c51a31b1f336d2ad2e9abb0aaf0005b44c6dd3053a582e797e67",
       "size": 14109668,
       "notes": "VoidWing mod: Jin Mori on Monkey King"
+    },
+    "yoruichi": {
+      "name": "Yoruichi Shihouin",
+      "version": "0.13.100",
+      "releaseTag": "yoruichi-v0.13.100",
+      "asset": "Yoruichi_Shihouin_v0.13.100.honmod",
+      "sha256": "1811d73629558be179b504d406a5985c57604422349825be02d5116dd96a4f71",
+      "size": 17210826,
+      "notes": "VoidWing mod: Yoruichi Shihouin on Silhouette"
     }
   }
 }
