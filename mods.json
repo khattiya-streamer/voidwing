@@ -9,6 +9,15 @@
       "sha256": "03ba67df296b8e36ee0f0abcf9dbb4f98933b92df5e4faaaf348fa465564257c",
       "size": 15917681,
       "notes": "VoidWing mod: Aizen Sosuke on Kinesis"
+    },
+    "jin-mori": {
+      "name": "Jin Mori",
+      "version": "0.6.77",
+      "releaseTag": "jin-mori-v0.6.77",
+      "asset": "Jin_Mori__Monkey_King_v0.6.77.honmod",
+      "sha256": "ce30ab2acc01c51a31b1f336d2ad2e9abb0aaf0005b44c6dd3053a582e797e67",
+      "size": 14109668,
+      "notes": "VoidWing mod: Jin Mori on Monkey King"
     }
   }
 }
