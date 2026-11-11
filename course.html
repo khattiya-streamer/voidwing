@@ -152,6 +152,9 @@ h1,h2,h3{font-family:var(--display);margin:0;line-height:1.15}
 .fmt .ic{font-size:30px}
 .fmt h3{font-size:21px;font-weight:700}
 .fmt p{margin:0;color:var(--muted);font-size:15px}
+.fmt .badge{align-self:flex-start;font-size:13px;font-weight:700;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.06);color:var(--muted);border:1px solid var(--line)}
+.fmt.open{border-color:var(--cyan);background:linear-gradient(180deg,rgba(53,224,208,.10),var(--panel))}
+.fmt.open .badge{background:rgba(53,224,208,.15);color:var(--cyan);border-color:rgba(53,224,208,.5)}
 .hire{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;margin-top:16px;padding:18px 22px;border-radius:16px;border:1px solid var(--line2);background:var(--panel)}
 .hire p{flex:1 1 320px;margin:0;color:#C7D3E8}
 .hire p b{color:#fff}
@@ -182,7 +185,7 @@ details p{margin:0 0 16px;color:var(--muted);font-size:16px;animation:fade .35s 
 .final > p{margin:14px auto 28px;max-width:560px;color:#C7D3E8;font-size:17px}
 .final .ctas{justify-content:center}
 .final .free{display:block;margin-top:14px;color:var(--muted);font-size:14px}
-.ask{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:40px;text-align:left}
+.ask{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:40px;text-align:left}
 .ask a{display:flex;align-items:center;gap:12px;min-height:64px;padding:12px 16px;border-radius:14px;background:rgba(6,9,18,.55);border:1px solid var(--line2);color:var(--ink);text-decoration:none;transition:border-color .2s,transform .2s}
 .ask a:hover{border-color:var(--cyan);transform:translateY(-2px);color:#fff}
 .ask .ic{flex:none;width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:#18223D;font-size:18px}
@@ -386,12 +389,12 @@ footer p{margin:0;max-width:680px}
       <div class="sec-head" data-reveal>
         <span class="eyebrow">FORMAT</span>
         <h2 id="fmtT">อยากเรียนแบบไหน บอกได้</h2>
-        <p>ยังไม่สรุปรูปแบบ เลือกแบบที่ใช่ในฟอร์มได้เลย ผมจะเปิดแบบที่คนเลือกเยอะที่สุดก่อน</p>
+        <p>รุ่นแรกเปิดแบบตัวต่อตัวแล้ว แบบกลุ่มกับคลิปอัดไว้จะเปิดเมื่อมีคนสนใจพอ เลือกแบบที่อยากได้ในฟอร์มไว้ได้เลย</p>
       </div>
       <div class="formats">
-        <div class="fmt" data-reveal><span class="ic" aria-hidden="true">🔴</span><h3>สอนสดเป็นกลุ่ม</h3><p>เรียนพร้อมกันใน Discord ทำตามไปทีละขั้น ติดตรงไหนถามได้ทันที</p></div>
-        <div class="fmt" data-reveal style="--d:.08s"><span class="ic" aria-hidden="true">🎬</span><h3>คลิปอัดไว้</h3><p>ดูเองตามเวลาสะดวก ย้อนดูได้ พร้อมเอกสารและ prompt ทุกขั้น</p></div>
-        <div class="fmt" data-reveal style="--d:.16s"><span class="ic" aria-hidden="true">🤝</span><h3>ตัวต่อตัว</h3><p>สอนบนเครื่องคุณ ทำตัวละครที่คุณอยากได้ไปด้วยกันจนเข้าเกม</p></div>
+        <div class="fmt" data-reveal><span class="ic" aria-hidden="true">🔴</span><span class="badge">เร็วๆ นี้</span><h3>สอนสดเป็นกลุ่ม</h3><p>เรียนพร้อมกันใน Discord ทำตามไปทีละขั้น ติดตรงไหนถามได้ทันที</p></div>
+        <div class="fmt" data-reveal style="--d:.08s"><span class="ic" aria-hidden="true">🎬</span><span class="badge">เร็วๆ นี้</span><h3>คลิปอัดไว้</h3><p>ดูเองตามเวลาสะดวก ย้อนดูได้ พร้อมเอกสารและ prompt ทุกขั้น</p></div>
+        <div class="fmt open" data-reveal style="--d:.16s"><span class="ic" aria-hidden="true">🤝</span><span class="badge">เปิดแล้ว · รุ่นแรก 1,990 บาท</span><h3>ตัวต่อตัว</h3><p>สอนสด 2 ครั้ง ครั้งละ 2 ชม. แชร์จอใน Discord ทำตัวละครที่คุณอยากได้จนเข้าเกม อัดคลิปให้ดูย้อนหลัง ติดตรงไหนถามได้ 30 วัน</p></div>
       </div>
       <div class="hire" data-reveal>
         <p><b>ไม่อยากเรียน แค่อยากได้ตัวละคร?</b> เลือก "อยากจ้างให้ทำ" ในฟอร์ม หรือทักมาคุยกันได้</p>
@@ -408,7 +411,7 @@ footer p{margin:0;max-width:680px}
       </div>
       <ol class="road">
         <li class="now" data-reveal><span class="tag">ตอนนี้</span><h3>1. ลงชื่อสนใจ</h3><p>กรอกฟอร์ม 1 นาที ยังไม่ต้องจ่ายเงิน</p></li>
-        <li data-reveal style="--d:.08s"><span class="tag">ถัดไป</span><h3>2. ประกาศรุ่นแรก</h3><p>ถ้าคนสนใจพอ ผมจะแจ้งราคา วันเรียน และรูปแบบให้คนที่ลงชื่อไว้ก่อน</p></li>
+        <li data-reveal style="--d:.08s"><span class="tag">ถัดไป</span><h3>2. นัดวันเรียน</h3><p>ตัวต่อตัวเปิดแล้ว ผมทักกลับไปนัดวัน ส่วนแบบกลุ่มจะแจ้งคนที่ลงชื่อไว้ก่อน</p></li>
         <li data-reveal style="--d:.16s"><span class="tag">จากนั้น</span><h3>3. จองที่นั่ง</h3><p>รุ่นแรกรับจำนวนจำกัด เพื่อดูแลทุกคนได้ทั่วถึง</p></li>
       </ol>
     </div>
@@ -425,7 +428,8 @@ footer p{margin:0;max-width:680px}
         <details><summary>ทำตัวละครอะไรก็ได้ไหม</summary><p>ได้ ตัวละครจากอนิเมะ เกม หรือออกแบบเองก็ได้ เลือกฮีโร่ใน HoN ที่ท่าทางใกล้เคียงเป็นตัวที่จะใส่แทน</p></details>
         <details><summary>คนอื่นในเกมเห็นตัวละครของเราไหม</summary><p>ม็อดเปลี่ยนสิ่งที่เห็นและได้ยินบนเครื่องของคุณ คนอื่นในแมตช์ไม่เห็นม็อดของคุณ ส่งไฟล์ให้เพื่อนติดตั้ง เพื่อนก็เห็นบนเครื่องเขาด้วย</p></details>
         <details><summary>ใช้ Mac ได้ไหม</summary><p>ตอนนี้วิธีที่สอนทดสอบบน Windows เท่านั้น ถ้าใช้ Mac ระบุไว้ในฟอร์มได้ ผมจะดูว่าทำได้ไหม</p></details>
-        <details><summary>ค่าคอร์สเท่าไหร่</summary><p>ยังไม่ประกาศ จะแจ้งคนที่ลงชื่อไว้ก่อน ในฟอร์มมีข้อให้เลือกงบที่สะดวก ช่วยให้ผมตั้งราคาให้เหมาะได้</p></details>
+        <details><summary>ค่าคอร์สเท่าไหร่</summary><p>ตัวต่อตัว รุ่นแรก 1,990 บาท (รุ่นต่อไป 2,990) รับแค่ 3-5 คน ค่า AI จ่ายแยกเอง ประมาณ 1,500-2,000 บาท/เดือน แบบกลุ่มกับคลิปอัดไว้จะถูกกว่านี้ จะแจ้งคนที่ลงชื่อไว้ก่อน</p></details>
+        <details><summary>อัดคลิปไว้ดูย้อนหลังได้ไหม</summary><p>ได้ ผมอัดให้ทุกครั้ง เรียนจบส่งลิงก์ให้ดูย้อนหลังได้เรื่อยๆ ขอให้เก็บไว้ดูเอง ไม่ส่งต่อ</p></details>
         <details><summary>ทำม็อดแล้วเอาไปแจกได้ไหม</summary><p>แจกฟรีแบบ fan-made ได้ ตัวละครที่มีลิขสิทธิ์ไม่ควรเอาไปขาย</p></details>
       </div>
     </div>
@@ -445,6 +449,7 @@ footer p{margin:0;max-width:680px}
         <div class="ask">
           <a href="https://www.facebook.com/profile.php?id=61596318838631" rel="noopener" target="_blank"><span class="ic" aria-hidden="true">💬</span><span><b>เพจ Facebook</b><small>ทักแชทเพจได้เลย</small></span></a>
           <a href="https://www.tiktok.com/@voidwing_g" rel="noopener" target="_blank"><span class="ic" aria-hidden="true">🎵</span><span><b>TikTok</b><small>@voidwing_g · DM / คอมเมนต์</small></span></a>
+          <a href="https://discord.gg/GzGaACPY5H" rel="noopener" target="_blank"><span class="ic" aria-hidden="true">🎮</span><span><b>Discord VoidWing</b><small>ห้องเรียน + พูดคุย</small></span></a>
           <a href="https://www.facebook.com/share/g/1H8T3Cg6g1/" rel="noopener" target="_blank"><span class="ic" aria-hidden="true">👥</span><span><b>กลุ่ม Facebook</b><small>ถามในกลุ่ม VoidWing</small></span></a>
           <a href="mailto:khattiya.streamer@gmail.com?subject=%E0%B8%AA%E0%B8%99%E0%B9%83%E0%B8%88%E0%B8%84%E0%B8%AD%E0%B8%A3%E0%B9%8C%E0%B8%AA%E0%B8%97%E0%B8%B3%E0%B8%A1%E0%B9%87%E0%B8%AD%E0%B8%94"><span class="ic" aria-hidden="true">✉️</span><span><b>อีเมล</b><small>khattiya.streamer@gmail.com</small></span></a>
         </div>
