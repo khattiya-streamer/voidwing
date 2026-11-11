@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#060912">
+<title>คอร์สสอนทำม็อด HoN ด้วย AI — VoidWing</title>
+<meta name="description" content="สร้างตัวละครที่คุณอยากเล่นลง Heroes of Newerth ด้วย AI ทั้งหมด ไม่ต้องเขียนโค้ด ตั้งแต่รูป โมเดล 3D ท่าทาง สกิล จนเข้าเกมจริง รุ่นแรกรับจำนวนจำกัด ลงชื่อสนใจได้แล้ว">
+<meta property="og:type" content="website">
+<meta property="og:title" content="คอร์สสอนทำม็อด HoN ด้วย AI · ไม่ต้องเขียนโค้ด — VoidWing">
+<meta property="og:description" content="จากรูปเดียว สู่ตัวละครที่เล่นได้จริงในเกม ด้วย AI ทั้งหมด รุ่นแรกรับจำนวนจำกัด">
+<meta property="og:url" content="https://khattiya-streamer.github.io/voidwing/course.html">
+<meta property="og:image" content="https://khattiya-streamer.github.io/voidwing/img/og.png?v=2">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@600;700;800&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap">
+<style>
+@property --a{syntax:'<angle>';initial-value:0deg;inherits:false}
+:root{
+  --bg:#060912; --bg2:#0A0F1D; --panel:#0F1628; --panel2:#151F38; --line:#243052; --line2:#33436F;
+  --ink:#E9EEF9; --muted:#A3B1CC; --cyan:#35E0D0; --violet:#8F7BFF; --gold:#FFC857; --focus:#FFB547;
+  --grad:linear-gradient(135deg,#35E0D0,#8F7BFF);
+  --display:'Kanit','IBM Plex Sans Thai',system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans Thai',system-ui,sans-serif;font-size:16px;line-height:1.65;overflow-x:hidden}
+a{color:#7FEFE4}
+a:hover{color:#fff}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:6px}
+h1,h2,h3{font-family:var(--display);margin:0;line-height:1.15}
+.wrap{max-width:1120px;margin:0 auto;padding:0 32px}
+.eyebrow{display:inline-block;font-size:13px;font-weight:600;letter-spacing:.2em;color:var(--cyan);text-transform:uppercase}
+.grad-t{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* top bar */
+.top{position:sticky;top:0;z-index:20;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);background:rgba(6,9,18,.78);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:18px;min-height:64px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;font-size:21px;color:#fff;text-decoration:none}
+.brand svg{filter:drop-shadow(0 0 8px rgba(53,224,208,.6))}
+.top nav{display:flex;gap:4px;margin-left:auto}
+.top nav a{padding:8px 12px;border-radius:9px;color:#C7D3E8;text-decoration:none;font-size:15px}
+.top nav a:hover{background:#121B33;color:#fff}
+.top .btn{min-height:42px;padding:0 18px;font-size:15px}
+
+/* buttons */
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 26px;border-radius:12px;background:var(--grad);color:#04121A;font-weight:700;font-size:16px;text-decoration:none;border:0;font-family:inherit;cursor:pointer;transition:transform .18s,box-shadow .18s;box-shadow:0 6px 24px rgba(53,224,208,.25)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(143,123,255,.4);color:#04121A}
+.btn.big{min-height:60px;padding:0 34px;font-size:18px;border-radius:14px}
+.btn.ghost{background:transparent;color:#E9EEF9;border:1px solid var(--line2);box-shadow:none}
+.btn.ghost:hover{background:#121B33;color:#fff}
+.btn .arr{transition:transform .2s}
+.btn:hover .arr{transform:translateX(4px)}
+
+/* hero */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line);background:radial-gradient(900px 560px at 10% 0%,rgba(143,123,255,.3),transparent 60%),radial-gradient(800px 560px at 95% 40%,rgba(53,224,208,.2),transparent 60%),var(--bg)}
+.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(143,123,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(143,123,255,.07) 1px,transparent 1px);background-size:48px 48px;-webkit-mask-image:radial-gradient(70% 70% at 40% 40%,#000,transparent);mask-image:radial-gradient(70% 70% at 40% 40%,#000,transparent);pointer-events:none}
+.hero .wrap{position:relative;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:48px;align-items:center;padding-top:64px;padding-bottom:80px}
+.hero-text{display:flex;flex-direction:column;gap:22px}
+.status{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;padding:6px 16px 6px 12px;border-radius:999px;border:1px solid rgba(255,200,87,.55);background:rgba(255,200,87,.1);color:#FFD98A;font-weight:600;font-size:14px}
+.status i{width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 0 rgba(255,200,87,.7);animation:ping 1.8s ease-out infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(255,200,87,.7)}100%{box-shadow:0 0 0 12px rgba(255,200,87,0)}}
+.hero h1{font-weight:800;font-size:clamp(40px,5.6vw,72px);letter-spacing:-.005em;line-height:1.12}
+.hero h1 .l2{display:block;background:linear-gradient(100deg,#9BF3EA 0%,#B3A6FF 50%,#9BF3EA 100%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 6s ease-in-out infinite}
+@keyframes shine{0%,100%{background-position:0% 0}50%{background-position:100% 0}}
+.lead{margin:0;font-size:19px;color:#C7D3E8;max-width:600px;text-wrap:pretty}
+.lead b{color:#fff}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.ctas small{flex-basis:100%;color:var(--muted);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:8px;max-width:600px}
+.stat{padding:14px 16px;border-radius:14px;background:rgba(15,22,40,.7);border:1px solid var(--line)}
+.stat b{display:block;font-family:var(--display);font-weight:800;font-size:clamp(26px,3.2vw,36px);line-height:1.1}
+.stat span{display:block;font-size:13px;color:var(--muted);line-height:1.4;margin-top:4px}
+
+/* phone with the course clip */
+.phone-wrap{position:relative;justify-self:center;width:min(100%,330px)}
+.phone{position:relative;padding:3px;border-radius:34px;background:conic-gradient(from var(--a),#35E0D0,#8F7BFF,#35E0D0 50%,#8F7BFF,#35E0D0);animation:spin 7s linear infinite;box-shadow:0 24px 90px rgba(143,123,255,.35)}
+@keyframes spin{to{--a:360deg}}
+.phone video,.phone img{display:block;width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:31px;background:#0B1224}
+.float{position:absolute;padding:8px 14px;border-radius:12px;background:rgba(10,16,32,.92);border:1px solid var(--line2);font-weight:600;font-size:14px;white-space:nowrap;box-shadow:0 10px 30px rgba(0,0,0,.45);animation:bob 4s ease-in-out infinite}
+.float.f1{left:-46px;top:72%}
+.float.f2{right:-34px;top:44%;animation-delay:-2s}
+.float b{color:var(--cyan)}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+/* sections */
+.sec{padding:88px 0 8px;position:relative}
+.sec-head{max-width:720px;margin-bottom:36px}
+.sec-head h2{font-size:clamp(30px,4vw,46px);font-weight:700;margin-top:6px}
+.sec-head p{margin:12px 0 0;color:var(--muted);font-size:17px;text-wrap:pretty}
+.center{text-align:center;margin-left:auto;margin-right:auto}
+
+/* made with this */
+.roster{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px}
+.char{position:relative;display:flex;flex-direction:column;gap:8px;padding:10px 10px 14px;border-radius:18px;background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);text-decoration:none;color:inherit;transition:transform .25s,border-color .25s,box-shadow .25s}
+.char:hover{transform:translateY(-5px);border-color:var(--cyan);box-shadow:0 16px 40px -16px rgba(53,224,208,.55);color:inherit}
+.char .pic{aspect-ratio:1/1;border-radius:12px;overflow:hidden;background:radial-gradient(70% 80% at 50% 40%,#1A2547,#0A1020)}
+.char img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.char:hover img{transform:scale(1.06)}
+.char b{font-family:var(--display);font-size:17px;line-height:1.2;padding:0 4px}
+.char span{font-size:13px;color:#8EA0C2;padding:0 4px}
+.roster-note{margin:18px 0 0;color:var(--muted);font-size:15px}
+
+/* flow: image -> model -> in game */
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;position:relative;margin:0;padding:0;list-style:none}
+.flow::before{content:"";position:absolute;left:8%;right:8%;top:38px;height:2px;background:var(--grad);opacity:.5;transform:scaleX(0);transform-origin:left;transition:transform 1.4s ease .2s}
+.flow.in::before{transform:scaleX(1)}
+.fstep{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px}
+.fic{position:relative;z-index:1;width:76px;height:76px;border-radius:22px;display:grid;place-items:center;background:var(--bg2);border:2px solid var(--line2);font-size:32px;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.fstep:last-child .fic{border-color:var(--cyan);background:linear-gradient(135deg,rgba(53,224,208,.2),rgba(143,123,255,.2))}
+.fstep strong{font-family:var(--display);font-size:19px;font-weight:700}
+.fstep span{color:var(--muted);font-size:14.5px;max-width:230px}
+.fstep em{font-style:normal;font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--cyan);padding:2px 10px;border-radius:99px;border:1px solid rgba(53,224,208,.4);background:rgba(53,224,208,.08)}
+.timer{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 18px;margin-top:34px;padding:18px 22px;border-radius:16px;border:1px solid var(--line2);background:linear-gradient(135deg,rgba(53,224,208,.1),rgba(143,123,255,.1))}
+.timer b{font-family:var(--display);font-weight:800;font-size:clamp(30px,4vw,42px);font-variant-numeric:tabular-nums}
+.timer span{color:#C7D3E8}
+.timer small{flex-basis:100%;text-align:center;color:var(--muted);font-size:13px}
+
+/* curriculum */
+.mods{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;counter-reset:m}
+.mod{position:relative;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;padding:22px 22px 22px 20px;border-radius:18px;background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);transition:border-color .25s,transform .25s}
+.mod:hover{border-color:var(--line2);transform:translateY(-3px)}
+.mod .n{grid-row:span 2;width:50px;height:50px;border-radius:14px;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:22px;color:#061018;background:var(--grad)}
+.mod h3{font-size:21px;font-weight:700;align-self:end}
+.mod p{margin:0;color:var(--muted);font-size:15px;text-wrap:pretty}
+.gets{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.get{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;background:rgba(53,224,208,.1);border:1px solid rgba(53,224,208,.4);color:#BFF7F1;font-weight:600;font-size:15px}
+.draft{margin:18px 0 0;color:#8394B5;font-size:14px}
+
+/* need / no need */
+.need{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:18px}
+.panel{position:relative;display:flex;flex-direction:column;gap:14px;padding:26px;border-radius:20px;background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line)}
+.panel h3{font-size:22px;font-weight:700}
+.list{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px}
+.list li{display:grid;grid-template-columns:40px 1fr;gap:12px;align-items:start}
+.list .ic{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;background:#0B1224;border:1px solid var(--line2);font-size:19px}
+.list b{display:block;line-height:1.3}
+.list small{display:block;color:var(--muted);font-size:14px;line-height:1.45;margin-top:2px}
+.cost{margin-top:4px;padding:14px 16px;border-radius:14px;border:1px dashed var(--line2);background:rgba(143,123,255,.07);color:#D5DCEC;font-size:15px}
+.cost b{color:#fff;font-family:var(--display);font-size:18px;white-space:nowrap}
+.panel.no{background:linear-gradient(180deg,rgba(53,224,208,.09),rgba(15,22,40,.9));border-color:rgba(53,224,208,.35)}
+.nolist{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:14px}
+.nolist li{display:flex;align-items:center;gap:12px;font-size:17px;font-weight:600}
+.nolist li::before{content:"✕";flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:14px;color:#061018;background:var(--cyan)}
+.panel.no p{margin:auto 0 0;color:var(--muted);font-size:15px}
+
+/* formats */
+.formats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.fmt{display:flex;flex-direction:column;gap:10px;padding:24px;border-radius:20px;background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);transition:border-color .25s,transform .25s}
+.fmt:hover{border-color:var(--violet);transform:translateY(-3px)}
+.fmt .ic{font-size:30px}
+.fmt h3{font-size:21px;font-weight:700}
+.fmt p{margin:0;color:var(--muted);font-size:15px}
+.hire{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;margin-top:16px;padding:18px 22px;border-radius:16px;border:1px solid var(--line2);background:var(--panel)}
+.hire p{flex:1 1 320px;margin:0;color:#C7D3E8}
+.hire p b{color:#fff}
+
+/* next steps */
+.road{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:0;padding:0;list-style:none}
+.road li{position:relative;padding:24px;border-radius:20px;border:1px solid var(--line);background:var(--panel)}
+.road li.now{border-color:var(--cyan);background:linear-gradient(160deg,rgba(53,224,208,.14),rgba(143,123,255,.1) 60%,var(--panel));box-shadow:0 18px 50px -24px rgba(53,224,208,.6)}
+.road .tag{display:inline-block;margin-bottom:10px;padding:2px 12px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.08em;background:#18223D;color:#8EA0C2}
+.road li.now .tag{background:var(--cyan);color:#061018}
+.road h3{font-size:21px;font-weight:700;margin-bottom:6px}
+.road p{margin:0;color:var(--muted);font-size:15px}
+
+/* faq */
+.faq{max-width:820px}
+details{border-top:1px solid var(--line);padding:4px 0}
+details:last-child{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-weight:600;font-size:17px;min-height:56px;display:flex;align-items:center;justify-content:space-between;gap:12px;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";flex:none;font-size:26px;color:var(--cyan);transition:transform .25s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{margin:0 0 16px;color:var(--muted);font-size:16px;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+
+/* contact / final cta */
+.final{position:relative;overflow:hidden;margin-top:24px;padding:56px 32px;border-radius:28px;text-align:center;border:1px solid var(--line2);background:radial-gradient(600px 300px at 50% 0%,rgba(143,123,255,.35),transparent 70%),radial-gradient(500px 300px at 50% 100%,rgba(53,224,208,.22),transparent 70%),var(--panel)}
+.final h2{font-size:clamp(30px,4.4vw,50px);font-weight:800}
+.final > p{margin:14px auto 28px;max-width:560px;color:#C7D3E8;font-size:17px}
+.final .ctas{justify-content:center}
+.final .free{display:block;margin-top:14px;color:var(--muted);font-size:14px}
+.ask{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:40px;text-align:left}
+.ask a{display:flex;align-items:center;gap:12px;min-height:64px;padding:12px 16px;border-radius:14px;background:rgba(6,9,18,.55);border:1px solid var(--line2);color:var(--ink);text-decoration:none;transition:border-color .2s,transform .2s}
+.ask a:hover{border-color:var(--cyan);transform:translateY(-2px);color:#fff}
+.ask .ic{flex:none;width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:#18223D;font-size:18px}
+.ask b{display:block;font-size:15px;line-height:1.25}
+.ask small{display:block;font-size:12.5px;color:var(--muted);line-height:1.3}
+.ask-h{margin:36px 0 0;color:#8EA0C2;font-size:15px;font-weight:600}
+.final .eyebrow{letter-spacing:.04em;font-size:14px;color:#FFD98A}
+
+footer{margin-top:80px;border-top:1px solid var(--line);padding:28px 0 110px;color:#8EA0C2;font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px}
+footer p{margin:0;max-width:680px}
+
+/* sticky mobile cta */
+.mcta{position:fixed;left:12px;right:12px;bottom:12px;z-index:30;display:none;transform:translateY(140%);transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.mcta.show{transform:none}
+.mcta .btn{width:100%;min-height:56px;font-size:17px;box-shadow:0 10px 36px rgba(0,0,0,.6),0 6px 24px rgba(53,224,208,.3)}
+
+/* reveal */
+[data-reveal]{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+[data-reveal].in{opacity:1;transform:none}
+
+@media (max-width:1000px){
+  .roster{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .formats,.road{grid-template-columns:1fr}
+  .ask{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .need{grid-template-columns:1fr}
+}
+@media (max-width:820px){
+  .wrap{padding:0 16px}
+  .top nav{display:none}
+  .top .btn{margin-left:auto}
+  .hero .wrap{grid-template-columns:1fr;gap:36px;padding-top:36px;padding-bottom:56px}
+  .phone-wrap{width:min(78%,300px)}
+  .float.f1{left:-28px}.float.f2{right:-22px}
+  .flow{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:30px}
+  .flow::before{display:none}
+  .mods{grid-template-columns:1fr}
+  .sec{padding-top:64px}
+  .final{padding:40px 18px;border-radius:22px}
+  .mcta{display:block}
+}
+@media (max-width:480px){
+  .stats{gap:8px}
+  .stat{padding:12px}
+  .stat span{font-size:12px}
+  .roster{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ask{grid-template-columns:1fr}
+  .float{font-size:12.5px;padding:6px 10px}
+  .btn.big{width:100%}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  [data-reveal]{opacity:1;transform:none}
+  .flow::before{transform:none}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="./" aria-label="VoidWing หน้าหลัก">
+      <svg width="30" height="30" viewBox="0 0 36 36" fill="none" stroke="#35E0D0" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9c8 1 13 5 15 12 2-7 7-11 15-12-2 8-6 13-15 18C9 22 5 17 3 9Z"/></svg>
+      VoidWing
+    </a>
+    <nav aria-label="ในหน้านี้">
+      <a href="#learn">เรียนอะไร</a>
+      <a href="#need">ต้องเตรียมอะไร</a>
+      <a href="#faq">คำถาม</a>
+      <a href="./">มอดทั้งหมด</a>
+    </nav>
+    <a class="btn" data-form href="#contact">ลงชื่อสนใจ</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero" aria-labelledby="h1">
+    <div class="wrap">
+      <div class="hero-text">
+        <span class="status"><i aria-hidden="true"></i>รุ่นแรก · กำลังเปิดรับคนสนใจ</span>
+        <h1 id="h1">ทำตัวละครที่คุณอยากเล่น<span class="l2">ลง HoN ด้วย AI</span></h1>
+        <p class="lead">คอร์สสอนทำม็อด Heroes of Newerth <b>ไม่ต้องเขียนโค้ดสักบรรทัด</b> ตั้งแต่สร้างรูป ปั้นโมเดล 3D ท่าทาง สกิล เอฟเฟกต์ จนตัวละครเข้าเกมเล่นได้จริง ด้วยวิธีเดียวกับที่ผมใช้ทำทุกตัวในช่อง</p>
+        <div class="ctas">
+          <a class="btn big" data-form href="#contact">ลงชื่อสนใจ (1 นาที) <span class="arr" aria-hidden="true">→</span></a>
+          <a class="btn ghost big" href="#learn">ดูว่าเรียนอะไรบ้าง</a>
+          <small>ยังไม่ต้องจ่ายเงิน ลงชื่อไว้ก่อน ถ้าคนสนใจพอจะเปิดรุ่นแรกและแจ้งรายละเอียดให้ก่อนใคร</small>
+        </div>
+        <div class="stats">
+          <div class="stat"><b class="grad-t">6</b><span>ตัวละครที่ทำด้วยวิธีนี้แล้ว</span></div>
+          <div class="stat"><b class="grad-t">&lt;30<small style="font-size:.5em"> นาที</small></b><span>ตัวละครใหม่เข้าเกม (โมเดล)</span></div>
+          <div class="stat"><b class="grad-t">0</b><span>บรรทัดโค้ดที่ต้องเขียนเอง</span></div>
+        </div>
+      </div>
+      <div class="phone-wrap">
+        <div class="phone">
+          <video src="video/course/teaser.mp4" poster="video/course/teaser.jpg" autoplay muted loop playsinline preload="metadata" aria-label="คลิปตัวอย่างตัวละครที่ทำด้วย AI: Aizen, Gojo, Yoruichi, Shanks, Yamamoto, Jin Mori"></video>
+        </div>
+        <div class="float f1" aria-hidden="true">✓ <b>เข้าเกมแล้ว!</b></div>
+        <div class="float f2" aria-hidden="true">🤖 AI ทำให้ทั้งหมด</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="madeT">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <span class="eyebrow">MADE WITH AI</span>
+        <h2 id="madeT">ทุกตัวนี้ ทำด้วยวิธีที่จะสอน</h2>
+        <p>โมเดล ท่าทาง สกิล เอฟเฟกต์ ทำร่วมกับ AI ทั้งหมด กดดูคลิปสกิลของแต่ละตัวได้ที่หน้าหลัก</p>
+      </div>
+      <div class="roster">
+        <a class="char" href="./#mods" data-reveal style="--d:0s"><div class="pic"><img src="img/aizen.png" alt="Aizen Sosuke" loading="lazy" width="250" height="250"></div><b>Aizen</b><span>บน Kinesis</span></a>
+        <a class="char" href="./#mods" data-reveal style="--d:.06s"><div class="pic"><img src="img/gojo.png" alt="Gojo Satoru" loading="lazy" width="250" height="250"></div><b>Gojo</b><span>บน Aluna</span></a>
+        <a class="char" href="./#mods" data-reveal style="--d:.12s"><div class="pic"><img src="img/yoruichi.png" alt="Yoruichi Shihouin" loading="lazy" width="250" height="250"></div><b>Yoruichi</b><span>บน Silhouette</span></a>
+        <a class="char" href="./#mods" data-reveal style="--d:.18s"><div class="pic"><img src="img/shanks.png" alt="Shanks" loading="lazy" width="250" height="250"></div><b>Shanks</b><span>บน Nomad</span></a>
+        <a class="char" href="./#mods" data-reveal style="--d:.24s"><div class="pic"><img src="img/yamamoto.png" alt="Yamamoto Genryusai" loading="lazy" width="250" height="250"></div><b>Yamamoto</b><span>บน Sand Wraith</span></a>
+        <a class="char" href="./#mods" data-reveal style="--d:.3s"><div class="pic"><img src="img/jin-mori.png" alt="Jin Mori" loading="lazy" width="250" height="250"></div><b>Jin Mori</b><span>บน Monkey King</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="flowT">
+    <div class="wrap">
+      <div class="sec-head center" data-reveal>
+        <span class="eyebrow">HOW IT WORKS</span>
+        <h2 id="flowT">จากรูปเดียว สู่ตัวละครในเกม</h2>
+        <p>คุณเป็นคนบอกว่าอยากได้แบบไหน AI เป็นคนลงมือ</p>
+      </div>
+      <ol class="flow" data-reveal>
+        <li class="fstep"><div class="fic" aria-hidden="true">🎨</div><em>ขั้น 1</em><strong>AI สร้างรูป</strong><span>บอกว่าอยากได้ตัวละครไหน ได้รูปพร้อมปั้น 3D</span></li>
+        <li class="fstep"><div class="fic" aria-hidden="true">🧊</div><em>ขั้น 2</em><strong>AI ปั้นโมเดล 3D</strong><span>เปลี่ยนรูปเป็นโมเดล 3D ทั้งตัวในไม่กี่นาที</span></li>
+        <li class="fstep"><div class="fic" aria-hidden="true">🦴</div><em>ขั้น 3</em><strong>AI ใส่เข้าฮีโร่</strong><span>จัดสัดส่วน ใส่โครงกระดูก ให้ขยับตามฮีโร่ใน HoN</span></li>
+        <li class="fstep"><div class="fic" aria-hidden="true">🎮</div><em>ขั้น 4</em><strong>เข้าเกม เล่นได้เลย</strong><span>แล้วค่อยเพิ่มสกิล เอฟเฟกต์ และเสียงต่อ</span></li>
+      </ol>
+      <div class="timer" data-reveal>
+        <span>ตัวละครใหม่ จากรูปถึงเข้าเกม</span><b class="grad-t" id="clock">00:00</b><span>ไม่ถึง 30 นาที</span>
+        <small>เวลาที่ผมทำจริง เฉพาะโมเดลเข้าเกม ยังไม่รวมสกิล เอฟเฟกต์ และเสียง</small>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="learn" aria-labelledby="learnT">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <span class="eyebrow">WHAT YOU'LL LEARN</span>
+        <h2 id="learnT">เรียนอะไรบ้าง</h2>
+        <p>จบคอร์สแล้ว คุณจะมีตัวละครของตัวเอง 1 ตัวที่เข้าเกมได้จริง และรู้วิธีทำตัวต่อไปเองได้</p>
+      </div>
+      <div class="mods">
+        <div class="mod" data-reveal><span class="n">1</span><h3>เตรียมเครื่องมือ</h3><p>ติดตั้ง AI และโปรแกรมที่ใช้ พร้อมไฟล์ตั้งค่าที่ผมเตรียมไว้ให้ ใช้ได้ทันที</p></div>
+        <div class="mod" data-reveal style="--d:.06s"><span class="n">2</span><h3>ออกแบบตัวละครด้วย AI</h3><p>สร้างรูปตัวละครที่อยากได้ ให้พร้อมเอาไปปั้นเป็น 3D</p></div>
+        <div class="mod" data-reveal><span class="n">3</span><h3>ปั้นโมเดล 3D</h3><p>เปลี่ยนรูปเป็นโมเดล แล้วให้ AI จัดสัดส่วนให้ใส่แทนฮีโร่ใน HoN ได้พอดี</p></div>
+        <div class="mod" data-reveal style="--d:.06s"><span class="n">4</span><h3>ท่าทาง</h3><p>ใช้ท่าเดิมของฮีโร่ หรือสั่ง AI ทำท่าใหม่ เช่น ท่ายืน ท่าวิ่ง ท่าใช้สกิล</p></div>
+        <div class="mod" data-reveal><span class="n">5</span><h3>สกิลและเอฟเฟกต์</h3><p>บอก AI ว่าอยากให้สกิลออกมาแบบไหน แล้วทำเอฟเฟกต์ให้เหมือนต้นฉบับ</p></div>
+        <div class="mod" data-reveal style="--d:.06s"><span class="n">6</span><h3>เสียง แพ็กไฟล์ และแชร์</h3><p>ใส่เสียง รวมเป็นไฟล์ .honmod ไฟล์เดียว ติดตั้งผ่าน HoN Reborn - Mod Launcher แล้วแชร์ให้เพื่อนได้</p></div>
+      </div>
+      <div class="gets" data-reveal>
+        <span class="get">📁 ไฟล์ตั้งค่าพร้อมใช้</span>
+        <span class="get">💬 prompt ทุกขั้นตอน</span>
+        <span class="get">🎮 ตัวละครของคุณ 1 ตัวเข้าเกมจริง</span>
+        <span class="get">🙋 กลุ่มถาม-ตอบ</span>
+      </div>
+      <p class="draft">* เนื้อหาเป็นร่างแรก อาจปรับตามผลสำรวจจากคนที่ลงชื่อ</p>
+    </div>
+  </section>
+
+  <section class="sec" id="need" aria-labelledby="needT">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <span class="eyebrow">BEFORE YOU START</span>
+        <h2 id="needT">ต้องเตรียมอะไร</h2>
+      </div>
+      <div class="need">
+        <div class="panel" data-reveal>
+          <h3>สิ่งที่ต้องมี</h3>
+          <ul class="list">
+            <li><span class="ic" aria-hidden="true">💻</span><div><b>คอม Windows ที่เล่น HoN ได้</b><small>วิธีที่สอนทดสอบบน Windows</small></div></li>
+            <li><span class="ic" aria-hidden="true">🤖</span><div><b>Claude (รายเดือน)</b><small>AI หลักที่ลงมือทำม็อดให้</small></div></li>
+            <li><span class="ic" aria-hidden="true">🎨</span><div><b>ChatGPT (รายเดือน)</b><small>ใช้สร้างรูปตัวละคร</small></div></li>
+            <li><span class="ic" aria-hidden="true">🧊</span><div><b>Tripo3D (รายเดือน)</b><small>ใช้ปั้นรูปเป็นโมเดล 3D</small></div></li>
+            <li><span class="ic" aria-hidden="true">🆓</span><div><b>Blender + HoN Reborn - Mod Launcher</b><small>ฟรีทั้งคู่ เดี๋ยวสอนติดตั้ง</small></div></li>
+          </ul>
+          <div class="cost">ค่า AI ระหว่างเรียนรวมประมาณ <b>1,500–2,000 บาท/เดือน</b><br>จ่ายให้บริการ AI โดยตรง ไม่รวมค่าคอร์ส</div>
+        </div>
+        <div class="panel no" data-reveal style="--d:.1s">
+          <h3>สิ่งที่ไม่ต้องมี</h3>
+          <ul class="nolist">
+            <li>ไม่ต้องเขียนโค้ดเป็น</li>
+            <li>ไม่ต้องวาดรูปเป็น</li>
+            <li>ไม่ต้องเคยใช้ Blender</li>
+            <li>ไม่ต้องเคยทำม็อด</li>
+          </ul>
+          <p>ขอแค่รู้ว่าอยากได้ตัวละครแบบไหน แล้วสั่ง AI เป็นภาษาพูดธรรมดา</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="fmtT">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <span class="eyebrow">FORMAT</span>
+        <h2 id="fmtT">อยากเรียนแบบไหน บอกได้</h2>
+        <p>ยังไม่สรุปรูปแบบ เลือกแบบที่ใช่ในฟอร์มได้เลย ผมจะเปิดแบบที่คนเลือกเยอะที่สุดก่อน</p>
+      </div>
+      <div class="formats">
+        <div class="fmt" data-reveal><span class="ic" aria-hidden="true">🔴</span><h3>สอนสดเป็นกลุ่ม</h3><p>เรียนพร้อมกันใน Discord ทำตามไปทีละขั้น ติดตรงไหนถามได้ทันที</p></div>
+        <div class="fmt" data-reveal style="--d:.08s"><span class="ic" aria-hidden="true">🎬</span><h3>คลิปอัดไว้</h3><p>ดูเองตามเวลาสะดวก ย้อนดูได้ พร้อมเอกสารและ prompt ทุกขั้น</p></div>
+        <div class="fmt" data-reveal style="--d:.16s"><span class="ic" aria-hidden="true">🤝</span><h3>ตัวต่อตัว</h3><p>สอนบนเครื่องคุณ ทำตัวละครที่คุณอยากได้ไปด้วยกันจนเข้าเกม</p></div>
+      </div>
+      <div class="hire" data-reveal>
+        <p><b>ไม่อยากเรียน แค่อยากได้ตัวละคร?</b> เลือก "อยากจ้างให้ทำ" ในฟอร์ม หรือทักมาคุยกันได้</p>
+        <a class="btn ghost" href="#ask">ทักมาคุย</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="roadT">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <span class="eyebrow">WHAT'S NEXT</span>
+        <h2 id="roadT">ขั้นตอนต่อจากนี้</h2>
+      </div>
+      <ol class="road">
+        <li class="now" data-reveal><span class="tag">ตอนนี้</span><h3>1. ลงชื่อสนใจ</h3><p>กรอกฟอร์ม 1 นาที ยังไม่ต้องจ่ายเงิน</p></li>
+        <li data-reveal style="--d:.08s"><span class="tag">ถัดไป</span><h3>2. ประกาศรุ่นแรก</h3><p>ถ้าคนสนใจพอ ผมจะแจ้งราคา วันเรียน และรูปแบบให้คนที่ลงชื่อไว้ก่อน</p></li>
+        <li data-reveal style="--d:.16s"><span class="tag">จากนั้น</span><h3>3. จองที่นั่ง</h3><p>รุ่นแรกรับจำนวนจำกัด เพื่อดูแลทุกคนได้ทั่วถึง</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec" id="faq" aria-labelledby="faqT">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <span class="eyebrow">FAQ</span>
+        <h2 id="faqT">คำถามที่พบบ่อย</h2>
+      </div>
+      <div class="faq" data-reveal>
+        <details><summary>ไม่เคยเขียนโค้ดเลย เรียนได้ไหม</summary><p>ได้ คอร์สนี้ออกแบบมาสำหรับคนที่ไม่เขียนโค้ด AI เป็นคนเขียนและแก้ไฟล์ให้ทั้งหมด คุณแค่บอกว่าอยากได้อะไร แล้วดูผลในเกม</p></details>
+        <details><summary>ทำตัวละครอะไรก็ได้ไหม</summary><p>ได้ ตัวละครจากอนิเมะ เกม หรือออกแบบเองก็ได้ เลือกฮีโร่ใน HoN ที่ท่าทางใกล้เคียงเป็นตัวที่จะใส่แทน</p></details>
+        <details><summary>คนอื่นในเกมเห็นตัวละครของเราไหม</summary><p>ม็อดเปลี่ยนสิ่งที่เห็นและได้ยินบนเครื่องของคุณ คนอื่นในแมตช์ไม่เห็นม็อดของคุณ ส่งไฟล์ให้เพื่อนติดตั้ง เพื่อนก็เห็นบนเครื่องเขาด้วย</p></details>
+        <details><summary>ใช้ Mac ได้ไหม</summary><p>ตอนนี้วิธีที่สอนทดสอบบน Windows เท่านั้น ถ้าใช้ Mac ระบุไว้ในฟอร์มได้ ผมจะดูว่าทำได้ไหม</p></details>
+        <details><summary>ค่าคอร์สเท่าไหร่</summary><p>ยังไม่ประกาศ จะแจ้งคนที่ลงชื่อไว้ก่อน ในฟอร์มมีข้อให้เลือกงบที่สะดวก ช่วยให้ผมตั้งราคาให้เหมาะได้</p></details>
+        <details><summary>ทำม็อดแล้วเอาไปแจกได้ไหม</summary><p>แจกฟรีแบบ fan-made ได้ ตัวละครที่มีลิขสิทธิ์ไม่ควรเอาไปขาย</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="contact" aria-labelledby="ctaT">
+    <div class="wrap">
+      <div class="final" data-reveal>
+        <span class="eyebrow">รุ่นแรก · รับจำนวนจำกัด</span>
+        <h2 id="ctaT" style="margin-top:8px">อยากทำตัวละครของคุณเอง?</h2>
+        <p>ลงชื่อไว้ก่อน ใช้เวลา 1 นาที ถ้าเปิดรุ่นแรก คุณจะได้รู้ก่อนใคร</p>
+        <div class="ctas">
+          <a class="btn big" data-form href="#contact">ลงชื่อสนใจคอร์ส <span class="arr" aria-hidden="true">→</span></a>
+        </div>
+        <span class="free">ยังไม่ต้องจ่ายเงิน · ไม่ต้องล็อกอิน Google</span>
+        <p class="ask-h" id="ask">มีคำถาม? ทักมาได้เลย</p>
+        <div class="ask">
+          <a href="https://www.facebook.com/profile.php?id=61596318838631" rel="noopener" target="_blank"><span class="ic" aria-hidden="true">💬</span><span><b>เพจ Facebook</b><small>ทักแชทเพจได้เลย</small></span></a>
+          <a href="https://www.tiktok.com/@voidwing_g" rel="noopener" target="_blank"><span class="ic" aria-hidden="true">🎵</span><span><b>TikTok</b><small>@voidwing_g · DM / คอมเมนต์</small></span></a>
+          <a href="https://www.facebook.com/share/g/1H8T3Cg6g1/" rel="noopener" target="_blank"><span class="ic" aria-hidden="true">👥</span><span><b>กลุ่ม Facebook</b><small>ถามในกลุ่ม VoidWing</small></span></a>
+          <a href="mailto:khattiya.streamer@gmail.com?subject=%E0%B8%AA%E0%B8%99%E0%B9%83%E0%B8%88%E0%B8%84%E0%B8%AD%E0%B8%A3%E0%B9%8C%E0%B8%AA%E0%B8%97%E0%B8%B3%E0%B8%A1%E0%B9%87%E0%B8%AD%E0%B8%94"><span class="ic" aria-hidden="true">✉️</span><span><b>อีเมล</b><small>khattiya.streamer@gmail.com</small></span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>VoidWing mods เป็นงาน fan-made ไม่เกี่ยวข้องกับ Juvio หรือ Heroes of Newerth ตัวละครและชื่อเป็นของเจ้าของลิขสิทธิ์เดิม</p>
+    <span><a href="./">← กลับหน้ามอดทั้งหมด</a> · © VoidWing</span>
+  </div>
+</footer>
+
+<div class="mcta" id="mcta"><a class="btn" data-form href="#contact">ลงชื่อสนใจคอร์ส (1 นาที) →</a></div>
+
+<script>
+/* Course interest form (Google Form, _channel/forms/ids.json course_form_url) */
+const FORM = "https://docs.google.com/forms/d/e/1FAIpQLSfdP6oieJN9LAoIbZ7wYp69hbSUm8HQm_4Ad4i8psP6V2lzuQ/viewform";
+document.querySelectorAll("[data-form]").forEach(a => { a.href = FORM; a.target = "_blank"; a.rel = "noopener"; });
+
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* reveal on scroll */
+const io = "IntersectionObserver" in window ? new IntersectionObserver(es => {
+  for (const e of es) if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+}, { threshold: 0.12 }) : null;
+document.querySelectorAll("[data-reveal]").forEach(n => io ? io.observe(n) : n.classList.add("in"));
+
+/* 00:00 -> 29:41 counter, once, when it scrolls into view */
+const clock = document.getElementById("clock");
+const runClock = () => {
+  const end = 29 * 60 + 41, dur = 1600, t0 = performance.now();
+  const fmt = s => String(Math.floor(s / 60)).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0");
+  if (reduce) { clock.textContent = fmt(end); return; }
+  const step = now => { const p = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+    clock.textContent = fmt(Math.round(end * e)); if (p < 1) requestAnimationFrame(step); };
+  requestAnimationFrame(step);
+};
+if ("IntersectionObserver" in window) {
+  const co = new IntersectionObserver(es => { if (es[0].isIntersecting) { runClock(); co.disconnect(); } }, { threshold: 0.6 });
+  co.observe(clock);
+} else runClock();
+
+/* sticky mobile button: shows after the hero, hides over the final call to action */
+const mcta = document.getElementById("mcta"), hero = document.querySelector(".hero"), fin = document.getElementById("contact");
+let pastHero = false, atEnd = false;
+const upd = () => mcta.classList.toggle("show", pastHero && !atEnd);
+if ("IntersectionObserver" in window) {
+  new IntersectionObserver(es => { pastHero = !es[0].isIntersecting; upd(); }).observe(hero);
+  new IntersectionObserver(es => { atEnd = es[0].isIntersecting; upd(); }, { threshold: 0.2 }).observe(fin);
+}
+
+/* pause the clip when it is off screen (saves battery on phones) */
+const vid = document.querySelector(".phone video");
+if (vid && "IntersectionObserver" in window) {
+  if (reduce) { vid.removeAttribute("autoplay"); vid.pause(); vid.controls = true; }
+  else new IntersectionObserver(es => { es[0].isIntersecting ? vid.play().catch(() => {}) : vid.pause(); }).observe(vid);
+}
+</script>
+</body>
+</html>
