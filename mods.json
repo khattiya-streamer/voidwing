@@ -28,6 +28,15 @@
       "size": 17210826,
       "notes": "VoidWing mod: Yoruichi Shihouin on Silhouette"
     },
+    "shanks": {
+      "name": "Shanks",
+      "version": "0.9.9",
+      "releaseTag": "shanks-v0.9.9",
+      "asset": "Shanks_v0.9.9.honmod",
+      "sha256": "6bd16192f4bacc7ac966d435992da09d7839cab92ca495f7048e4a2b9fa52a02",
+      "size": 23397818,
+      "notes": "VoidWing mod: Shanks on Nomad"
+    },
     "yamamoto": {
       "name": "Yamamoto Genryusai",
       "version": "0.7.31",
