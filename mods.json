@@ -21,11 +21,11 @@
     },
     "yoruichi": {
       "name": "Yoruichi Shihouin",
-      "version": "0.13.100",
-      "releaseTag": "yoruichi-v0.13.100",
-      "asset": "Yoruichi_Shihouin_v0.13.100.honmod",
-      "sha256": "1811d73629558be179b504d406a5985c57604422349825be02d5116dd96a4f71",
-      "size": 17210826,
+      "version": "0.13.101",
+      "releaseTag": "yoruichi-v0.13.101",
+      "asset": "Yoruichi_Shihouin_v0.13.101.honmod",
+      "sha256": "f4a1dd269bd4a11d87cc3015efb6b2deb3330399b63d2fb8eb9a66d085e943ba",
+      "size": 17145815,
       "notes": "VoidWing mod: Yoruichi Shihouin on Silhouette"
     },
     "shanks": {
