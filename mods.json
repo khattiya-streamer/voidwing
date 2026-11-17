@@ -39,11 +39,11 @@
     },
     "yamamoto": {
       "name": "Yamamoto Genryusai",
-      "version": "0.7.31",
-      "releaseTag": "yamamoto-v0.7.31",
-      "asset": "Yamamoto_Genryusai_v0.7.31.honmod",
-      "sha256": "74b960ecdfb693b57da2dd535185642250fcd41044afba8328ec44833f80a362",
-      "size": 24275864,
+      "version": "0.7.32",
+      "releaseTag": "yamamoto-v0.7.32",
+      "asset": "Yamamoto_Genryusai_v0.7.32.honmod",
+      "sha256": "5c49ca1fe16ad7521ec02e3020a75f6209c3e852ff62bd5af61087e0f200f16e",
+      "size": 24295547,
       "notes": "VoidWing mod: Yamamoto Genryusai on Sand Wraith"
     },
     "gojo": {
