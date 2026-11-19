@@ -3,11 +3,11 @@
   "mods": {
     "aizen": {
       "name": "Aizen Sosuke",
-      "version": "1.2.111",
-      "releaseTag": "aizen-v1.2.111",
-      "asset": "Aizen_Kinesis_v1.2.111.honmod",
-      "sha256": "b8536903cfbd99f11245542f6c9114f4452b9983683511a3bcdee0da84eee21e",
-      "size": 15917693,
+      "version": "1.2.112",
+      "releaseTag": "aizen-v1.2.112",
+      "asset": "Aizen_Kinesis_v1.2.112.honmod",
+      "sha256": "71326149962e889e6e9f4996c23c43d34c7a713d5a58515b16aada84268e1a47",
+      "size": 15917634,
       "notes": "VoidWing mod: Aizen Sosuke on Kinesis"
     },
     "jin-mori": {
