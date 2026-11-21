@@ -54,6 +54,15 @@
       "sha256": "f7c585c464e77714e9377ec874cb87af876c07111651b1444e50bd3b6b33818b",
       "size": 18975195,
       "notes": "VoidWing mod: Gojo Satoru on Aluna"
+    },
+    "zoro": {
+      "name": "Roronoa Zoro",
+      "version": "0.25.83",
+      "releaseTag": "zoro-v0.25.83",
+      "asset": "Zoro_v0.25.83.honmod",
+      "sha256": "60e8133213b5f281d9074d099d370ec1b0c7c15050db7b2e29bd25720fa817de",
+      "size": 20337724,
+      "notes": "VoidWing mod: Roronoa Zoro on Swiftblade"
     }
   }
 }
