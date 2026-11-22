@@ -30,11 +30,11 @@
     },
     "shanks": {
       "name": "Shanks",
-      "version": "0.9.9",
-      "releaseTag": "shanks-v0.9.9",
-      "asset": "Shanks_v0.9.9.honmod",
-      "sha256": "6bd16192f4bacc7ac966d435992da09d7839cab92ca495f7048e4a2b9fa52a02",
-      "size": 23397818,
+      "version": "0.9.11",
+      "releaseTag": "shanks-v0.9.11",
+      "asset": "Shanks_v0.9.11.honmod",
+      "sha256": "1af28bf9ea1bcab43f78ce1547950afe5e9726ca1248303dcaaa3fc8ac8d3f46",
+      "size": 23367059,
       "notes": "VoidWing mod: Shanks on Nomad"
     },
     "yamamoto": {
