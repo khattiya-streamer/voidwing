@@ -57,11 +57,11 @@
     },
     "zoro": {
       "name": "Roronoa Zoro",
-      "version": "0.25.83",
-      "releaseTag": "zoro-v0.25.83",
-      "asset": "Zoro_v0.25.83.honmod",
-      "sha256": "60e8133213b5f281d9074d099d370ec1b0c7c15050db7b2e29bd25720fa817de",
-      "size": 20337724,
+      "version": "0.26.13",
+      "releaseTag": "zoro-v0.26.13",
+      "asset": "Zoro_v0.26.13.honmod",
+      "sha256": "e08e78230da9ee5b99f411894b10933b1da210a340b3c1f91d0898ae1315d4d4",
+      "size": 20341067,
       "notes": "VoidWing mod: Roronoa Zoro on Swiftblade"
     }
   }
